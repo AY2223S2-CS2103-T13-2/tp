@@ -13,7 +13,6 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 
 <img src="images/alson001.png" width="200px">
 
-[[homepage]()]
 [[github](https://github.com/alson001)]
 [[portfolio](team/alson001.md)]
 
@@ -26,8 +25,8 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[github](http://github.com/filbertphang)]
 [[portfolio](team/filbertphang.md)]
 
-- Role:
-- Responsibilities:
+- Role: Testing
+- Responsibilities: (to be confirmed)
 
 ### James Liu Zixin
 
