@@ -17,7 +17,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added...
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2223s2.github.io/tp-dashboard/?search=filbertphang&breakdown=true)
 
 * **Project management**:
     * Managed releases `v1.xx` - `v1.xx` (# releases) on GitHub
