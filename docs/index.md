@@ -6,12 +6,6 @@ title: RIZZ-ipe
 [![CI Status](https://github.com/AY2223S2-CS2103T-T13-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2223S2-CS2103T-T13-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2223S2-CS2103T-T13-2/tp/branch/master/graph/badge.svg?token=7VWU83CQOT)](https://codecov.io/gh/AY2223S2-CS2103T-T13-2/tp)
 
-<a href="https://codecov.io/gh/AY2223S2-CS2103T-T13-2/tp" > 
- <img src="https://codecov.io/gh/AY2223S2-CS2103T-T13-2/tp/branch/master/graph/badge.svg?token=7VWU83CQOT"/> 
-</a>
-
-![Ui](images/Ui.png)
-
 **RIZZ-ipe is a desktop application for managing your delicious recipes.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 * If you are interested in using RIZZipe, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
