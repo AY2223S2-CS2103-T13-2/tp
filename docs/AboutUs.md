@@ -35,8 +35,8 @@ You can reach us at the email `seer@comp.nus.edu.sg`
 [[github](http://github.com/jamesliuzx)]
 [[portfolio](team/jamesliuzx.md)]
 
-- Role:
-- Responsibilities:
+- Role: Team Lead
+- Responsibilities: Overall project coordination
 
 ### Ong Seeu Sim
 
