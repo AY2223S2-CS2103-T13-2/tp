@@ -28,7 +28,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `xx` and `xx` [\#]()
+        * Added documentation for the features `delete` and `list` [\#26](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/26)
         * Did cosmetic tweaks to existing documentation of features `xx`, `xx`: [\#]()
     * Developer Guide:
         * Added implementation details of the `xx` feature.
