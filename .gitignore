@@ -3,10 +3,11 @@
 /build/
 src/main/resources/docs/
 
-# IDEA files
+# IDEA/vscode files
 /.idea/
 /out/
 /*.iml
+/.vscode/
 
 # Storage/log files
 /data/
