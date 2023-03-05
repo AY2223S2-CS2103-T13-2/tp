@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 ### User stories
 
@@ -143,8 +143,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (poss
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private recipe detail**: A recipe detail that is not meant to be shared with others
-
+* **Main Success Scenario (MSS)**: The main or optimal flow of a use case, representing the successful completion of the user's goal.
+* **Use Case**: A description of a specific user goal or task and the steps required to achieve it.
+* **Chef**: The user or operator of the application.
+* **Recipe**: A set of instructions to prepare and cook a specific dish. Includes dish name, ingredients, serving size, preparation time and any dietary labels.
+* **Book**: Refers to the application or system that manages the storage and retrieval of recipe data.
+* **Storage file**: The file used by the application to store and retrieve recipe data.
+* **Index**: Refers to the position of a specific recipe within a list of recipes, represented by a numerical value.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -170,23 +175,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
-
-### Deleting a recipe
-
-1. Deleting a recipe while all recipes are being shown
-
-   1. Prerequisites: List all recipes using the `list` command. Multiple recipes in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First recipe is deleted from the list. Details of the deleted recipe shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No recipe is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 

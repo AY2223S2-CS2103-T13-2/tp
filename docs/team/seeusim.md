@@ -9,38 +9,17 @@ RIZZipe is a desktop recipe book application used for busy cooks who want to tra
 
 Given below are my contributions to the project.
 
-* **FeatureName**: Added the ability to ....
-    * What it does: allows the user to...
-    * Justification: This feature improves...
-    * Highlights: This enhancement affects...
-    * Credits: *{if any}*
-
-* **New Feature**: Added...
-
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2223s2.github.io/tp-dashboard/?search=SeeuSim&breakdown=true)
 
 * **Project management**:
-    * Managed releases `v1.xx` - `v1.xx` (# releases) on GitHub
-
-* **Enhancements to existing features**:
-    * Updated... (Pull requests [\#](), [\#]())
-    * Wrote additional tests... (Pull requests [\#](), [\#]())
+    * Managed releases `v1.1` (1 release) on GitHub
 
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `delete` and `list` [\#26](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/26)
-        * Did cosmetic tweaks to existing documentation of features `xx`, `xx`: [\#]()
+        * Did cosmetic tweaks to existing documentation of features `add`, `view`: [\#30](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/30)
     * Developer Guide:
-        * Added implementation details of the `xx` feature.
+        * Added user stories for the `delete`, `list` features [\#35](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/35)
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-    * Integrated a third party library (BangBros-JS) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * PRs reviewed (with non-trivial review comments): [\#34](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/34), [\#37](https://github.com/AY2223S2-CS2103T-T13-2/tp/pull/37)
