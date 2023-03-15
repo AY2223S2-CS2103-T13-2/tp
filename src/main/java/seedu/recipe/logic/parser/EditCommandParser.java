@@ -4,10 +4,13 @@ import seedu.recipe.commons.core.index.Index;
 import seedu.recipe.logic.commands.EditCommand;
 import seedu.recipe.logic.commands.EditCommand.EditRecipeDescriptor;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.model.recipe.Ingredient;
+import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -47,16 +50,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editRecipeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editRecipeDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
+            editRecipeDescriptor.setDuration(ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editRecipeDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editRecipeDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_PORTION).isPresent()) {
+            editRecipeDescriptor.setPortion(ParserUtil.parsePortion(argMultimap.getValue(PREFIX_PORTION).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRecipeDescriptor::setTags);
+        parseIngredientsForEdit(argMultimap.getAllValues(PREFIX_INGREDIENT)).ifPresent(editRecipeDescriptor::setIngredients);
+        parseStepsForEdit(argMultimap.getAllValues(PREFIX_STEP)).ifPresent(editRecipeDescriptor::setSteps);
 
         if (!editRecipeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -80,4 +82,23 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    private Optional<List<Ingredient>> parseIngredientsForEdit(Collection<String> ingredients) throws ParseException {
+        assert ingredients != null;
+
+        if (ingredients.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> ingredientList = ingredients.size() == 1 && ingredients.contains("") ? Collections.emptyList() : ingredients;
+        return Optional.of(ParserUtil.parseIngredients(ingredientList));
+    }
+
+    private Optional<List<Step>> parseStepsForEdit(Collection<String> steps) throws ParseException {
+        assert steps != null;
+
+        if (steps.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> stepsList = steps.size() == 1 && steps.contains("") ? Collections.emptyList() : steps;
+        return Optional.of(ParserUtil.parseSteps(stepsList));
+    }
 }

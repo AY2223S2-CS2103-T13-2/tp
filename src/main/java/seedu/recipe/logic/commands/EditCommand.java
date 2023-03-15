@@ -89,6 +89,7 @@ public class EditCommand extends Command {
         Recipe recipeToEdit = lastShownList.get(index.getZeroBased());
         Recipe editedRecipe = createEditedRecipe(recipeToEdit, editRecipeDescriptor);
 
+        // TODO: ensure that these model methods work properly
         if (!recipeToEdit.isSameRecipe(editedRecipe) && model.hasRecipe(editedRecipe)) {
             throw new CommandException(MESSAGE_DUPLICATE_RECIPE);
         }
@@ -106,11 +107,24 @@ public class EditCommand extends Command {
         assert recipeToEdit != null;
 
         Name updatedName = editRecipeDescriptor.getName().orElse(recipeToEdit.getName());
-        List<Ingredient> updatedIngredients = editRecipeDescriptor.getPhone().orElse(recipeToEdit.getIngredient());
-        Email updatedEmail = editRecipeDescriptor.getEmail().orElse(recipeToEdit.getEmail());
-        Address updatedAddress = editRecipeDescriptor.getAddress().orElse(recipeToEdit.getAddress());
-        Set<Tag> updatedTags = editRecipeDescriptor.getTags().orElse(recipeToEdit.getTags());
-        return new Recipe(updatedName, updatedIngredient, updatedEmail, updatedAddress, updatedTags, null);
+        Recipe newRecipe = new Recipe(updatedName);
+
+        RecipeDuration updatedDuration = editRecipeDescriptor.getDuration().orElse(recipeToEdit.getDurationNullable());
+        newRecipe.setDuration(updatedDuration);
+
+        RecipePortion updatedPortion = editRecipeDescriptor.getPortion().orElse(recipeToEdit.getPortionNullable());
+        newRecipe.setPortion(updatedPortion);
+
+        Tag[] updatedTags = editRecipeDescriptor.getTags().orElse(recipeToEdit.getTags()).toArray(Tag[]::new);
+        newRecipe.setTags(updatedTags);
+
+        Ingredient[] updatedIngredients = editRecipeDescriptor.getIngredients().orElse(recipeToEdit.getIngredients()).toArray(Ingredient[]::new);
+        newRecipe.setIngredients(updatedIngredients);
+
+        Step[] updatedSteps = editRecipeDescriptor.getSteps().orElse(recipeToEdit.getSteps()).toArray(Step[]::new);
+        newRecipe.setSteps(updatedSteps);
+
+        return newRecipe;
     }
 
     @Override
