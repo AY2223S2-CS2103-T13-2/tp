@@ -51,6 +51,16 @@ public class Recipe {
         return duration.get();
     }
 
+    // nullable variants of getPortion and getDuration
+    // when we are okay with receiving null
+    public RecipePortion getPortionNullable() {
+        return portion.orElse(null);
+    }
+
+    public RecipeDuration getDurationNullable() {
+        return duration.orElse(null);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -64,11 +74,11 @@ public class Recipe {
     }
 
     public void setPortion(RecipePortion portion) {
-        this.portion = Optional.of(portion);
+        this.portion = Optional.ofNullable(portion);
     }
 
     public void setDuration(RecipeDuration duration) {
-        this.duration = Optional.of(duration);
+        this.duration = Optional.ofNullable(duration);
     }
 
     public void setTags(Tag... tags) {
@@ -82,6 +92,7 @@ public class Recipe {
     public void setSteps(Step... steps) {
         this.steps.addAll(List.of(steps));
     }
+
 
 
     /**
