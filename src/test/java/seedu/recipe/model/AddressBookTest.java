@@ -24,7 +24,7 @@ import seedu.recipe.testutil.PersonBuilder;
 
 public class AddressBookTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final RecipeBook addressBook = new RecipeBook();
 
     @Test
     public void constructor() {
@@ -38,7 +38,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        RecipeBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -49,7 +49,7 @@ public class AddressBookTest {
         Recipe editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Recipe> newRecipes = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newRecipes);
+        RecipeBookStub newData = new RecipeBookStub(newRecipes);
 
         assertThrows(DuplicateRecipeException.class, () -> addressBook.resetData(newData));
     }
@@ -86,10 +86,10 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose recipes list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class RecipeBookStub implements ReadOnlyRecipeBook {
         private final ObservableList<Recipe> recipes = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Recipe> recipes) {
+        RecipeBookStub(Collection<Recipe> recipes) {
             this.recipes.setAll(recipes);
         }
 

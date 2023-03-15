@@ -3,11 +3,14 @@ package seedu.recipe.logic.parser;
 import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.recipe.logic.parser.CliSyntax.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.recipe.logic.commands.AddCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.logic.parser.functional.TryUtil;
 import seedu.recipe.model.recipe.*;
 import seedu.recipe.model.tag.Tag;
 
@@ -35,12 +38,32 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // 1. Parse Duration
         argMultimap.getValue(PREFIX_DURATION).ifPresent(durationString -> {
-            ParserUtil.parse
+            Optional<RecipeDuration> recipeDuration =
+                TryUtil.safeCompute(ParserUtil::parseDuration, durationString);
+            recipeDuration.ifPresent(recipe::setDuration);
         });
+
         // 2. Parse Portion
+        argMultimap.getValue(PREFIX_PORTION).ifPresent(portionString -> {
+            Optional<RecipePortion> recipeDuration =
+                    TryUtil.safeCompute(ParserUtil::parsePortion, portionString);
+            recipeDuration.ifPresent(recipe::setPortion);
+        });
+
         // 3. Parse Tags
+        Tag[] tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG))
+                .toArray(Tag[]::new);
+        recipe.setTags(tags);
+
         // 4. Parse Ingredients
+        Ingredient[] ingredients = ParserUtil.parseIngredients(argMultimap.getAllValues(PREFIX_INGREDIENT))
+                .toArray(Ingredient[]::new);
+        recipe.setIngredients(ingredients);
+
         // 5. Parse Steps
+        Step[] steps = ParserUtil.parseSteps(argMultimap.getAllValues(PREFIX_STEP))
+                .toArray(Step[]::new);
+        recipe.setSteps(steps);
 
         return new AddCommand(recipe);
     }

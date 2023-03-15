@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.recipe.model.AddressBook;
-import seedu.recipe.model.ReadOnlyAddressBook;
+import seedu.recipe.model.RecipeBook;
+import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.recipe.*;
 import seedu.recipe.model.tag.Tag;
 
@@ -24,8 +24,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyRecipeBook getSampleAddressBook() {
+        RecipeBook sampleAb = new RecipeBook();
         for (Recipe sampleRecipe : getSamplePersons()) {
             sampleAb.addRecipe(sampleRecipe);
         }

@@ -12,7 +12,7 @@ import seedu.recipe.model.recipe.UniqueRecipeList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameRecipe comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class RecipeBook implements ReadOnlyRecipeBook {
 
     private final UniqueRecipeList recipes;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         recipes = new UniqueRecipeList();
     }
 
-    public AddressBook() {}
+    public RecipeBook() {}
 
     /**
      * Creates an AddressBook using the Recipes in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public RecipeBook(ReadOnlyRecipeBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,7 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyRecipeBook newData) {
         requireNonNull(newData);
 
         setRecipes(newData.getRecipeList());
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && recipes.equals(((AddressBook) other).recipes));
+                || (other instanceof RecipeBook // instanceof handles nulls
+                && recipes.equals(((RecipeBook) other).recipes));
     }
 
     @Override

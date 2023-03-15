@@ -7,7 +7,7 @@ import seedu.recipe.commons.core.GuiSettings;
 import seedu.recipe.logic.commands.CommandResult;
 import seedu.recipe.logic.commands.exceptions.CommandException;
 import seedu.recipe.logic.parser.exceptions.ParseException;
-import seedu.recipe.model.ReadOnlyAddressBook;
+import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.recipe.Recipe;
 
 /**
@@ -26,9 +26,9 @@ public interface Logic {
     /**
      * Returns the AddressBook.
      *
-     * @see seedu.recipe.model.Model#getAddressBook()
+     * @see seedu.recipe.model.Model#getRecipeBook()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyRecipeBook getAddressBook();
 
     /** Returns an unmodifiable view of the filtered list of recipes */
     ObservableList<Recipe> getFilteredRecipeList();

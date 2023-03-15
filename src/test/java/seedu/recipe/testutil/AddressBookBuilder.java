@@ -1,6 +1,6 @@
 package seedu.recipe.testutil;
 
-import seedu.recipe.model.AddressBook;
+import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Recipe;
 
 /**
@@ -10,13 +10,13 @@ import seedu.recipe.model.recipe.Recipe;
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private RecipeBook addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        addressBook = new RecipeBook();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
+    public AddressBookBuilder(RecipeBook addressBook) {
         this.addressBook = addressBook;
     }
 
@@ -28,7 +28,7 @@ public class AddressBookBuilder {
         return this;
     }
 
-    public AddressBook build() {
+    public RecipeBook build() {
         return addressBook;
     }
 }

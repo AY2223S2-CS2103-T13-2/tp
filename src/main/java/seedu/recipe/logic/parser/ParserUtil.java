@@ -9,6 +9,7 @@ import seedu.recipe.commons.core.index.Index;
 import seedu.recipe.commons.util.StringUtil;
 import seedu.recipe.logic.parser.exceptions.ParseException;
 import seedu.recipe.model.recipe.*;
+import seedu.recipe.model.recipe.unit.PortionUnit;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -52,7 +53,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseDuration(String duration) throws ParseException {
+    public static RecipeDuration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);
         String trimmedDuration = duration.trim();
         if (!RecipeDuration.isValidRecipeDuration(trimmedDuration)) {
@@ -67,13 +68,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parsePortion(String portion) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static RecipePortion parsePortion(String portion) throws ParseException {
+        requireNonNull(portion);
+        String trimmedPortion = portion.trim();
+        if (!RecipePortion.isValidRecipePortion(trimmedPortion)) {
+            throw new ParseException(RecipePortion.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return RecipePortion.of(trimmedPortion);
     }
 
     /**

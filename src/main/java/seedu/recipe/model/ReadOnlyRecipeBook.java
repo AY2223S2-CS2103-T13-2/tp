@@ -6,7 +6,7 @@ import seedu.recipe.model.recipe.Recipe;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyRecipeBook {
 
     /**
      * Returns an unmodifiable view of the persons list.
