@@ -1,23 +1,24 @@
 package seedu.recipe.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
+import seedu.recipe.commons.core.index.Index;
+import seedu.recipe.logic.commands.EditCommand;
+import seedu.recipe.logic.commands.EditCommand.EditRecipeDescriptor;
+import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.model.tag.Tag;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.recipe.commons.core.index.Index;
-import seedu.recipe.logic.commands.EditCommand;
-import seedu.recipe.logic.commands.EditCommand.EditRecipeDescriptor;
-import seedu.recipe.logic.parser.exceptions.ParseException;
-import seedu.recipe.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
+import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,7 +33,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DURATION, PREFIX_PORTION, PREFIX_TAG, PREFIX_INGREDIENT, PREFIX_STEP);
 
         Index index;
 
