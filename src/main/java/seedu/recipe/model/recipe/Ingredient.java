@@ -11,7 +11,8 @@ public class Ingredient {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Ingredient contains alphanumeric characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+(\\s+[A-Za-z0-9()\\-,.]+)*$";
+    public static final String VALIDATION_REGEX =
+            "^([0-9]+(\\.[0-9]+)?|[A-Za-z\\(\\)\\.\\,/-]+)(\\s+[0-9A-Za-z\\(\\)\\.\\,\\+-/:;]+)*\\S+$";
     public final String name;
 
     /**
@@ -21,7 +22,7 @@ public class Ingredient {
      */
     public Ingredient(String name) {
         requireNonNull(name);
-//        checkArgument(isValidIngredient(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidIngredient(name), MESSAGE_CONSTRAINTS);
         this.name = name;
     }
 

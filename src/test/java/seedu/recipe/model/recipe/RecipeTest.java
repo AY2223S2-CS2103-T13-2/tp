@@ -1,8 +1,23 @@
 package seedu.recipe.model.recipe;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.recipe.testutil.Assert.assertThrows;
-import static seedu.recipe.testutil.TypicalRecipes.*;
+import static seedu.recipe.testutil.TypicalRecipes.BLUEBERRY_PANCAKES;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_DURATION;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_INGREDIENTS;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_NAME;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_PORTION;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_STEPS;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_STRING;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_TAGS;
+import static seedu.recipe.testutil.TypicalRecipes.FISH_AND_CHIPS;
+import static seedu.recipe.testutil.TypicalRecipes.GRILLED_CHEESE;
+import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +26,11 @@ import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
 import seedu.recipe.model.tag.Tag;
 import seedu.recipe.testutil.RecipeBuilder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class RecipeTest {
     // Varying fields
@@ -162,14 +181,12 @@ public class RecipeTest {
 
     @Test
     public void setSteps() {
-//        List<Step> newStepList = new ArrayList<>(CACIO_STEPS);
         Step[] newSteps = new Step[]{
                 new Step("Step one"),
                 new Step("Step two")
         };
         Recipe test = new RecipeBuilder(CACIO_E_PEPE).build();
         test.setSteps(newSteps);
-//        newStepList.addAll(List.of(stepsToAdd));
         assertEquals(List.of(newSteps), test.getSteps());
     }
 
