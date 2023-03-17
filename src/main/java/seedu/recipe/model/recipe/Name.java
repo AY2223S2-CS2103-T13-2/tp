@@ -16,7 +16,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[A-Za-z0-9]+(\\s+[A-Za-z0-9]+)*$";
+    public static final String VALIDATION_REGEX = "^([A-Za-z0-9\\-]+)(\\s+[A-Za-z0-9\\-]*)*$";
 
     public final String recipeName;
 
@@ -27,7 +27,7 @@ public class Name {
      */
     public Name(String recipeName) {
         requireNonNull(recipeName);
-//        checkArgument(isValidName(recipeName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidName(recipeName), MESSAGE_CONSTRAINTS);
         this.recipeName = recipeName;
     }
 
