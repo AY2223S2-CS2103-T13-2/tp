@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.recipe.model.recipe.Ingredient;
 import seedu.recipe.model.recipe.Recipe;
 
 /**
@@ -78,8 +79,8 @@ public class RecipeCard extends UiPart<Region> {
         //Steps
         recipe.getSteps()
                 .forEach(step -> steps.getChildren().add(new Label(step.toString())));
-                // Add a click listener to the cardPane node
         
+        // Add a click listener to the cardPane node
         cardPane.setOnMouseClicked(event -> {
             RecipePopup popup = new RecipePopup(recipe, displayedIndex);
             popup.display();
