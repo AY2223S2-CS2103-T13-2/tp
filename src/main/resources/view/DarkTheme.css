@@ -350,3 +350,23 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#cardPane {
+    -fx-border-color: dimgray;
+    -fx-border-width: 2;
+}
+
+.close-button {
+    -fx-background-color: transparent;
+    -fx-background-image: url("/path/to/close_icon.png");
+    -fx-background-size: 24px 24px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #999999;
+    -fx-padding: 0 5px 0 0;
+    float: right;
+}
