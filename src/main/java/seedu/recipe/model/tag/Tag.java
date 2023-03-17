@@ -10,7 +10,7 @@ import static seedu.recipe.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "([A-Za-z0-9]\\s+)*";
+    public static final String VALIDATION_REGEX = "([A-Za-z0-9]+)(\\s+[A-Za-z0-9]+)*";
 
     public final String tagName;
 
@@ -21,7 +21,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-//        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
 

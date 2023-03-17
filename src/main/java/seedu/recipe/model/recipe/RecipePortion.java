@@ -9,7 +9,6 @@ import java.util.Objects;
  *
  */
 public class RecipePortion {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Recipe Portion's upper and lower ranges should only contain numbers, and its unit should only contain " +
                     "alphanumeric characters, and it should not be blank";
