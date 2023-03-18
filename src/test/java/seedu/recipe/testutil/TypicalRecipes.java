@@ -80,28 +80,29 @@ public class TypicalRecipes {
             RecipePortion.of("2 - 3 servings"),
             RecipeDuration.of("35 minutes"),
             Set.of(new Tag("American"), new Tag("Breakfast")),
-            List.of(new Ingredient("200 g self-raising flour"),
-                    new Ingredient("1 tsp baking powder"),
-                    new Ingredient("1 egg"),
-                    new Ingredient("1 knob butter"),
-                    new Ingredient("150 g pack blueberry"),
-                    new Ingredient("golden or maple syrup"),
-                    new Ingredient("sunflower oil or a little butter")),
             List.of(
-                    new Step("Mix together 200 g self-raising flour, 1 tsp baking powder and a "
-                            + "pinch of salt in a large bowl."),
-                    new Step("Beat 1 egg with 300ml milk, make a well in the centre of the dry ingredients and whisk "
-                            + "in the milk to make a thick smooth batter."),
-                    new Step("Beat in a knob of melted butter, and gently stir in half of the 150g pack of "
-                            + "blueberries."),
-                    new Step("Heat a teaspoon of sunflower oil or small knob of butter in a large non-stick frying"
-                            + "pan."),
-                    new Step("Drop a large tablespoonful of the batter per pancake into the pan to make pancakes about"
-                            + " 7.5cm across. Make three or four pancakes at a time."),
-                    new Step("Cook for about 3 minutes over a medium heat until small bubbles appear on the surface of"
-                            + "each pancake, then turn and cook another 2-3 minutes until golden."),
-                    new Step("Cover with kitchen paper to keep warm while you use up the rest of the batter."),
-                    new Step("Serve with golden or maple syrup and the rest of the blueberries.")
+                new Ingredient("200 g self-raising flour"),
+                new Ingredient("1 tsp baking powder"),
+                new Ingredient("1 egg"),
+                new Ingredient("1 knob butter"),
+                new Ingredient("150 g pack blueberry"),
+                new Ingredient("golden or maple syrup"),
+                new Ingredient("sunflower oil or a little butter")),
+            List.of(
+                new Step("Mix together 200 g self-raising flour, 1 tsp baking powder and a "
+                        + "pinch of salt in a large bowl."),
+                new Step("Beat 1 egg with 300ml milk, make a well in the centre of the dry ingredients and whisk "
+                        + "in the milk to make a thick smooth batter."),
+                new Step("Beat in a knob of melted butter, and gently stir in half of the 150g pack of "
+                        + "blueberries."),
+                new Step("Heat a teaspoon of sunflower oil or small knob of butter in a large non-stick frying"
+                        + "pan."),
+                new Step("Drop a large tablespoonful of the batter per pancake into the pan to make pancakes about"
+                        + " 7.5cm across. Make three or four pancakes at a time."),
+                new Step("Cook for about 3 minutes over a medium heat until small bubbles appear on the surface of"
+                        + "each pancake, then turn and cook another 2-3 minutes until golden."),
+                new Step("Cover with kitchen paper to keep warm while you use up the rest of the batter."),
+                new Step("Serve with golden or maple syrup and the rest of the blueberries.")
             )).build();
     public static final Recipe MASALA_DOSA = new RecipeBuilder(
             new Name("Classic Masala Dosa"),
@@ -127,9 +128,10 @@ public class TypicalRecipes {
                 new Ingredient("2 small green chiles, finely chopped"),
                 new Ingredient("1.5 pounds yellow-fleshed potatoes, such as Yukon Gold, boiled, peeled and cubed"),
                 new Ingredient("0.5 cup roughly chopped cilantro, leaves and tender stems")),
-            List.of(new Step("Make the dosa batter: Put rice in a bowl, rinse well and cover with "
-                            + "4 cups cold water. Put urad dal and fenugreek seeds in a small bowl, rinse "
-                            + "well and add cold water to cover. Leave both to soak for 4 to 6 hours."),
+            List.of(
+                new Step("Make the dosa batter: Put rice in a bowl, rinse well and cover with "
+                        + "4 cups cold water. Put urad dal and fenugreek seeds in a small bowl, rinse "
+                        + "well and add cold water to cover. Leave both to soak for 4 to 6 hours."),
                 new Step("Drain rice and dal-fenugreek mixture in separate colanders. Put rice "
                         + "in a food processor, blender or wet-dry grinder. Add 1 cup cold water and "
                         + "grind to a smooth paste. It will take about 10 minutes, and it may be necessary "
@@ -173,9 +175,10 @@ public class TypicalRecipes {
                 new Ingredient("a few drops of balsamic vinegar"),
                 new Ingredient("butter")
             ),
-            List.of(new Step("Butter the bread. Put a wedge of camembert or brie on the unbuttered side of one slice of"
-                            + " bread. Top with a spoonful of cranberry sauce. Drizzle with a few drops of balsamic"
-                            + " vinegar, if you have some."),
+            List.of(
+                new Step("Butter the bread. Put a wedge of camembert or brie on the unbuttered side of one slice of"
+                        + " bread. Top with a spoonful of cranberry sauce. Drizzle with a few drops of balsamic"
+                        + " vinegar, if you have some."),
                 new Step("Put the second slice of bread on top, buttered side out. Fry in a hot non-stick pan,"
                         + " pressing down with a fish slice, for a minute or two on each side, until golden brown"
                         + " and melting. Cut in half and eat straightaway."))).build();
@@ -200,8 +203,9 @@ public class TypicalRecipes {
                 new Ingredient("0.75 Shallot Diced"),
                 new Ingredient("Lemon Juice (about 1 Teaspoon)"),
                 new Ingredient("Hot Sauce (Optional)")),
-            List.of(new Step("Get oil in pan medium-high heat for frying before assembling ingredients. Do not need"
-                            + " a deep pan or pot, a large pan will do"),
+            List.of(
+                new Step("Get oil in pan medium-high heat for frying before assembling ingredients. Do not need"
+                        + " a deep pan or pot, a large pan will do"),
                 new Step("In a bowl whisk together flour, baking soda, curry powder and beer. Then whisk egg whites"
                         + " till there are stiff peaks and fold into batter (if too heavy add some water)"),
                 new Step("Add teaspoon of curry powder to dredging flour for more seasoning (optional)"),
