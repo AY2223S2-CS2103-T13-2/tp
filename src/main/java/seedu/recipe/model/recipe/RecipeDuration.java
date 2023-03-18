@@ -8,6 +8,10 @@ import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthE
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
 import seedu.recipe.model.recipe.unit.TimeUnit;
 
+import java.util.Objects;
+
+import static seedu.recipe.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents the Duration that a Recipe is estimated to take to complete.
  */
@@ -20,7 +24,7 @@ public class RecipeDuration {
 
     private final double time;
     private final TimeUnit timeUnit;
-
+    
     /**
      * Generates and returns an instance of a RecipeDuration object, if the provided parameters are valid.
      * @param time The non-negative time amount

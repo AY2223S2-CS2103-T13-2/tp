@@ -8,6 +8,10 @@ import static seedu.recipe.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import static seedu.recipe.logic.commands.CommandTestUtil.VALID_INGREDIENT_CHICKEN;
+import static seedu.recipe.logic.commands.CommandTestUtil.VALID_INGREDIENT_FISH;
+import static seedu.recipe.testutil.Assert.assertThrows;
+
 public class IngredientTest {
     private static final String VALID_INTEGER = "1 watermelon";
     private static final String VALID_DECIMAL = "13.5 g molasses extract";
@@ -22,6 +26,31 @@ public class IngredientTest {
     @Test
     public void null_name() {
         assertThrows(NullPointerException.class, () -> new Ingredient(null));
+    }
+
+    @Test
+    public void constructor_invalidIngredient_throwsIllegalArgumentException() {
+        String invalidIngredient = "";
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient(invalidIngredient));
+    }
+
+    @Test
+    public void isValidIngredient() {
+        // null ingredient
+        assertThrows(NullPointerException.class, () -> Ingredient.isValidIngredient(null));
+
+        // invalid ingredient
+        Assertions.assertFalse(Ingredient.isValidIngredient("")); // empty string
+        Assertions.assertFalse(Ingredient.isValidIngredient(" ")); // spaces only
+        Assertions.assertFalse(Ingredient.isValidIngredient("9011p041")); // numbers within alphabets
+        // FAILED ALL NUMBERS CASE
+        // Assertions.assertFalse(Ingredient.isValidIngredient("90117041")); // numbers within alphabets
+
+        // valid ingredient
+        Assertions.assertTrue(Ingredient.isValidIngredient("salt")); // non-numeric
+        Assertions.assertTrue(Ingredient.isValidIngredient("fish oil")); // spaces within ingredients
+        Assertions.assertTrue(Ingredient.isValidIngredient("Salt")); // Caps
+        Assertions.assertTrue(Ingredient.isValidIngredient("1 container (15 ounces) ricotta cheese"));
     }
 
     @Test

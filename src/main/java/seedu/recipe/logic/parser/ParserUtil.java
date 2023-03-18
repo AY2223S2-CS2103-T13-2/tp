@@ -147,6 +147,7 @@ public class ParserUtil {
      * @throws ParseException The Exception resulting from an invalid Step description provided.
      */
     public static Step parseStep(String step) throws ParseException {
+        requireNonNull(step);
         String trimmedStep = step.trim();
         if (!Step.isValidStep(trimmedStep)) {
             throw new ParseException(Step.MESSAGE_CONSTRAINTS);

@@ -13,6 +13,8 @@ import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
 
+import static seedu.recipe.logic.commands.CommandTestUtil.*;
+
 /**
  * A utility class containing a list of {@code Recipe} objects to be used in tests.
  */
@@ -228,6 +230,21 @@ public class TypicalRecipes {
                 new Step("Add all Tartar ingredients together and mix. Add salt to taste and hot sauce if you want"
                         + " heat."),
                 new Step("Assemble together and enjoy!"))).build();
+    // Manually added - Person's details found in {@code CommandTestUtil}
+    public static final Recipe CHICKEN = new RecipeBuilder(
+            new Name(VALID_NAME_CHICKEN),
+            RecipePortion.of(VALID_PORTION_CHICKEN),
+            RecipeDuration.of(VALID_DURATION_CHICKEN),
+            Set.of(new Tag(VALID_TAG_CHINESE)),
+            List.of(new Ingredient(VALID_INGREDIENT_CHICKEN)),
+            List.of(new Step(VALID_STEP_CHICKEN))).build();
+    public static final Recipe FISH = new RecipeBuilder(
+            new Name(VALID_NAME_FISH),
+            RecipePortion.of(VALID_PORTION_FISH),
+            RecipeDuration.of(VALID_DURATION_FISH),
+            Set.of(new Tag(VALID_TAG_ITALIAN)),
+            List.of(new Ingredient(VALID_INGREDIENT_FISH)),
+            List.of(new Step(VALID_STEP_FISH))).build();
 
     // Manually added - Recipe's details found in {@code CommandTestUtil}
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

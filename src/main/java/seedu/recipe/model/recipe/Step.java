@@ -21,6 +21,7 @@ public class Step {
     public static final String VALIDATION_REGEX =
             "^[A-Za-z0-9]+([\\-,/.][A-Za-z0-9]+)?[.,:;]?"
             + "(\\s+[(]?([A-Za-z0-9]+|[0-9]+\\.[0-9]+)([\\-,/.]([A-Za-z0-9]+|([0-9]+\\.[0-9]+)))?[.,!:;)]{0,2})+";
+
     public final String description;
 
     /**
@@ -41,7 +42,7 @@ public class Step {
     }
 
     @Override
-    public String toString() {
+    public String toString(){
         return description;
     }
 

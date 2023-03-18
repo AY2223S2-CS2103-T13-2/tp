@@ -13,6 +13,7 @@ public class Ingredient {
             "Ingredient contains alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX =
             "^(([1-9][0-9]*|(([0-9]|[1-9][0-9]+)[./][0-9]+))([a-z.-]+)?|[A-Za-z().,/-]+)(\\s+[0-9A-Za-z().,+-/:;]+)*$";
+
     public final String name;
 
     /**

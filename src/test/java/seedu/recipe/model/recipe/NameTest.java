@@ -1,10 +1,14 @@
 package seedu.recipe.model.recipe;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.recipe.logic.commands.CommandTestUtil.VALID_NAME_CHICKEN;
+import static seedu.recipe.logic.commands.CommandTestUtil.VALID_NAME_FISH;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.recipe.testutil.Assert.assertThrows;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_NAME;
 
 import org.junit.jupiter.api.Test;
 
