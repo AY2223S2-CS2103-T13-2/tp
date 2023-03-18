@@ -14,6 +14,7 @@ public class IngredientTest {
     private static final String TRAILING_WHITESPACE = "watermelon juice ";
     private static final String WHITESPACE = "  ";
     private static final String LEADING_WHITESPACE = " juice of 1 carrot";
+    private static final String SLASH_UNIT = "1/3 cup milk";
 
     @Test
     public void null_name() {
@@ -27,6 +28,8 @@ public class IngredientTest {
         assertTrue(Ingredient.isValidIngredient(VALID_INTEGER_CONCAT_UNIT));
         assertTrue(Ingredient.isValidIngredient(VALID_DECIMAL_CONCAT_UNIT));
         assertTrue(Ingredient.isValidIngredient(VALID_ALPHA));
+        assertTrue(Ingredient.isValidIngredient(SLASH_UNIT));
+
         assertFalse(Ingredient.isValidIngredient(TRAILING_WHITESPACE));
         assertFalse(Ingredient.isValidIngredient(WHITESPACE));
         assertFalse(Ingredient.isValidIngredient(LEADING_WHITESPACE));

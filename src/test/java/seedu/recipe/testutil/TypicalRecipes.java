@@ -21,8 +21,8 @@ public class TypicalRecipes {
         new Ingredient("6 oz pasta (such as egg tagliolini, bucatini, or spaghetti)"),
         new Ingredient("3 Tbsp unsalted butter, cubed, divided"),
         new Ingredient("1 tsp freshly cracked black pepper"),
-        new Ingredient("0.75 cup finely grated Grana Padano or Parmesan"),
-        new Ingredient("0.33 cup finely grated Pecorino")
+        new Ingredient("3/4 cup finely grated Grana Padano or Parmesan"),
+        new Ingredient("1/3 cup finely grated Pecorino")
     );
     public static final List<Step> CACIO_STEPS = List.of(
         new Step("Bring 3 quarts water to a boil in a 5-qt. pot. "
