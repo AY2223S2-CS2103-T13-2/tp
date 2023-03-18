@@ -1,13 +1,16 @@
 package seedu.recipe.model.recipe;
 
+import static seedu.recipe.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
+
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthException;
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
 import seedu.recipe.model.recipe.unit.TimeUnit;
 
-import java.util.Objects;
-
-import static seedu.recipe.commons.util.AppUtil.checkArgument;
-
+/**
+ * Represents the Duration that a Recipe is estimated to take to complete.
+ */
 public class RecipeDuration {
     public static final String MESSAGE_CONSTRAINTS =
             "A Recipe Duration should consist of a numeric/decimal portion and an alphanumeric time unit";
@@ -18,6 +21,11 @@ public class RecipeDuration {
     private final double time;
     private final TimeUnit timeUnit;
 
+    /**
+     * Generates and returns an instance of a RecipeDuration object, if the provided parameters are valid.
+     * @param time The non-negative time amount
+     * @param timeUnit The time unit instance
+     */
     public RecipeDuration(double time, TimeUnit timeUnit) {
         checkArgument(isValidRecipeDuration(String.format("%s %s", time, timeUnit.toString())), MESSAGE_CONSTRAINTS);
         this.time = time;
@@ -28,6 +36,11 @@ public class RecipeDuration {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Generates an instance of a RecipeDuration Object, provided the parameter string is formatted correctly.
+     * @param duration The parameter string to input the time and unit into this factory.
+     * @return The generated RecipeDuration instance, if the parameter is valid.
+     */
     public static RecipeDuration of(String duration) {
         String[] tokens = duration.split("\\s+");
         if (tokens.length != 2) {
@@ -39,7 +52,6 @@ public class RecipeDuration {
         //No format exception will occur, thanks to regex
         double timeAmount = Double.parseDouble(tokens[0]);
         return new RecipeDuration(timeAmount, new TimeUnit(tokens[1]));
-
     }
 
     @Override

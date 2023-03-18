@@ -1,33 +1,39 @@
 package seedu.recipe.model.recipe;
 
-import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentException;
-import seedu.recipe.model.recipe.unit.PortionUnit;
+import static seedu.recipe.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
-import static seedu.recipe.commons.util.AppUtil.checkArgument;
+import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentException;
+import seedu.recipe.model.recipe.unit.PortionUnit;
 
 /**
  *
  */
 public class RecipePortion {
     public static final String MESSAGE_CONSTRAINTS =
-            "Recipe Portion's upper and lower ranges should only contain numbers, and its unit should only contain " +
-                    "alphanumeric characters, and it should not be blank";
+            "Recipe Portion's upper and lower ranges should only contain numbers, and its unit should only contain "
+            + "alphanumeric characters, and it should not be blank";
 
     private static final String TOKENIZE_REGEX =
             "([\\s-]+to[\\s-]+|[\\s-]+-?[\\s-]*)";
 
     //{digit}(- OR to){digit} {alphabetic unit}
     private static final String VALIDATION_REGEX =
-            "^1\\s+[A-Za-z]*[A-RT-Za-rt-z]$|^1(\\s+to\\s+|\\s*\\-\\s*)\\d{1,3}\\s+[A-Za-z]+$|" +
-                    "^[02-9]\\d{0,2}((\\s+to\\s+|\\s*-\\s*)\\d{1,3})?\\s+[A-Za-z]+s$";
+            "^1\\s+[A-Za-z]*[A-RT-Za-rt-z]$|^1(\\s+to\\s+|\\s*\\-\\s*)\\d{1,3}\\s+[A-Za-z]+$|"
+            + "^[02-9]\\d{0,2}((\\s+to\\s+|\\s*-\\s*)\\d{1,3})?\\s+[A-Za-z]+s$";
 
     private final int lowerRange;
     private final int upperRange;
     private final PortionUnit portionUnit;
 
-    public RecipePortion(int lowerRange, int upperRange, PortionUnit portionUnit){
+    /**
+     * Generates and returns an instance of a RecipePortion object, if the provided parameters are valid.
+     * @param lowerRange The non-negative lower range amount
+     * @param upperRange The non-negative upper range amount, if present. Else, a negative value.
+     * @param portionUnit The portion unit instance
+     */
+    public RecipePortion(int lowerRange, int upperRange, PortionUnit portionUnit) {
         if (upperRange < 0) {
             checkArgument(
                     isValidRecipePortion(String.format("%s %s", lowerRange, portionUnit.toString())),
@@ -71,14 +77,20 @@ public class RecipePortion {
         return portionUnit;
     }
 
+    /**
+     * Checks if the provided String is formatted properly and can be split into the appropriate tokens to
+     * generate a RecipePortion instance.
+     * @param test The string to test.
+     * @return The boolean indicating if it is valid.
+     */
     public static boolean isValidRecipePortion(String test) {
         if (!test.matches(VALIDATION_REGEX)) {
             return false;
         }
         String[] tokens = test.split(TOKENIZE_REGEX);
         if (tokens.length != 3) {
-            String[] singular_token = test.split("\\s+");
-            int lower = Integer.parseInt(tokens[0]);
+            String[] singularToken = test.split("\\s+");
+            int lower = Integer.parseInt(singularToken[0]);
             return lower > 0;
         }
         int lower = Integer.parseInt(tokens[0]);
@@ -86,6 +98,12 @@ public class RecipePortion {
         return upper > lower;
     }
 
+    /**
+     * Checks if the provided String is formatted properly and can be split into the appropriate tokens to
+     * generate a RecipePortion instance. Returns a RecipePortion instance if the candidate is valid.
+     * @param candidate The string to construct around.
+     * @return The generated RecipePortion instance.
+     */
     public static RecipePortion of(String candidate) {
         if (!isValidRecipePortion(candidate)) {
             throw new RecipePortionInvalidArgumentException(candidate);

@@ -1,17 +1,25 @@
 package seedu.recipe.logic.parser;
 
 import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.recipe.logic.parser.CliSyntax.*;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.recipe.logic.commands.AddCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
 import seedu.recipe.logic.parser.functional.TryUtil;
-import seedu.recipe.model.recipe.*;
+import seedu.recipe.model.recipe.Ingredient;
+import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.RecipeDuration;
+import seedu.recipe.model.recipe.RecipePortion;
+import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -26,7 +34,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PORTION, PREFIX_DURATION, PREFIX_TAG, PREFIX_INGREDIENT, PREFIX_STEP);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PORTION, PREFIX_DURATION,
+                        PREFIX_TAG, PREFIX_INGREDIENT, PREFIX_STEP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {

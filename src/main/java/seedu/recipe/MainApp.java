@@ -15,16 +15,16 @@ import seedu.recipe.commons.util.ConfigUtil;
 import seedu.recipe.commons.util.StringUtil;
 import seedu.recipe.logic.Logic;
 import seedu.recipe.logic.LogicManager;
-import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.Model;
 import seedu.recipe.model.ModelManager;
 import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.ReadOnlyUserPrefs;
+import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.UserPrefs;
 import seedu.recipe.model.util.SampleDataUtil;
-import seedu.recipe.storage.RecipeBookStorage;
 import seedu.recipe.storage.JsonRecipeBookStorage;
 import seedu.recipe.storage.JsonUserPrefsStorage;
+import seedu.recipe.storage.RecipeBookStorage;
 import seedu.recipe.storage.Storage;
 import seedu.recipe.storage.StorageManager;
 import seedu.recipe.storage.UserPrefsStorage;
@@ -78,7 +78,7 @@ public class MainApp extends Application {
         ReadOnlyRecipeBook initialData;
         try {
             recipeBookOptional = storage.readRecipeBook();
-            if (!recipeBookOptional.isPresent()) {
+            if (recipeBookOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample RecipeBook");
             }
             initialData = recipeBookOptional.orElseGet(SampleDataUtil::getSampleRecipeBook);

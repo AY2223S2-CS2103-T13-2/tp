@@ -2,10 +2,7 @@ package seedu.recipe.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.collections.ObservableList;
 import seedu.recipe.model.recipe.Recipe;

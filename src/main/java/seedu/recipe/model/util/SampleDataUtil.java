@@ -1,5 +1,12 @@
 package seedu.recipe.model.util;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Ingredient;
@@ -9,14 +16,6 @@ import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Contains utility methods for populating {@code RecipeBook} with sample data.
@@ -49,7 +48,7 @@ public class SampleDataUtil {
                     + "and pasta is al dente. (Add more pasta water if sauce seems dry.) Transfer "
                     + "pasta to warm bowls and serve."));
 
-    public static final Recipe CACIO_E_PEPE = build (
+    public static final Recipe CACIO_E_PEPE = build(
             CACIO_NAME, CACIO_PORTION, CACIO_DURATION, CACIO_TAGS,
             CACIO_INGREDIENTS, CACIO_STEPS);
 
@@ -120,7 +119,7 @@ public class SampleDataUtil {
                             + "Cover bowl with a kitchen towel and set in a warm place. Let ferment until the "
                             + "surface is bubbly, about 8 hours. Stir in the salt. Use the batter straight away "
                             + "or refrigerate for later use. (Batter will keep for up to a week, refrigerated. "
-                            +" Thin with water if necessary before proceeding.)"),
+                            + " Thin with water if necessary before proceeding.)"),
                     new Step("Make the potato filling: Put ghee in a wide skillet over medium heat. "
                             + "When oil is wavy, add mustard seeds and cumin seeds. Wait for seeds to pop, "
                             + "about 1 minute, then add red peppers and onion. Cook, stirring until onions have "
@@ -134,8 +133,8 @@ public class SampleDataUtil {
                     new Step("To make dosas, set a griddle or cast-iron skillet over medium heat. "
                             + "Brush with about 1 teaspoon vegetable oil. Ladle 1/4 cup batter in the center "
                             + "of griddle. Using bottom of ladle, quickly spread batter outward in a circular motion "
-                            + "to a diameter of about 7 inches. Drizzle 0.5 teaspoon oil over the top. Leave dosa batter"
-                            + " to brown "
+                            + "to a diameter of about 7 inches. Drizzle 0.5 teaspoon oil over the top. Leave dosa "
+                            + "batter to brown "
                             + "gradually until outer edges begin to look dry, about 2 minutes, cooking on one side"
                             + " only. With a spatula, carefully loosen dosa from griddle. Bottom should be crisp and "
                             + "beautifully browned. Spoon 0.5 cup potato filling onto top of dosa, centering it as a"
@@ -190,23 +189,20 @@ public class SampleDataUtil {
                     new Step("Add teaspoon of curry powder to dredging flour for more seasoning (optional)"),
                     new Step("Season fish with salt, then coat with flour. Knock off excess flour and put into batter"
                             + " mixture. Make sure fish is fully battered and ad to oil"),
-                    new Step("Once fish is in, baste the fish with oil. Let first side cook until golden brown and flip."
-                            + " Basting fish with oil on other side. Take pan on and off oil so that the oil does not get"
-                            + " too hot. Fish should be in oil 3-3.5 minutes. Once finished put on plate with paper towel"
-                            + " and put in warm oven"),
-                    new Step("Chop potato into square, then chop into tall skinny fries (the skinnier the fry the quicker"
-                            + " they will cook). Then roll in paper towel to dry any excess moisture. Add new oil to pain"
-                            + " then add potatoes to high heat. Once fries are browned, remove from oil on to paper towel"
-                            + " and add salt."),
+                    new Step("Once fish is in, baste the fish with oil. Let first side cook until golden brown and"
+                            + "flip. Basting fish with oil on other side. Take pan on and off oil so that the oil does "
+                            + "not get too hot. Fish should be in oil 3-3.5 minutes. Once finished put on plate with "
+                            + "paper towel and put in warm oven"),
+                    new Step("Chop potato into square, then chop into tall skinny fries (the skinnier the fry the "
+                            + "quicker they will cook). Then roll in paper towel to dry any excess moisture. Add new "
+                            + "oil to pain then add potatoes to high heat. Once fries are browned, remove from oil on "
+                            + "to paper towel and add salt."),
                     new Step("Add all Tartar ingredients together and mix. Add salt to taste and hot sauce if you want"
                             + " heat."),
                     new Step("Assemble together and enjoy!")));
 
     public static Recipe[] getSampleRecipes() {
-        return new Recipe[] {
-                CACIO_E_PEPE
-//                CACIO_E_PEPE, BLUEBERRY_PANCAKES, MASALA_DOSA, FISH_AND_CHIPS, GRILLED_CHEESE
-        };
+        return new Recipe[] { CACIO_E_PEPE };
     }
 
     public static ReadOnlyRecipeBook getSampleRecipeBook() {

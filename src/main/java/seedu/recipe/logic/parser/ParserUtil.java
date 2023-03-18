@@ -2,14 +2,20 @@ package seedu.recipe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import seedu.recipe.commons.core.index.Index;
 import seedu.recipe.commons.util.StringUtil;
 import seedu.recipe.logic.parser.exceptions.ParseException;
-import seedu.recipe.model.recipe.*;
-import seedu.recipe.model.recipe.unit.PortionUnit;
+import seedu.recipe.model.recipe.Ingredient;
+import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.RecipeDuration;
+import seedu.recipe.model.recipe.RecipePortion;
+import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -134,6 +140,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Creates and returns a Step instance, given a String description.
+     * @param step The String description
+     * @return The Step Instance
+     * @throws ParseException The Exception resulting from an invalid Step description provided.
+     */
     public static Step parseStep(String step) throws ParseException {
         String trimmedStep = step.trim();
         if (!Step.isValidStep(trimmedStep)) {
@@ -142,6 +154,12 @@ public class ParserUtil {
         return new Step(step);
     }
 
+    /**
+     * Creates and returns a list of Step instances, given a Collection of String descriptions.
+     * @param steps The Collection of String descriptions
+     * @return The list of Step instances
+     * @throws ParseException The Exception resulting from an invalid Step description provided.
+     */
     public static List<Step> parseSteps(Collection<String> steps) throws ParseException {
         requireNonNull(steps);
         List<Step> stepList = new ArrayList<>();

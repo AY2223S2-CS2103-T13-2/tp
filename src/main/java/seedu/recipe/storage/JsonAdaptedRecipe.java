@@ -1,29 +1,27 @@
 package seedu.recipe.storage;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import seedu.recipe.commons.exceptions.IllegalValueException;
-import seedu.recipe.logic.parser.Parser;
-import seedu.recipe.model.recipe.*;
-import seedu.recipe.model.tag.Tag;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import seedu.recipe.commons.exceptions.IllegalValueException;
+import seedu.recipe.model.recipe.Ingredient;
+import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.RecipeDuration;
+import seedu.recipe.model.recipe.RecipePortion;
+import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.tag.Tag;
+
 /**
  * Jackson-friendly version of {@link Recipe}.
  */
-@JsonPropertyOrder({
-        "name",
-        "portion",
-        "duration",
-        "tags",
-        "ingredients",
-        "steps"
-})
+@JsonPropertyOrder({ "name", "portion", "duration", "tags", "ingredients", "steps"})
 class JsonAdaptedRecipe {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Recipe's %s field is missing!";
 
@@ -85,7 +83,7 @@ class JsonAdaptedRecipe {
                 source.getTags().stream()
                         .map(JsonAdaptedTag::new)
                         .collect(Collectors.toList())
-                   );
+        );
 
         ingredients.addAll(
                 source.getIngredients().stream()
@@ -112,8 +110,6 @@ class JsonAdaptedRecipe {
         if (!Name.isValidName(name.getName())) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name.getName());
-
 
         Recipe res = new Recipe(name.toModelType());
 
@@ -128,7 +124,7 @@ class JsonAdaptedRecipe {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, RecipeDuration.class.getSimpleName())
             );
-        } if (duration.isPresent()) {
+        } else if (duration.isPresent()) {
             res.setDuration(duration.get().toModelType());
         }
 

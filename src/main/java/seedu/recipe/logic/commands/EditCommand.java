@@ -1,10 +1,10 @@
 package seedu.recipe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.recipe.model.Model.PREDICATE_SHOW_ALL_RECIPE;
@@ -116,7 +116,10 @@ public class EditCommand extends Command {
         Tag[] updatedTags = editRecipeDescriptor.getTags().orElse(recipeToEdit.getTags()).toArray(Tag[]::new);
         newRecipe.setTags(updatedTags);
 
-        Ingredient[] updatedIngredients = editRecipeDescriptor.getIngredients().orElse(recipeToEdit.getIngredients()).toArray(Ingredient[]::new);
+        Ingredient[] updatedIngredients = editRecipeDescriptor
+                .getIngredients()
+                .orElse(recipeToEdit.getIngredients())
+                .toArray(Ingredient[]::new);
         newRecipe.setIngredients(updatedIngredients);
 
         Step[] updatedSteps = editRecipeDescriptor.getSteps().orElse(recipeToEdit.getSteps()).toArray(Step[]::new);

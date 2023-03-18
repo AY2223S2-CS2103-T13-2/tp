@@ -1,17 +1,19 @@
 package seedu.recipe.model.recipe;
 
-import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
-import seedu.recipe.model.recipe.exceptions.RecipeDurationNotPresentException;
-import seedu.recipe.model.tag.Tag;
+import static seedu.recipe.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import static seedu.recipe.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.recipe.model.recipe.exceptions.RecipeDurationNotPresentException;
+import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
+import seedu.recipe.model.tag.Tag;
+
 
 /**
  * Represents a Recipe in the recipe book.
@@ -82,15 +84,14 @@ public class Recipe {
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
+     * @return A set of the tags associated with this Recipe.
      */
     public Set<Tag> getTags() {
         return tags;
     }
 
     public void setTags(Tag... tags) {
-        for (Tag tag : tags) {
-            this.tags.add(tag);
-        }
+        this.tags.addAll(Arrays.asList(tags));
     }
 
     public List<Step> getSteps() {

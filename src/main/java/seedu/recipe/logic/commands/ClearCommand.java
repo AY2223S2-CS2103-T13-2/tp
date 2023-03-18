@@ -2,8 +2,8 @@ package seedu.recipe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.Model;
+import seedu.recipe.model.RecipeBook;
 
 /**
  * Clears the address book.

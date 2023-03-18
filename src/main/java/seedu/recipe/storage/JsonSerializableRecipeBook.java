@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.recipe.commons.exceptions.IllegalValueException;
-import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.ReadOnlyRecipeBook;
+import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Recipe;
 
 /**

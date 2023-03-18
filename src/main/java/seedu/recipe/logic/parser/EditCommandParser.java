@@ -2,11 +2,16 @@ package seedu.recipe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,21 +23,6 @@ import seedu.recipe.logic.parser.functional.TryUtil;
 import seedu.recipe.model.recipe.Ingredient;
 import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
-import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -47,7 +37,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DURATION, PREFIX_PORTION, PREFIX_TAG, PREFIX_INGREDIENT, PREFIX_STEP);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DURATION, PREFIX_PORTION,
+                        PREFIX_TAG, PREFIX_INGREDIENT, PREFIX_STEP);
 
         Index index;
 
@@ -108,7 +99,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (ingredients.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> ingredientList = ingredients.size() == 1 && ingredients.contains("") ? Collections.emptyList() : ingredients;
+        Collection<String> ingredientList =
+                ingredients.size() == 1 && ingredients.contains("")
+                    ? Collections.emptyList()
+                    : ingredients;
         return Optional.of(ParserUtil.parseIngredients(ingredientList));
     }
 
