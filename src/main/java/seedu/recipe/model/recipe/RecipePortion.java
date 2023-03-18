@@ -103,4 +103,13 @@ public class RecipePortion {
 
         return new RecipePortion(lower, upper, new PortionUnit(tokens[2]));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this
+                || o instanceof RecipePortion
+                && ((RecipePortion) o).portionUnit.equals(portionUnit)
+                && ((RecipePortion) o).lowerRange == lowerRange
+                && ((RecipePortion) o).upperRange == upperRange;
+    }
 }

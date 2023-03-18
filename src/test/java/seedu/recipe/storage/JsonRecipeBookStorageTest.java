@@ -1,19 +1,22 @@
 package seedu.recipe.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
+import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
 import static seedu.recipe.testutil.TypicalRecipes.getTypicalRecipeBook;
 
 import java.io.IOException;
+import java.lang.reflect.Executable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.recipe.commons.exceptions.DataConversionException;
+import seedu.recipe.commons.exceptions.IllegalValueException;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.ReadOnlyRecipeBook;
 
@@ -70,12 +73,13 @@ public class JsonRecipeBookStorageTest {
         assertEquals(original, new RecipeBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
+        original.removeRecipe(MASALA_DOSA);
         jsonRecipeBookStorage.saveRecipeBook(original, filePath);
         readBack = jsonRecipeBookStorage.readRecipeBook(filePath).get();
         assertEquals(original, new RecipeBook(readBack));
 
         // Save and read without specifying file path
-//        original.addRecipe(IDA);
+        original.addRecipe(MASALA_DOSA);
         jsonRecipeBookStorage.saveRecipeBook(original); // file path not specified
         readBack = jsonRecipeBookStorage.readRecipeBook().get(); // file path not specified
         assertEquals(original, new RecipeBook(readBack));
@@ -102,5 +106,13 @@ public class JsonRecipeBookStorageTest {
     @Test
     public void saveRecipeBook_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveRecipeBook(new RecipeBook(), null));
+    }
+
+    @Test
+    public void getPath() {
+        Path filePath = testFolder.resolve("TempRecipeBook.json");
+        JsonRecipeBookStorage jsonRecipeBookStorage = new JsonRecipeBookStorage(filePath);
+
+        assertNotNull(jsonRecipeBookStorage.getRecipeBookFilePath());
     }
 }

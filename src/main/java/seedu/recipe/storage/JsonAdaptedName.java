@@ -43,17 +43,10 @@ class JsonAdaptedName {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Name.
      */
     public Name toModelType() throws IllegalValueException {
-        //WIP
-        return new Name(name);
-    }
-
-    public Optional<Name> toModelTypeOptional() {
         try {
-            Name out = this.toModelType();
-            return Optional.ofNullable(out);
-        } catch (IllegalValueException e) {
-            //log
-            return Optional.empty();
+            return new Name(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Name.class.getSimpleName());
         }
     }
 }

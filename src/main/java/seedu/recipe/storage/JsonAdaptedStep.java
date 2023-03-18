@@ -45,17 +45,10 @@ class JsonAdaptedStep {
      * @throws IllegalValueException if there were any data constraints violated in the adapted step.
      */
     public Step toModelType() throws IllegalValueException {
-        //WIP
-        return new Step(stepName);
-    }
-
-    public Optional<Step> toModelTypeOptional() {
         try {
-            Step out = this.toModelType();
-            return Optional.ofNullable(out);
-        } catch (IllegalValueException e) {
-            //log
-            return Optional.empty();
+            return new Step(stepName);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Step.MESSAGE_CONSTRAINTS);
         }
     }
 }

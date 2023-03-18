@@ -2,7 +2,10 @@ package seedu.recipe.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.collections.ObservableList;
 import seedu.recipe.model.recipe.Recipe;
@@ -108,9 +111,19 @@ public class RecipeBook implements ReadOnlyRecipeBook {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof RecipeBook // instanceof handles nulls
-                && recipes.equals(((RecipeBook) other).recipes));
+        if (!(other instanceof RecipeBook)) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        ObservableList<Recipe> r = ((RecipeBook) other).getRecipeList();
+        for (Recipe recipe: r) {
+            if (!this.hasRecipe(recipe)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

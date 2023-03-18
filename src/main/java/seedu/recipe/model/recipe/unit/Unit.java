@@ -19,4 +19,11 @@ public abstract class Unit {
     public String getUnit() {
         return this.unit;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this
+                || o instanceof Unit
+                && ((Unit) o).unit.equals(this.unit);
+    }
 }

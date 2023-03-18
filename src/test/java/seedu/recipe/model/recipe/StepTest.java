@@ -80,7 +80,7 @@ public class StepTest {
         assertEquals(test, test);
 
         //Same name
-        assertNotEquals(test, new Step(MULTI_TOKEN_PAREN));
+        assertEquals(test, new Step(MULTI_TOKEN_PAREN));
 
         //Diff name
         assertNotEquals(new Step(MULTI_TOKEN_PAREN), new Step(MULTI_TOKEN_DECIMAL_RANGE));

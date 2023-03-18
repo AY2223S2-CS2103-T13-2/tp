@@ -50,4 +50,11 @@ public class Step {
     public int hashCode() {
         return description.hashCode();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this ||
+                o instanceof Step
+                && ((Step) o).description.equals(this.description);
+    }
 }

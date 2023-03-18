@@ -49,14 +49,4 @@ class JsonAdaptedTag {
         }
         return new Tag(tagName);
     }
-
-    public Optional<Tag> toModelTypeOptional() {
-        try {
-            Tag out = this.toModelType();
-            return Optional.ofNullable(out);
-        } catch (IllegalValueException e) {
-            //log
-            return Optional.empty();
-        }
-    }
 }

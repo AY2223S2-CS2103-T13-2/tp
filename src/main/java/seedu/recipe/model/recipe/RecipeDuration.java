@@ -59,4 +59,12 @@ public class RecipeDuration {
     public TimeUnit getTimeUnit() {
         return timeUnit;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this
+                || o instanceof RecipeDuration
+                && ((RecipeDuration) o).time == this.time
+                && ((RecipeDuration) o).timeUnit.equals(this.timeUnit);
+    }
 }

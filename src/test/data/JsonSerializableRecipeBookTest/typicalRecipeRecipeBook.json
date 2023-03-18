@@ -1,0 +1,74 @@
+{
+  "_comment": "RecipeBook save file which contains the same Recipe values as in TypicalRecipes#getTypicalRecipeBook()",
+  "recipes" : [ {
+    "name" : "Cacio e Pepe",
+    "portion" : {
+      "lowerRange" : 1,
+      "upperRange" : 2,
+      "portionUnit" : "servings"
+    },
+    "duration" : {
+      "time" : 15.0,
+      "timeUnit" : "minutes"
+    },
+    "tags" : [ "Italian" ],
+    "ingredients" : [ "Kosher salt", "6 oz pasta (such as egg tagliolini, bucatini, or spaghetti)", "3 Tbsp unsalted butter, cubed, divided", "1 tsp freshly cracked black pepper", "3/4 cup finely grated Grana Padano or Parmesan", "1/3 cup finely grated Pecorino" ],
+    "steps" : [ "Bring 3 quarts water to a boil in a 5-qt. pot. Season with salt; add pasta and cook, stirring occasionally, until about 2 minutes before tender. Drain, reserving 3/4 cup pasta cooking water.", "Meanwhile, melt 2 Tbsp. butter in a Dutch oven or other large pot or skillet over medium heat. Add pepper and cook, swirling pan, until toasted, about 1 minute.", "Add 0.5 cup reserved pasta water to skillet and bring to a simmer. Add pasta and remaining butter. Reduce heat to low and add Grana Padano, stirring and tossing with tongs until melted. Remove pan from heat; add Pecorino, stirring and tossing until cheese melts, sauce coats the pasta, and pasta is al dente. (Add more pasta water if sauce seems dry.) Transfer pasta to warm bowls and serve." ]
+  }, {
+    "name" : "American blueberry pancakes",
+    "portion" : {
+      "lowerRange" : 2,
+      "upperRange" : 3,
+      "portionUnit" : "servings"
+    },
+    "duration" : {
+      "time" : 35.0,
+      "timeUnit" : "minutes"
+    },
+    "tags" : [ "Breakfast", "American" ],
+    "ingredients" : [ "200 g self-raising flour", "1 tsp baking powder", "1 egg", "1 knob butter", "150 g pack blueberry", "golden or maple syrup", "sunflower oil or a little butter" ],
+    "steps" : [ "Mix together 200 g self-raising flour, 1 tsp baking powder and a pinch of salt in a large bowl.", "Beat 1 egg with 300ml milk, make a well in the centre of the dry ingredients and whisk in the milk to make a thick smooth batter.", "Beat in a knob of melted butter, and gently stir in half of the 150g pack of blueberries.", "Heat a teaspoon of sunflower oil or small knob of butter in a large non-stick fryingpan.", "Drop a large tablespoonful of the batter per pancake into the pan to make pancakes about 7.5cm across. Make three or four pancakes at a time.", "Cook for about 3 minutes over a medium heat until small bubbles appear on the surface ofeach pancake, then turn and cook another 2-3 minutes until golden.", "Cover with kitchen paper to keep warm while you use up the rest of the batter.", "Serve with golden or maple syrup and the rest of the blueberries." ]
+  }, {
+    "name" : "Classic Masala Dosa",
+    "portion" : {
+      "lowerRange" : 8,
+      "upperRange" : 10,
+      "portionUnit" : "servings"
+    },
+    "duration" : {
+      "time" : 1.0,
+      "timeUnit" : "hour"
+    },
+    "tags" : [ "Indian" ],
+    "ingredients" : [ "2 cups short-grain rice", "0.5 cup urad dal (split husked black lentils)", "1 teaspoon fenugreek seeds", "0.5 teaspoon salt", "Vegetable oil, for frying", "3 tablespoons ghee or vegetable oil", "1 teaspoon mustard seeds", "0.5 teaspoon cumin seeds", "2 small dried hot red peppers", "1 medium onion, diced", "0.5 teaspoon salt", "0.5 teaspoon turmeric", "Pinch of asafetida", "1 tablespoon grated ginger", "6 to 8 curry leaves", "4 garlic cloves, minced", "2 small green chiles, finely chopped", "1.5 pounds yellow-fleshed potatoes, such as Yukon Gold, boiled, peeled and cubed", "0.5 cup roughly chopped cilantro, leaves and tender stems" ],
+    "steps" : [ "Make the dosa batter: Put rice in a bowl, rinse well and cover with 4 cups cold water. Put urad dal and fenugreek seeds in a small bowl, rinse well and add cold water to cover. Leave both to soak for 4 to 6 hours.", "Drain rice and dal-fenugreek mixture in separate colanders. Put rice in a food processor, blender or wet-dry grinder. Add 1 cup cold water and grind to a smooth paste. It will take about 10 minutes, and it may be necessary to work in batches. Repeat the process with the dal-fenugreek mixture.", "Combine the two pastes in a medium mixing bowl. Whisk together, adding enough water to obtain a medium-thick batter. You should have about 6 cups. Cover bowl with a kitchen towel and set in a warm place. Let ferment until the surface is bubbly, about 8 hours. Stir in the salt. Use the batter straight away or refrigerate for later use. (Batter will keep for up to a week, refrigerated.  Thin with water if necessary before proceeding.)", "Make the potato filling: Put ghee in a wide skillet over medium heat. When oil is wavy, add mustard seeds and cumin seeds. Wait for seeds to pop, about 1 minute, then add red peppers and onion. Cook, stirring until onions have softened, about 5 minutes. Season lightly with salt. Add turmeric, asafetida, ginger, curry leaves, garlic and green chile. Stir to coat and let sizzle for 1 minute.", "Add potatoes and 0.5 cup water. Cook, stirring well to combine, until liquid has evaporated, about 5 minutes. Mash potatoes a bit with the back of a wooden spoon. Season well with salt, add cilantro, then set aside at roomtemperature. (Potato filling may be prepared up to a day in advance.)", "To make dosas, set a griddle or cast-iron skillet over medium heat. Brush with about 1 teaspoon vegetable oil. Ladle 1/4 cup batter in the center of griddle. Using bottom of ladle, quickly spread batter outward in a circular motion to a diameter of about 7 inches. Drizzle 0.5 teaspoon oil over the top. Leave dosa batter to brown gradually until outer edges begin to look dry, about 2 minutes, cooking on one side only. With a spatula, carefully loosen dosa from griddle. Bottom should be crisp and beautifully browned. Spoon 0.5 cup potato filling onto top of dosa, centering it as a strip in the middle of the round dosa. Flatten the potato mixture slightly. Using the spatula, fold the sides of the dosa around the filling to make a cylindrical shape. Serve immediately. Continue making dosas one at a time." ]
+  }, {
+    "name" : "Fish and Chips",
+    "portion" : {
+      "lowerRange" : 1,
+      "upperRange" : 2,
+      "portionUnit" : "servings"
+    },
+    "duration" : {
+      "time" : 10.0,
+      "timeUnit" : "minutes"
+    },
+    "tags" : [ "English", "Comfort food" ],
+    "ingredients" : [ "120 Grams Self Rising Flour + additional to coat", "175 Grams White Fleshed Fish (such as Cod)", "1 Medium Egg White", "160 ML (0.5 cup or little under half a bottle) Light Beer or Lager", "1 Large Waxy Potato, Peeled", "Sunflower Oil", "Salt", "1 Teaspoon Curry Powder (used twice)", "1 Teaspoon Baking Powder", "1 Tablespoon of Gherkins, chopped", "50 Grams Creme Fraiche", "200 Grams Mayonnaise", "0.75 Shallot Diced", "Lemon Juice (about 1 Teaspoon)", "Hot Sauce (Optional)" ],
+    "steps" : [ "Get oil in pan medium-high heat for frying before assembling ingredients. Do not need a deep pan or pot, a large pan will do", "In a bowl whisk together flour, baking soda, curry powder and beer. Then whisk egg whites till there are stiff peaks and fold into batter (if too heavy add some water)", "Add teaspoon of curry powder to dredging flour for more seasoning (optional)", "Season fish with salt, then coat with flour. Knock off excess flour and put into batter mixture. Make sure fish is fully battered and ad to oil", "Once fish is in, baste the fish with oil. Let first side cook until golden brown and flip. Basting fish with oil on other side. Take pan on and off oil so that the oil does not get too hot. Fish should be in oil 3-3.5 minutes. Once finished put on plate with paper towel and put in warm oven", "Chop potato into square, then chop into tall skinny fries (the skinnier the fry the quicker they will cook). Then roll in paper towel to dry any excess moisture. Add new oil to pain then add potatoes to high heat. Once fries are browned, remove from oil on to paper towel and add salt.", "Add all Tartar ingredients together and mix. Add salt to taste and hot sauce if you want heat.", "Assemble together and enjoy!" ]
+  }, {
+    "name" : "Pan-fried camembert sandwich",
+    "portion" : {
+      "lowerRange" : 1,
+      "upperRange" : -2147483648,
+      "portionUnit" : "portion"
+    },
+    "duration" : {
+      "time" : 4.0,
+      "timeUnit" : "min"
+    },
+    "tags" : [ "English", "Comfort food" ],
+    "ingredients" : [ "2 thick slices of white bread", "wedge of camembert or brie (about 85g/3oz)", "a spoonful of cranberry sauce", "a few drops of balsamic vinegar", "butter" ],
+    "steps" : [ "Butter the bread. Put a wedge of camembert or brie on the unbuttered side of one slice of bread. Top with a spoonful of cranberry sauce. Drizzle with a few drops of balsamic vinegar, if you have some.", "Put the second slice of bread on top, buttered side out. Fry in a hot non-stick pan, pressing down with a fish slice, for a minute or two on each side, until golden brown and melting. Cut in half and eat straightaway." ]
+  } ]
+}

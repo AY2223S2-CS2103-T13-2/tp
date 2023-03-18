@@ -240,6 +240,12 @@ public class TypicalRecipes {
     }
 
     public static List<Recipe> getTypicalRecipes() {
-        return new ArrayList<>(Arrays.asList());
+        return List.of(
+                BLUEBERRY_PANCAKES,
+                CACIO_E_PEPE,
+                FISH_AND_CHIPS,
+                GRILLED_CHEESE,
+                MASALA_DOSA
+        );
     }
 }

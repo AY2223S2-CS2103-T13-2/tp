@@ -43,17 +43,10 @@ class JsonAdaptedTimeUnit {
      * @throws IllegalValueException if there were any data constraints violated in the adapted TimeUnit.
      */
     public TimeUnit toModelType() throws IllegalValueException {
-        //WIP
-        return new TimeUnit(unit);
-    }
-
-    public Optional<TimeUnit> toModelTypeOptional() {
         try {
-            TimeUnit out = this.toModelType();
-            return Optional.ofNullable(out);
-        } catch (IllegalValueException e) {
-            //log
-            return Optional.empty();
+            return new TimeUnit(unit);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(TimeUnit.class.getSimpleName());
         }
     }
 }

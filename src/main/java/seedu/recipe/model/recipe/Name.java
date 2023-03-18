@@ -27,7 +27,7 @@ public class Name {
      */
     public Name(String recipeName) {
         requireNonNull(recipeName);
-        checkArgument(isValidName(recipeName), MESSAGE_CONSTRAINTS + "{" + recipeName + "}");
+        checkArgument(isValidName(recipeName), MESSAGE_CONSTRAINTS);
         this.recipeName = recipeName;
     }
 

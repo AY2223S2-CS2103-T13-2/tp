@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.recipe.commons.exceptions.IllegalValueException;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.RecipeDuration;
+import seedu.recipe.model.recipe.RecipePortion;
 
 import java.util.Optional;
 
@@ -56,17 +57,10 @@ class JsonAdaptedRecipeDuration {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Name.
      */
     public RecipeDuration toModelType() throws IllegalValueException {
-        //WIP
-        return new RecipeDuration(time, timeUnit.toModelType());
-    }
-
-    public Optional<RecipeDuration> toModelTypeOptional() {
         try {
-            RecipeDuration out = this.toModelType();
-            return Optional.ofNullable(out);
-        } catch (IllegalValueException e) {
-            //log
-            return Optional.empty();
+            return new RecipeDuration(time, timeUnit.toModelType());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(RecipeDuration.MESSAGE_CONSTRAINTS);
         }
     }
 }
