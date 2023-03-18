@@ -8,7 +8,6 @@ import static seedu.recipe.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
-
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -16,7 +15,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^([A-Za-z0-9\\-]+)(\\s+[A-Za-z0-9\\-]*)*$";
+    public static final String VALIDATION_REGEX = "^(([0-9]+\\s*)?[A-Za-z\\-]+)(\\s+[A-Za-z0-9\\-]*)*$";
 
     public final String recipeName;
 
