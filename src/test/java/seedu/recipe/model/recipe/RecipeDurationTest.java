@@ -29,6 +29,7 @@ public class RecipeDurationTest {
     private static final String LONG_DECIMAL_2 = "2.0000 hours";
     private static final String LARGE_NUM_2 = "2000 hours";
     private static final String LARGE_NUM = "1000 hours";
+    private static final String NON_ONE_NON_PLURAL = "10 hour";
 
     //Future support is intended for this, but the recipe duration should be a fixed estimate.
     private static final String RANGE_UNIT = "2 - 3 hours";
@@ -51,6 +52,7 @@ public class RecipeDurationTest {
         assertFalse(RecipeDuration.isValidRecipeDuration(LONG_DECIMAL_2));
         assertFalse(RecipeDuration.isValidRecipeDuration(LARGE_NUM));
         assertFalse(RecipeDuration.isValidRecipeDuration(LARGE_NUM_2));
+        assertFalse(RecipeDuration.isValidRecipeDuration(NON_ONE_NON_PLURAL));
 
         assertTrue(RecipeDuration.isValidRecipeDuration(VALID_DECIMAL));
         assertTrue(RecipeDuration.isValidRecipeDuration(VALID_SIMPLE));
@@ -94,7 +96,7 @@ public class RecipeDurationTest {
 
     @Test
     public void test_hashCode() {
-        TimeUnit t = new TimeUnit("hour");
+        TimeUnit t = new TimeUnit("hours");
         assertEquals(Objects.hash(2.0, t), new RecipeDuration(2.0, t).hashCode());
     }
 
