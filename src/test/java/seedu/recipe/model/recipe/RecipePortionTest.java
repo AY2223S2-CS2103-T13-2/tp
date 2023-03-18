@@ -1,12 +1,15 @@
 package seedu.recipe.model.recipe;
 
-import org.junit.jupiter.api.Test;
-import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentException;
-import seedu.recipe.model.recipe.unit.PortionUnit;
-
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentException;
+import seedu.recipe.model.recipe.unit.PortionUnit;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
 public class RecipePortionTest {
