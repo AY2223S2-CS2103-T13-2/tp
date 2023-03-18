@@ -33,7 +33,7 @@ public class TypicalRecipes {
                 + "or skillet over medium heat. Add pepper and cook, swirling pan, "
                 + "until toasted, about 1 minute."),
         new Step("Add 0.5 cup reserved pasta water to skillet and bring to a simmer. "
-                + "Add pasta and remaining butter. Reduce heat to low and add Grana Padano,"
+                + "Add pasta and remaining butter. Reduce heat to low and add Grana Padano, "
                 + "stirring and tossing with tongs until melted. Remove pan from heat; add "
                 + "Pecorino, stirring and tossing until cheese melts, sauce coats the pasta, "
                 + "and pasta is al dente. (Add more pasta water if sauce seems dry.) Transfer "
@@ -151,7 +151,7 @@ public class TypicalRecipes {
                         + "temperature. "
                         + "(Potato filling may be prepared up to a day in advance.)"),
                 new Step("To make dosas, set a griddle or cast-iron skillet over medium heat. "
-                        + "Brush with about 1 teaspoon vegetable oil. Ladle ¼ cup batter in the center "
+                        + "Brush with about 1 teaspoon vegetable oil. Ladle 1/4 cup batter in the center "
                         + "of griddle. Using bottom of ladle, quickly spread batter outward in a circular motion "
                         + "to a diameter of about 7 inches. Drizzle 0.5 teaspoon oil over the top. Leave dosa batter"
                         + " to brown "

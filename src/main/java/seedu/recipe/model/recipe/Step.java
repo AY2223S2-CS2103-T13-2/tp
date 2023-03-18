@@ -17,8 +17,8 @@ public class Step {
      * otherwise " " (a blank string) becomes a valid input. The string
      * should also not end with whitespace.
      */
-    public static final String VALIDATION_REGEX = "^(\\S+)(\\s+\\S+)*(?!\n)$";
-
+    public static final String VALIDATION_REGEX =
+            "^[A-Za-z0-9]+((\\-|\\,|/|\\.)[A-Za-z0-9]+)?(\\.|\\,|;)?(\\s+(\\()?[A-Za-z0-9]+((\\-|\\,|/|\\.)[A-Za-z0-9]+)?[\\.|\\,|!:;|\\)]*)*";
     public final String description;
 
     /**

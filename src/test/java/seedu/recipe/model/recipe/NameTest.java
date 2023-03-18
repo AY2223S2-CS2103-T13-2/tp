@@ -11,10 +11,12 @@ public class NameTest {
     private static final String NON_VALID_CHAR_SOLO = "^";
     private static final String NON_VALID_CHAR = "Oven-roasted chicken*";
     private static final String NUMBER_ONLY = "7896";
+    private static final String HYPHEN_ONLY = "- New Recipe";
     private static final String ONE_TOKEN_ALPHA = "lasagna";
     private static final String MULTI_TOKEN_ALPHA = "pan fried beef slices";
     private static final String SINGLE_NUMBER_LEADING = "5 minute stew";
     private static final String NUMBER_CONCAT_ALPHA = "5-minute stew";
+    private static final String ALPHA_CONCAT_ALPHA = "Pan-fried steak";
     private static final String CAPITAL_LETTERS = "Beef Stroganoff";
     private static final String LONG_TOKEN = "Mozzarella Sandwich with pesto aioli and oven-roasted beef";
 
@@ -34,12 +36,14 @@ public class NameTest {
         assertFalse(Name.isValidName(NON_VALID_CHAR_SOLO));
         assertFalse(Name.isValidName(NON_VALID_CHAR));
         assertFalse(Name.isValidName(NUMBER_ONLY));
+        assertFalse(Name.isValidName(HYPHEN_ONLY));
 
         // valid name
         assertTrue(Name.isValidName(ONE_TOKEN_ALPHA));
         assertTrue(Name.isValidName(MULTI_TOKEN_ALPHA));
         assertTrue(Name.isValidName(SINGLE_NUMBER_LEADING));
         assertTrue(Name.isValidName(NUMBER_CONCAT_ALPHA));
+        assertTrue(Name.isValidName(ALPHA_CONCAT_ALPHA));
         assertTrue(Name.isValidName(CAPITAL_LETTERS));
         assertTrue(Name.isValidName(LONG_TOKEN));
     }
