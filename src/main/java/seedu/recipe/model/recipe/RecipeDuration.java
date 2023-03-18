@@ -12,8 +12,8 @@ public class RecipeDuration {
     public static final String MESSAGE_CONSTRAINTS =
             "A Recipe Duration should consist of a numeric/decimal portion and an alphanumeric time unit";
     private static final String VALIDATION_REGEX =
-            "^(([2-9]\\d{0,2}|1\\d{1,2})(\\.\\d{1,3})?|[01]\\.\\d{0,2}[1-9])\\s+(hour|minute|second|day)s$|"
-            + "^(1|1.0)\\s+(hour|minute|day|second)$";
+            "^(([2-9]\\d{0,2}|1\\d{1,2})(\\.\\d{1,3})?|[01]\\.\\d{0,2}[1-9])\\s+((hour|minute|second|day)s|min|h)$|"
+            + "^(1|1.0)\\s+(hour|minute|day|second|min|h)$";
 
     private final double time;
     private final TimeUnit timeUnit;

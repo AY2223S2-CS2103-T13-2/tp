@@ -186,7 +186,7 @@ public class TypicalRecipes {
     public static final Recipe FISH_AND_CHIPS = new RecipeBuilder(
             new Name("Fish and Chips"),
             RecipePortion.of("1 - 2 servings"),
-            RecipeDuration.of("10 minute"),
+            RecipeDuration.of("10 minutes"),
             Set.of(new Tag("English"), new Tag("Comfort food")),
             List.of(new Ingredient("120 Grams Self Rising Flour + additional to coat"),
                 new Ingredient("175 Grams White Fleshed Fish (such as Cod)"),
