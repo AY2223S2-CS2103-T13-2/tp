@@ -14,7 +14,6 @@ import seedu.recipe.model.recipe.exceptions.RecipeDurationNotPresentException;
 import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
 import seedu.recipe.model.tag.Tag;
 
-
 /**
  * Represents a Recipe in the recipe book.
  * Guarantees: details are present and not null, field values are validated, immutable.

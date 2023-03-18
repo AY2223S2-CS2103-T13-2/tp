@@ -8,7 +8,7 @@ import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentExceptio
 import seedu.recipe.model.recipe.unit.PortionUnit;
 
 /**
- *
+ * Represents the Portion Size of a Recipe, i.e. "1-2 servings"
  */
 public class RecipePortion {
     public static final String MESSAGE_CONSTRAINTS =
@@ -89,8 +89,8 @@ public class RecipePortion {
         }
         String[] tokens = test.split(TOKENIZE_REGEX);
         if (tokens.length != 3) {
-            String[] singularToken = test.split("\\s+");
-            int lower = Integer.parseInt(singularToken[0]);
+            String[] singularTokens = test.split("\\s+");
+            int lower = Integer.parseInt(singularTokens[0]);
             return lower > 0;
         }
         int lower = Integer.parseInt(tokens[0]);

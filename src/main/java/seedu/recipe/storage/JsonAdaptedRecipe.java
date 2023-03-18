@@ -84,7 +84,6 @@ class JsonAdaptedRecipe {
                         .map(JsonAdaptedTag::new)
                         .collect(Collectors.toList())
         );
-
         ingredients.addAll(
                 source.getIngredients().stream()
                         .map(JsonAdaptedIngredient::new)

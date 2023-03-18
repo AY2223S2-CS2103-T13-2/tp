@@ -92,7 +92,6 @@ public class RecipeDurationTest {
         //Invalid duration
         assertThrows(RecipeDurationInvalidDurationException.class, (
             ) -> RecipeDuration.of(INVALID_FRACTION));
-
         assertEquals(
                 RecipeDuration.of(VALID_PLURAL).toString(),
                 new RecipeDuration(2, new TimeUnit("hours")).toString());

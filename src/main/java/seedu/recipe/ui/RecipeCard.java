@@ -103,7 +103,7 @@ public class RecipeCard extends UiPart<Region> {
             return false;
         }
 
-        // state checkbyd
+        // state check
         RecipeCard card = (RecipeCard) other;
         return id.getText().equals(card.id.getText())
                 && recipe.equals(card.recipe);

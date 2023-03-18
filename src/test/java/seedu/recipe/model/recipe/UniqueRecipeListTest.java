@@ -42,7 +42,7 @@ public class UniqueRecipeListTest {
     @Test
     public void contains_recipeWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRecipeList.add(CACIO_E_PEPE);
-        Recipe editedCacioEPepe = new RecipeBuilder(CACIO_E_PEPE).build();
+        Recipe editedCacioEPepe = CACIO_E_PEPE;
         editedCacioEPepe.setTags(new Tag("Fusion"));
         assertTrue(uniqueRecipeList.contains(editedCacioEPepe));
     }

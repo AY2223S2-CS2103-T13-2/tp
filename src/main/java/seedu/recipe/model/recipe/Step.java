@@ -22,7 +22,7 @@ public class Step {
             "^[A-Za-z0-9]+([\\-,/.][A-Za-z0-9]+)?[.,:;]?"
             + "(\\s+[(]?([A-Za-z0-9]+|[0-9]+\\.[0-9]+)([\\-,/.]([A-Za-z0-9]+|([0-9]+\\.[0-9]+)))?[.,!:;)]{0,2})+";
 
-    public final String description;
+    private final String description;
 
     /**
      * Constructs a {@code Step}
