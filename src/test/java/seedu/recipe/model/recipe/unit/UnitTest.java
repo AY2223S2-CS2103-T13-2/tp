@@ -1,8 +1,8 @@
 package seedu.recipe.model.recipe.unit;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class UnitTest {
     private static final Unit STUB = new Unit("unitName") {};

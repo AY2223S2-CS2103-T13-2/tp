@@ -1,10 +1,16 @@
 package seedu.recipe.testutil;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import seedu.recipe.model.RecipeBook;
-import seedu.recipe.model.recipe.*;
+import seedu.recipe.model.recipe.Ingredient;
+import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.RecipeDuration;
+import seedu.recipe.model.recipe.RecipePortion;
+import seedu.recipe.model.recipe.Step;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -42,32 +48,32 @@ public class TypicalRecipes {
     public static final String CACIO_STRING = String.format(
             "%s;\nPortion: %s;\nDuration: %s;\nTags: %s;\n"
                     + "Ingredients: %s;\nSteps: %s",
-            CACIO_NAME, CACIO_PORTION, CACIO_DURATION,
-            ((Supplier<String>) () -> {
-                StringBuilder out = new StringBuilder();
-                for (Tag tag: CACIO_TAGS) {
-                    out.append(tag.toString());
-                }
-                return out.toString();
-            }).get(),
-            ((Supplier<String>) () -> {
-                StringBuilder out = new StringBuilder();
-                for (Ingredient i: CACIO_INGREDIENTS) {
-                    out.append(i.toString())
-                            .append(",\n");
-                }
-                return out.toString();
-            }).get(),
-            ((Supplier<String>) () -> {
-                StringBuilder out = new StringBuilder();
-                for (int i = 0; i < CACIO_STEPS.size(); i++) {
-                    out.append(i + 1)
-                            .append(". ")
-                            .append(CACIO_STEPS.get(i).toString())
-                            .append(",\n");
-                }
-                return out.toString();
-            }).get()
+            CACIO_NAME, CACIO_PORTION, CACIO_DURATION, (
+                (Supplier<String>) () -> {
+                    StringBuilder out = new StringBuilder();
+                    for (Tag tag: CACIO_TAGS) {
+                        out.append(tag.toString());
+                    }
+                    return out.toString();
+                }).get(), (
+                (Supplier<String>) () -> {
+                    StringBuilder out = new StringBuilder();
+                    for (Ingredient i: CACIO_INGREDIENTS) {
+                        out.append(i.toString())
+                                .append(",\n");
+                    }
+                    return out.toString();
+                }).get(), (
+                (Supplier<String>) () -> {
+                    StringBuilder out = new StringBuilder();
+                    for (int i = 0; i < CACIO_STEPS.size(); i++) {
+                        out.append(i + 1)
+                                .append(". ")
+                                .append(CACIO_STEPS.get(i).toString())
+                                .append(",\n");
+                    }
+                    return out.toString();
+                }).get()
     );
 
     public static final Recipe CACIO_E_PEPE = new RecipeBuilder(
@@ -141,7 +147,7 @@ public class TypicalRecipes {
                         + "Cover bowl with a kitchen towel and set in a warm place. Let ferment until the "
                         + "surface is bubbly, about 8 hours. Stir in the salt. Use the batter straight away "
                         + "or refrigerate for later use. (Batter will keep for up to a week, refrigerated. "
-                        +" Thin with water if necessary before proceeding.)"),
+                        + " Thin with water if necessary before proceeding.)"),
                 new Step("Make the potato filling: Put ghee in a wide skillet over medium heat. "
                         + "When oil is wavy, add mustard seeds and cumin seeds. Wait for seeds to pop, "
                         + "about 1 minute, then add red peppers and onion. Cook, stirring until onions have "

@@ -1,10 +1,12 @@
 package seedu.recipe.model.recipe;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
+import org.junit.jupiter.api.Test;
 
 public class StepTest {
     private static final String EMPTY = "";
@@ -24,7 +26,8 @@ public class StepTest {
     private static final String DECIMAL_CONCAT_MULTI = "1.5oz. of water should be sufficient.";
     private static final String MIN_LENGTH_TOKEN = "Heat, serve.";
     private static final String MULTI_TOKEN = "Heat the oil on a frying pan. When ready, crack an egg into the pan.";
-    private static final String MULTI_TOKEN_PAREN = "You may wish to cover the tray (to prevent moisture from escaping)";
+    private static final String MULTI_TOKEN_PAREN = "You may wish to cover the tray "
+            + "(to prevent moisture from escaping)";
     private static final String MULTI_TOKEN_DECIMAL_RANGE = "Leave in the oven for 3-3.5 hours.";
 
     @Test

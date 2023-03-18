@@ -1,22 +1,27 @@
 package seedu.recipe.model;
-
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.recipe.commons.core.GuiSettings;
-import seedu.recipe.model.recipe.NameContainsKeywordsPredicate;
-import seedu.recipe.model.recipe.Recipe;
-import seedu.recipe.model.recipe.exceptions.RecipeNotFoundException;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.recipe.model.Model.PREDICATE_SHOW_ALL_RECIPE;
+import static seedu.recipe.testutil.Assert.assertThrows;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
+import static seedu.recipe.testutil.TypicalRecipes.FISH_AND_CHIPS;
+import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.recipe.model.Model.PREDICATE_SHOW_ALL_RECIPE;
-import static seedu.recipe.testutil.Assert.assertThrows;
-import static seedu.recipe.testutil.TypicalRecipes.*;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.recipe.commons.core.GuiSettings;
+import seedu.recipe.model.recipe.NameContainsKeywordsPredicate;
+import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.exceptions.RecipeNotFoundException;
 
 public class ModelManagerTest {
 
@@ -93,24 +98,24 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(recipeBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(recipeBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different recipeBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentRecipeBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentRecipeBook, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = CACIO_E_PEPE.getName().recipeName.split("\\s+");
         modelManager.updateFilteredRecipeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(recipeBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(recipeBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPE);
@@ -118,7 +123,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setRecipeBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(recipeBook, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(recipeBook, differentUserPrefs));
     }
 
     @Test

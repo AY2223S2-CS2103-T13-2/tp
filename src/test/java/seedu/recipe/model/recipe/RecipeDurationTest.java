@@ -1,13 +1,18 @@
 package seedu.recipe.model.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthException;
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
 import seedu.recipe.model.recipe.unit.TimeUnit;
 
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class RecipeDurationTest {
     private static final String VALID_SIMPLE = "1 hour";
@@ -65,7 +70,7 @@ public class RecipeDurationTest {
     }
 
     @Test
-    public void test_wrong_arguments_constructor() {
+    public void testWrongArgumentsConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new RecipeDuration(0.00, new TimeUnit("hour")));
         assertThrows(IllegalArgumentException.class, () -> new RecipeDuration(-1.00, new TimeUnit("hour")));
     }
@@ -78,16 +83,16 @@ public class RecipeDurationTest {
     @Test
     public void testFactory() {
         //Too few arguments
-        assertThrows(RecipeDurationInvalidArgumentLengthException.class,
-                () -> RecipeDuration.of(NO_WHITESPACE)
+        assertThrows(RecipeDurationInvalidArgumentLengthException.class, (
+            ) -> RecipeDuration.of(NO_WHITESPACE)
         );
         //Too many arguments
-        assertThrows(RecipeDurationInvalidArgumentLengthException.class,
-                () -> RecipeDuration.of("13 days in the winter")
+        assertThrows(RecipeDurationInvalidArgumentLengthException.class, (
+            ) -> RecipeDuration.of("13 days in the winter")
         );
         //Invalid duration
-        assertThrows(RecipeDurationInvalidDurationException.class,
-                () -> RecipeDuration.of(INVALID_FRACTION));
+        assertThrows(RecipeDurationInvalidDurationException.class, (
+            ) -> RecipeDuration.of(INVALID_FRACTION));
 
         assertEquals(
                 RecipeDuration.of(VALID_PLURAL).toString(),

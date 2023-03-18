@@ -1,5 +1,10 @@
 package seedu.recipe.model.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -7,13 +12,8 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import seedu.recipe.testutil.RecipeBuilder;
 import seedu.recipe.model.tag.Tag;
+import seedu.recipe.testutil.RecipeBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
@@ -41,11 +41,12 @@ public class NameContainsKeywordsPredicateTest {
         // different recipe -> returns false
         assertNotEquals(firstPredicate, secondPredicate);
     }
-//
+
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Lasagna"));
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("Lasagna"));
         assertTrue(predicate.test(new Recipe(new Name("Lasagna"))));
 
         // Multiple keywords

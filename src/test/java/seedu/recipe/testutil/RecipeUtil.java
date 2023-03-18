@@ -28,9 +28,9 @@ public class RecipeUtil {
     public static String getRecipeDetails(Recipe recipe) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + recipe.getName().recipeName + " ");
-//        sb.append(PREFIX_PHONE + recipe.getIngredient().value + " ");
-//        sb.append(PREFIX_EMAIL + recipe.getEmail().value + " ");
-//        sb.append(PREFIX_ADDRESS + recipe.getAddress().value + " ");
+        // sb.append(PREFIX_PHONE + recipe.getIngredient().value + " ");
+        // sb.append(PREFIX_EMAIL + recipe.getEmail().value + " ");
+        // sb.append(PREFIX_ADDRESS + recipe.getAddress().value + " ");
         recipe.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -43,9 +43,9 @@ public class RecipeUtil {
     public static String getEditRecipeDescriptorDetails(EditCommand.EditRecipeDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.recipeName).append(" "));
-//        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-//        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-//        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        // descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
+        // descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        // descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

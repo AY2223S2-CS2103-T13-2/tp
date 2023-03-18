@@ -1,22 +1,28 @@
 package seedu.recipe.model;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.recipe.model.recipe.Recipe;
-import seedu.recipe.model.recipe.UniqueRecipeList;
-import seedu.recipe.model.recipe.exceptions.DuplicateRecipeException;
-import seedu.recipe.model.recipe.exceptions.RecipeNotFoundException;
-import seedu.recipe.model.tag.Tag;
-import seedu.recipe.testutil.RecipeBuilder;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_TAGS;
+import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
+import static seedu.recipe.testutil.TypicalRecipes.getTypicalRecipeBook;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.recipe.testutil.TypicalRecipes.*;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.exceptions.DuplicateRecipeException;
+import seedu.recipe.model.recipe.exceptions.RecipeNotFoundException;
+import seedu.recipe.model.tag.Tag;
+import seedu.recipe.testutil.RecipeBuilder;
 
 public class RecipeBookTest {
 
@@ -92,14 +98,14 @@ public class RecipeBookTest {
         assertEquals(recipeBook, newBook);
 
         //Test direction
-//        Recipe newRecipe = new RecipeBuilder(MASALA_DOSA).build();
+        // Recipe newRecipe = new RecipeBuilder(MASALA_DOSA).build();
 
         assertThrows(RecipeNotFoundException.class, () -> recipeBook.setRecipe(CACIO_E_PEPE, MASALA_DOSA));
-//        assertThrows(DuplicateRecipeException.class, () -> recipeBook.setRecipe(MASALA_DOSA, newRecipe));
+        // assertThrows(DuplicateRecipeException.class, () -> recipeBook.setRecipe(MASALA_DOSA, newRecipe));
     }
 
     @Test
-    public void remove(){
+    public void remove() {
         assertThrows(RecipeNotFoundException.class, () -> recipeBook.removeRecipe(CACIO_E_PEPE));
         recipeBook.addRecipe(CACIO_E_PEPE);
         assertDoesNotThrow(() -> recipeBook.removeRecipe(CACIO_E_PEPE));

@@ -1,24 +1,22 @@
 package seedu.recipe.model.recipe;
 
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.recipe.testutil.Assert.assertThrows;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
+import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import seedu.recipe.model.recipe.exceptions.DuplicateRecipeException;
 import seedu.recipe.model.recipe.exceptions.RecipeNotFoundException;
 import seedu.recipe.model.tag.Tag;
-import static seedu.recipe.testutil.Assert.assertThrows;
-import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
-import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
-
 import seedu.recipe.testutil.RecipeBuilder;
 
 public class UniqueRecipeListTest {

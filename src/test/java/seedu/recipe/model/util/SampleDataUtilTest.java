@@ -1,18 +1,18 @@
 package seedu.recipe.model.util;
 
-import javafx.collections.ObservableList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
+
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.recipe.testutil.TypicalRecipes.CACIO_E_PEPE;
 
 public class SampleDataUtilTest {
     @Test
@@ -40,8 +40,8 @@ public class SampleDataUtilTest {
     @Test
     public void getTagSet() {
         String[] tags = new String[] {
-                "Tag 1", "Tag 2", "Tag 3",
-                "Tag 4", "Tag 4"
+            "Tag 1", "Tag 2", "Tag 3",
+            "Tag 4", "Tag 4"
         };
         Set<Tag> expected = Set.of(
                 new Tag("Tag 1"),

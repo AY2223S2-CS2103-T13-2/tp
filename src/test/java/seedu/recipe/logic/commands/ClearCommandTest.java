@@ -5,9 +5,9 @@ import static seedu.recipe.testutil.TypicalRecipes.getTypicalRecipeBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.Model;
 import seedu.recipe.model.ModelManager;
+import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.UserPrefs;
 
 public class ClearCommandTest {

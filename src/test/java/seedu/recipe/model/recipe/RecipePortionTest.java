@@ -1,16 +1,16 @@
 package seedu.recipe.model.recipe;
-
-import java.util.Objects;
-
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.recipe.testutil.Assert.assertThrows;
+
+import java.util.Objects;
+
+import org.junit.jupiter.api.Test;
 
 import seedu.recipe.model.recipe.exceptions.RecipePortionInvalidArgumentException;
 import seedu.recipe.model.recipe.unit.PortionUnit;
-import static seedu.recipe.testutil.Assert.assertThrows;
 
 public class RecipePortionTest {
     private static final String RANGE_CONCAT = "1-2 servings";
