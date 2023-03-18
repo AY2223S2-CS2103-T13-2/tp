@@ -209,7 +209,7 @@ public class TypicalRecipes {
                         + " mixture. Make sure fish is fully battered and ad to oil"),
                 new Step("Once fish is in, baste the fish with oil. Let first side cook until golden brown and flip."
                         + " Basting fish with oil on other side. Take pan on and off oil so that the oil does not get"
-                        + " too hot. Fish should be in oil 3-3 0.5 minutes. Once finished put on plate with paper towel"
+                        + " too hot. Fish should be in oil 3-3.5 minutes. Once finished put on plate with paper towel"
                         + " and put in warm oven"),
                 new Step("Chop potato into square, then chop into tall skinny fries (the skinnier the fry the quicker"
                         + " they will cook). Then roll in paper towel to dry any excess moisture. Add new oil to pain"
