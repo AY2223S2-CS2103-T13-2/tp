@@ -13,7 +13,6 @@ import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthE
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
 import seedu.recipe.model.recipe.unit.TimeUnit;
 
-
 public class RecipeDurationTest {
     private static final String VALID_SIMPLE = "1 hour";
     private static final String VALID_PLURAL = "2 hours";

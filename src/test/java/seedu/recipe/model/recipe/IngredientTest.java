@@ -25,6 +25,24 @@ public class IngredientTest {
     }
 
     @Test
+    public void constructor_invalidArgs() {
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient(TRAILING_WHITESPACE));
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient(WHITESPACE));
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient(LEADING_WHITESPACE));
+    }
+
+    @Test
+    public void test_toString() {
+        assertEquals(VALID_INTEGER_CONCAT_UNIT, new Ingredient(VALID_INTEGER_CONCAT_UNIT).toString());
+    }
+
+    @Test
+    public void constructor_invalidIngredient_throwsIllegalArgumentException() {
+        String invalidIngredient = "";
+        assertThrows(IllegalArgumentException.class, () -> new Ingredient(invalidIngredient));
+    }
+
+    @Test
     public void ingredient_name_regex() {
         assertTrue(Ingredient.isValidIngredient(VALID_INTEGER));
         assertTrue(Ingredient.isValidIngredient(VALID_DECIMAL));
@@ -36,18 +54,6 @@ public class IngredientTest {
         assertFalse(Ingredient.isValidIngredient(TRAILING_WHITESPACE));
         assertFalse(Ingredient.isValidIngredient(WHITESPACE));
         assertFalse(Ingredient.isValidIngredient(LEADING_WHITESPACE));
-    }
-
-    @Test
-    public void constructor_invalidArgs() {
-        assertThrows(IllegalArgumentException.class, () -> new Ingredient(TRAILING_WHITESPACE));
-        assertThrows(IllegalArgumentException.class, () -> new Ingredient(WHITESPACE));
-        assertThrows(IllegalArgumentException.class, () -> new Ingredient(LEADING_WHITESPACE));
-    }
-
-    @Test
-    public void test_toString() {
-        assertEquals(VALID_INTEGER_CONCAT_UNIT, new Ingredient(VALID_INTEGER_CONCAT_UNIT).toString());
     }
 
     @Test

@@ -106,6 +106,7 @@ public class RecipeTest {
         assertEquals(CACIO_PORTION, CACIO_E_PEPE.getPortion());
     }
 
+    //Tag logic
     @Test
     public void setCacioPortion() {
         Recipe test = new RecipeBuilder(CACIO_E_PEPE).build();
@@ -186,7 +187,11 @@ public class RecipeTest {
         };
         Recipe test = new RecipeBuilder(CACIO_E_PEPE).build();
         test.setSteps(newSteps);
-        assertEquals(List.of(newSteps), test.getSteps());
+
+        ArrayList<Step> stepList = new ArrayList<>();
+        stepList.addAll(CACIO_STEPS);
+        stepList.addAll(List.of(newSteps));
+        assertEquals(stepList, test.getSteps());
     }
 
     //Equality

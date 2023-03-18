@@ -46,6 +46,7 @@ public class RecipeBuilder {
         portion = recipeToCopy.getPortion();
         tags = new HashSet<>(recipeToCopy.getTags());
         ingredients = recipeToCopy.getIngredients();
+        steps = recipeToCopy.getSteps();
     }
 
     /**
