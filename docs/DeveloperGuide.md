@@ -18,8 +18,7 @@ title: Developer Guide
 
 **API** : [`Model.java`](https://github.com/AY2223S2-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/recipe/model/Model.java)
 
-[//]: # (Model Class Diagram)
-<img src="" width="450" />
+<img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
@@ -34,7 +33,7 @@ The `Model` component,
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 [//]: # (Better Model Class Diagram)
-<img src="images/BetterModelClassDiagram.png" width="450" />
+[//]: # (<img src="images/BetterModelClassDiagram.png" width="450" />)
 
 </div>
 

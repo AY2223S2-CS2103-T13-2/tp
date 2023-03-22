@@ -7,44 +7,50 @@ skinparam classBackgroundColor MODEL_COLOR
 Package Model <<Rectangle>>{
 Class "<<interface>>\nReadOnlyRecipeBook" as ReadOnlyRecipeBook
 Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
+Class "<<interface>>\nModel" as Model_
 Class RecipeBook
 Class ModelManager
 Class UserPrefs
 
 Class UniqueRecipeList
 Class Recipe
-Class Address
-Class Email
+Class RecipePortion
 Class Name
-Class Phone
+Class RecipeDuration
 Class Tag
-
+Class Step
+Class Ingredient
+Class IngredientParser
+Class IngredientBuilder
+Class IngredientQuantifier
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
 
+HiddenOutside .down.> Model_
+
+ModelManager .up.|> Model_
 RecipeBook .up.|> ReadOnlyRecipeBook
 
-ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyRecipeBook
+Model_ .left.> ReadOnlyUserPrefs
+Model_ .right.> ReadOnlyRecipeBook
 ModelManager -left-> "1" RecipeBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 RecipeBook *--> "1" UniqueRecipeList
 UniqueRecipeList --> "~* all" Recipe
-Recipe *--> Name
-Recipe *--> Phone
-Recipe *--> Email
-Recipe *--> Address
+Recipe *--> "1" Name
+Recipe *--> "0..1" RecipeDuration
+Recipe *--> "0..1" RecipePortion
 Recipe *--> "*" Tag
+Recipe *--> "*" Step
+Recipe *--> "*" Ingredient
+Ingredient .up.> IngredientBuilder
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Ingredient -left-> "1" IngredientQuantifier
+IngredientQuantifier .up.> IngredientBuilder
+IngredientBuilder .up.> IngredientParser
 
 ModelManager -->"~* filtered" Recipe
 @enduml
