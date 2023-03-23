@@ -20,8 +20,9 @@ Class RecipeDuration
 Class Tag
 Class Step
 Class Ingredient
-Class IngredientQuantifier
 Class IngredientBuilder
+Class IngredientParser
+Class IngredientQuantifier
 }
 
 Class HiddenOutside #FFFFFF
@@ -50,6 +51,6 @@ Recipe .right.> IngredientBuilder
 
 IngredientBuilder ..> Ingredient
 IngredientBuilder ..> IngredientQuantifier
-
+IngredientBuilder .u.> IngredientParser
 ModelManager -->"~* filtered" Recipe
 @enduml
