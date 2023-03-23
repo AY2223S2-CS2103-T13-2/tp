@@ -46,11 +46,11 @@ Recipe *--> "0..1" RecipePortion
 Recipe *--> "*" Tag
 Recipe *--> "*" Step
 Recipe *--> "*" Ingredient
-Ingredient .up.> IngredientBuilder
+Ingredient <... IngredientBuilder
 
-Ingredient -left-> "1" IngredientQuantifier
-IngredientQuantifier .up.> IngredientBuilder
-IngredientBuilder .up.> IngredientParser
+Ingredient ---> "1" IngredientQuantifier
+IngredientQuantifier <.left. IngredientBuilder
+IngredientBuilder ...> IngredientParser
 
 ModelManager -->"~* filtered" Recipe
 @enduml
