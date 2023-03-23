@@ -32,9 +32,10 @@ The `Model` component,
   `ReadOnlyUserPref` object.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
   should make sense on their own without depending on other components)
-* However, it is worth noting that clients need only pass valid `IngredientBuilder` instances to `Recipe` objects, 
-  from which the population of the `Ingredient` and `IngredientQuantifier` fields will be done by the `Recipe` class
-  and its methods.
+* However, it is worth noting that to populate their `Recipe` objects with `Ingredient` instances, clients need only
+  pass valid `IngredientBuilder` instances to `Recipe` objects.
+  The `Recipe` class will then populate its own `Ingredient` and `IngredientQuantifier` fields, via `IngredientBuilder`
+  and its use of `IngredientParser`.
 
 <div markdown="span" class="alert alert-info">
 
