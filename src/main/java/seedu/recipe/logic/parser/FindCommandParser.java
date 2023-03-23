@@ -36,15 +36,15 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         switch (nameKeywords[0].toLowerCase()) {
         case "tag":
-            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(nameKeywords, Recipe::getTags,
-                                                                             (tag) -> tag.tagName);
+            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(nameKeywords, Recipe::getTags, (
+                tag) -> tag.tagName);
             break;
         case "name":
             nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
             // fallthrough
         default: // if no property is specified, assume we are finding by Name
-            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, Recipe::getName,
-                                                                        (name) -> name.recipeName);
+            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, Recipe::getName, (
+                name) -> name.recipeName);
         }
 
         return new FindCommand(predicate);

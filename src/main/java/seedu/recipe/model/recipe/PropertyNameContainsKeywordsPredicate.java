@@ -8,7 +8,10 @@ import java.util.function.Predicate;
 import seedu.recipe.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Recipe}'s {@code Name} matches any of the keywords given.
+ * Tests that the property name of a {@code Recipe} matches any of the keywords given.
+ * A property is a field in the Recipe, e.g. its Name, Tags, or Ingredients.
+ *
+ * @param <T> Type of the property to be tested
  */
 public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recipe> {
     private final List<String> keywords;
@@ -18,12 +21,26 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
     private final Function<Recipe, String> getter;
 
 
+    /**
+     * Constructs an instance of PropertyNameContainsKeywordsPredicate.
+     *
+     * @param keywords       A list of keywords to test against the property name
+     * @param propertyGetter A method that returns the property from a Recipe
+     * @param nameGetter     A method that gets the name of a property
+     */
     public PropertyNameContainsKeywordsPredicate(List<String> keywords, Function<Recipe, T> propertyGetter,
                                                  Function<T, String> nameGetter) {
         this.keywords = keywords;
         this.getter = propertyGetter.andThen(nameGetter);
     }
 
+    /**
+     * Constructs an instance of PropertyNameContainsKeywordsPredicate.
+     *
+     * @param keywords       An array of keywords to test against the property name
+     * @param propertyGetter A method that returns the property from a Recipe
+     * @param nameGetter     A method that gets the name of a property
+     */
     public PropertyNameContainsKeywordsPredicate(String[] keywords, Function<Recipe, T> propertyGetter,
                                                  Function<T, String> nameGetter) {
         this(Arrays.asList(keywords), propertyGetter, nameGetter);

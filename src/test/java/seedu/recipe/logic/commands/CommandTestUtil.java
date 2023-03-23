@@ -135,7 +135,7 @@ public class CommandTestUtil {
         final String[] splitName = recipe.getName().recipeName.split("\\s+");
         model.updateFilteredRecipeList(
             new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(splitName[0]), Recipe::getName,
-                                                            (name) -> name.recipeName));
+                name -> name.recipeName));
 
         assertEquals(1, model.getFilteredRecipeList().size());
     }

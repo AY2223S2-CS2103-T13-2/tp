@@ -29,10 +29,10 @@ public class FindCommandTest {
     public void equals() {
         PropertyNameContainsKeywordsPredicate<Name> firstPredicate =
             new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("first"), Recipe::getName,
-                                                            (name) -> name.recipeName);
+                name -> name.recipeName);
         PropertyNameContainsKeywordsPredicate<Name> secondPredicate =
             new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("second"), Recipe::getName,
-                                                            (name) -> name.recipeName);
+                name -> name.recipeName);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -79,6 +79,6 @@ public class FindCommandTest {
      */
     private PropertyNameContainsKeywordsPredicate<Name> preparePredicate(String userInput) {
         return new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(userInput.split("\\s+")), Recipe::getName,
-                                                               (name) -> name.recipeName);
+            name -> name.recipeName);
     }
 }

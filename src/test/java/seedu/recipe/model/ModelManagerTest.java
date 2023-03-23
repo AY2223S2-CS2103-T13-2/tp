@@ -118,7 +118,7 @@ public class ModelManagerTest {
         String[] keywords = CACIO_E_PEPE.getName().recipeName.split("\\s+");
         modelManager.updateFilteredRecipeList(
             new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(keywords), Recipe::getName,
-                                                            (name) -> name.recipeName));
+                name -> name.recipeName));
         assertNotEquals(modelManager, new ModelManager(recipeBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
