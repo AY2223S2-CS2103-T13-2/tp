@@ -19,5 +19,6 @@ Recipe *--> RecipePortion
 Recipe *--> RecipeDuration
 Recipe *--> Name
 Recipe *--> Step
-Ingredient --> "1" IngredientQuantifier
+Recipe *--> "*" IngredientQuantifier
+
 @enduml

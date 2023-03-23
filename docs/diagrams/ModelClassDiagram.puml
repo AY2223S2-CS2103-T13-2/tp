@@ -20,9 +20,8 @@ Class RecipeDuration
 Class Tag
 Class Step
 Class Ingredient
-Class IngredientParser
-Class IngredientBuilder
 Class IngredientQuantifier
+Class IngredientBuilder
 }
 
 Class HiddenOutside #FFFFFF
@@ -40,17 +39,14 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 RecipeBook *--> "1" UniqueRecipeList
 UniqueRecipeList --> "~* all" Recipe
-Recipe *--> "1" Name
+Recipe *--right-> "*" Tag
+Recipe *--left-> "*" Step
 Recipe *--> "0..1" RecipeDuration
 Recipe *--> "0..1" RecipePortion
-Recipe *--> "*" Tag
-Recipe *--> "*" Step
-Recipe *--> "*" Ingredient
-Ingredient <... IngredientBuilder
-
-Ingredient ---> "1" IngredientQuantifier
-IngredientQuantifier <.left. IngredientBuilder
-IngredientBuilder ...> IngredientParser
+Recipe *--> "1" Name
+Recipe *---> "*" Ingredient
+Recipe *---> "*" IngredientQuantifier
+Recipe ...> IngredientBuilder
 
 ModelManager -->"~* filtered" Recipe
 @enduml

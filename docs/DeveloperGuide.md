@@ -24,13 +24,26 @@ title: Developer Guide
 The `Model` component,
 
 * stores the recipe book data i.e., all `Recipe` objects (which are contained in a `UniqueRecipeBook` object).
-* stores the currently 'selected' `Recipe` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Recipe>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list changes.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` object.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* stores the currently 'selected' `Recipe` objects (e.g., results of a search query such as `find` or `list`) as a 
+  separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Recipe>` instance that 
+  can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the 
+  list changes.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a 
+  `ReadOnlyUserPref` object.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
+  should make sense on their own without depending on other components)
+* However, it is worth noting that clients need only pass valid `IngredientBuilder` instances to `Recipe` objects, 
+  from which the population of the `Ingredient` and `IngredientQuantifier` fields will be done by the `Recipe` class
+  and its methods.
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and an `Ingredient` list in the `RecipeBook`, which `Recipe` references. This allows `RecipeBook` to only require one `Tag` object per unique **tag**, and one `Ingredient` object per unique **ingredient**, instead of each `Recipe` needing their own `Tag` or `Ingredient` objects.<br>
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and 
+an `Ingredient` list in the `RecipeBook`, which `Recipe` references. This allows `RecipeBook` to only require 
+one `Tag` object per unique **tag**, and one `Ingredient` object per unique **ingredient**, instead of each `Recipe` 
+needing their own `Tag` or `Ingredient` objects. This, however is highly complex and adds additional dependencies,
+which may in turn introduce more vulnerabilities or points of failure. As such, its implementation is a proposed 
+extension feature to this project.<br/>
 
 <img src="images/BetterModelClassDiagram.png" width="500" />
 
