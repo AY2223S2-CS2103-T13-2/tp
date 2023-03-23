@@ -5,6 +5,22 @@ title: Developer Guide
 * Table of Contents
 {:toc}
 
+### Storage Component
+
+The **API** of this component is specified
+in [`Storage.java`](https://github.com/AY2223S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/recipe/storage/Storage.java)
+
+Structure of the Storage Component: (tbc)
+
+The `Storage` component:
+
+* saves both recipe data and user preferences data in JSON format
+* reads saved JSON recipe data and user preferences data into their respective objects
+* inherits from both the `RecipeBookStorage` and `UserPrefStorage` interfaces, which means it can be treated as either
+  one (if the functionality of only one is needed).
+* depends on some classes in the Model component (because the Storage component’s job is to save/retrieve objects that
+  belong to the Model)
+
 ## **Appendix: Requirements**
 
 ### Product scope
