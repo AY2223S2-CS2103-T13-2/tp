@@ -39,14 +39,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 RecipeBook *--> "1" UniqueRecipeList
 UniqueRecipeList --> "~* all" Recipe
-Recipe *--right-> "*" Tag
-Recipe *--left-> "*" Step
-Recipe *--> "0..1" RecipeDuration
-Recipe *--> "0..1" RecipePortion
-Recipe *--> "1" Name
-Recipe *---> "*" Ingredient
-Recipe *---> "*" IngredientQuantifier
-Recipe ...> IngredientBuilder
+Recipe *--l-> "1" Name
+Recipe *---> "*" Tag
+Recipe *---> "*" Step
+Recipe *---> "0..1" RecipeDuration
+Recipe *---> "0..1" RecipePortion
+Recipe *-right-> "*" Ingredient
+Recipe *--> "*" IngredientQuantifier
+Recipe .right.> IngredientBuilder
+
+IngredientBuilder ..> Ingredient
+IngredientBuilder ..> IngredientQuantifier
 
 ModelManager -->"~* filtered" Recipe
 @enduml
