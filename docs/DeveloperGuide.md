@@ -12,7 +12,7 @@ in [`Storage.java`](https://github.com/AY2223S2-CS2103T-T13-2/tp/tree/master/src
 
 Structure of the Storage Component: (tbc)
 
-The `Storage` component:
+**The `Storage` component:**
 
 * saves both recipe data and user preferences data in JSON format
 * reads saved JSON recipe data and user preferences data into their respective objects
@@ -20,6 +20,17 @@ The `Storage` component:
   one (if the functionality of only one is needed).
 * depends on some classes in the Model component (because the Storage component’s job is to save/retrieve objects that
   belong to the Model)
+
+**Implementation:**
+
+Serialization and deserialization of recipe book objects is done using [Jackson](https://github.com/FasterXML/jackson). 
+To serialize a recipe, we must necessarily serialize its component fields too: its `Name`, `RecipePortion`, 
+`RecipeDuration`, `Tag` set, `Ingredient` list, and `Step` list.
+
+The default JSON representation for each component is to express the fields of each component as key-value pairs. 
+However, this representation is too verbose and space-inefficient. Hence, we opted to write custom JSON adapters for
+each component clas, which can be found in the [`seedu.recipe.storage.jsonadapters`](https://github.com/AY2223S2-CS2103T-T13-2/tp/tree/master/src/main/java/seedu/recipe/storage/jsonadapters) 
+package. The JSON adapters allow us to express how each class should be serialized.
 
 ## **Appendix: Requirements**
 
