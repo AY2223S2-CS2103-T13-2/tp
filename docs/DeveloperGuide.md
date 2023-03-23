@@ -41,9 +41,10 @@ The `Model` component,
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and 
 an `Ingredient` list in the `RecipeBook`, which `Recipe` references. This allows `RecipeBook` to only require 
 one `Tag` object per unique **tag**, and one `Ingredient` object per unique **ingredient**, instead of each `Recipe` 
-needing their own `Tag` or `Ingredient` objects. This, however is highly complex and adds additional dependencies,
+needing their own `Tag` or `Ingredient` objects.<br/><br/>
+This, however is highly complex and adds additional dependencies,
 which may in turn introduce more vulnerabilities or points of failure. As such, its implementation is a proposed 
-extension feature to this project.<br/>
+extension feature to this project.<br/><br/>
 
 <img src="images/BetterModelClassDiagram.png" width="500" />
 
