@@ -35,6 +35,7 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
 
     @Override
     public boolean test(Recipe recipe) {
+        // check if any of the keywords match any property in the collection
         return keywords.stream()
             .anyMatch(
                 keyword -> getter.apply(recipe).stream().anyMatch(
