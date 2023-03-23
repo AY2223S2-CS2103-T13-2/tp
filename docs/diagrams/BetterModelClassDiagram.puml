@@ -10,7 +10,7 @@ RecipeBook *-right-> "1" UniqueIngredientList
 
 UniqueTagList -down-> "*" Tag
 UniqueIngredientList -down-> "*" Ingredient
-UniqueRecipeList -down-> Recipe
+UniqueRecipeList -down-> "*" Recipe
 
 Recipe -up-> "*" Tag
 Recipe -up-> "*" Ingredient
