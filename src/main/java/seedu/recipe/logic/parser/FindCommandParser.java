@@ -1,5 +1,6 @@
 package seedu.recipe.logic.parser;
 
+import static seedu.recipe.commons.core.Messages.MESSAGE_EMPTY_KEYWORDS_FIND;
 import static seedu.recipe.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
@@ -32,23 +33,41 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] allKeywords = trimmedArgs.split("\\s+");
+        String command = allKeywords[0];
+        String[] findKeywords = Arrays.copyOfRange(allKeywords, 1, allKeywords.length);
         Predicate<Recipe> predicate;
 
-        switch (nameKeywords[0].toLowerCase()) {
+        switch (command.toLowerCase()) {
         case "tag":
-            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(nameKeywords,
+            validateFindKeywords(findKeywords);
+            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(findKeywords,
                 FindUtil.GET_TAGS_FROM_RECIPE, FindUtil.GET_TAG_STRING);
             break;
         case "name":
-            nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
-            // fallthrough
+            validateFindKeywords(findKeywords);
+            predicate = new PropertyNameContainsKeywordsPredicate<Name>(findKeywords, FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING);
+            break;
         default: // if no property is specified, assume we are finding by Name
-            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, FindUtil.GET_NAME_FROM_RECIPE,
+            validateFindKeywords(allKeywords);
+            predicate = new PropertyNameContainsKeywordsPredicate<Name>(allKeywords, FindUtil.GET_NAME_FROM_RECIPE,
                 FindUtil.GET_NAME_STRING);
         }
 
         return new FindCommand(predicate);
+    }
+
+    /**
+     * Validates whether a list of keywords is a valid input to the find command.
+     *
+     * @param findKeywords A list of keywords.
+     * @throws ParseException Thrown if the keyword list is empty.
+     */
+    public void validateFindKeywords(String[] findKeywords) throws ParseException {
+        if (findKeywords.length == 0) {
+            throw new ParseException(MESSAGE_EMPTY_KEYWORDS_FIND);
+        }
     }
 
 }
