@@ -20,6 +20,8 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
     /**
      * This method gets the name string of property T from Recipe.
      */
+    private final Function<Recipe, Collection<T>> propertyGetter;
+    private final Function<T, String> nameGetter;
     private final Function<Recipe, Collection<String>> getter;
 
     /**
@@ -33,6 +35,8 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
                                                        Function<Recipe, Collection<T>> propertyGetter,
                                                        Function<T, String> nameGetter) {
         this.keywords = keywords;
+        this.propertyGetter = propertyGetter;
+        this.nameGetter = nameGetter;
         this.getter = (recipe) -> propertyGetter.apply(recipe).stream().map(nameGetter).collect(Collectors.toList());
     }
 
@@ -63,7 +67,8 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
         return other == this // short circuit if same object
             || (other instanceof PropertyCollectionContainsKeywordsPredicate<?> // instanceof handles nulls
             && keywords.equals(((PropertyCollectionContainsKeywordsPredicate<?>) other).keywords)
-            && getter.equals(((PropertyCollectionContainsKeywordsPredicate<?>) other).getter)); // state check
+            && propertyGetter.equals(((PropertyCollectionContainsKeywordsPredicate<?>) other).propertyGetter)
+            && nameGetter.equals(((PropertyCollectionContainsKeywordsPredicate<?>) other).nameGetter)); // state check
     }
 
 }
