@@ -44,8 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
             // fallthrough
         default: // if no property is specified, assume we are finding by Name
-            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, FindUtil.getNameFromRecipe,
-                FindUtil.getNameString);
+            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING);
         }
 
         return new FindCommand(predicate);

@@ -74,8 +74,8 @@ public class RecipeBookParserTest {
 //        FindCommand command = (FindCommand) parser.parseCommand(
 //            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
 //        assertEquals(new FindCommand(
-//                new PropertyNameContainsKeywordsPredicate<Name>(keywords, FindUtil.getNameFromRecipe,
-//                    FindUtil.getNameString)),
+//                new PropertyNameContainsKeywordsPredicate<Name>(keywords, FindUtil.GET_NAME_FROM_RECIPE,
+//                    FindUtil.GET_NAME_STRING)),
 //            command);
 //    }
 

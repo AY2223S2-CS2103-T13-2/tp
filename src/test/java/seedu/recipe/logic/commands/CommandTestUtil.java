@@ -135,8 +135,8 @@ public class CommandTestUtil {
         Recipe recipe = model.getFilteredRecipeList().get(targetIndex.getZeroBased());
         final String[] splitName = recipe.getName().recipeName.split("\\s+");
         model.updateFilteredRecipeList(
-            new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(splitName[0]), FindUtil.getNameFromRecipe,
-                FindUtil.getNameString));
+            new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(splitName[0]), FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING));
 
         assertEquals(1, model.getFilteredRecipeList().size());
     }

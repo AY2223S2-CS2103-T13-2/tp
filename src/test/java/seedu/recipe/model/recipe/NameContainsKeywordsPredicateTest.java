@@ -20,11 +20,11 @@ public class NameContainsKeywordsPredicateTest {
     //        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
     //
     //        PropertyNameContainsKeywordsPredicate<Name> firstPredicate = new
-    //        PropertyNameContainsKeywordsPredicate<Name>(
-    //            firstPredicateKeywordList, FindUtil.getNameFromRecipe, FindUtil.getNameString);
+    //            PropertyNameContainsKeywordsPredicate<Name>(
+    //            firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
     //        PropertyNameContainsKeywordsPredicate<Name> secondPredicate = new
-    //        PropertyNameContainsKeywordsPredicate<Name>(
-    //            secondPredicateKeywordList, FindUtil.getNameFromRecipe, FindUtil.getNameString);
+    //            PropertyNameContainsKeywordsPredicate<Name>(
+    //            secondPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
     //
     //        // same object -> returns true
     //        assertEquals(firstPredicate, firstPredicate);
@@ -32,7 +32,7 @@ public class NameContainsKeywordsPredicateTest {
     //        // same values -> returns true
     //        PropertyNameContainsKeywordsPredicate<Name> firstPredicateCopy =
     //            new PropertyNameContainsKeywordsPredicate<Name>(
-    //                firstPredicateKeywordList, FindUtil.getNameFromRecipe, FindUtil.getNameString);
+    //                firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
     //        assertEquals(firstPredicate, firstPredicateCopy);
     //
     //        // different types -> returns false
@@ -50,26 +50,26 @@ public class NameContainsKeywordsPredicateTest {
         // One keyword
         PropertyNameContainsKeywordsPredicate<Name> predicate =
             new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("Lasagna"),
-                FindUtil.getNameFromRecipe,
-                FindUtil.getNameString);
+                FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING);
         assertTrue(predicate.test(new Recipe(new Name("Lasagna"))));
 
         // Multiple keywords
         predicate = new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("Grilled", "Cheese"),
-            FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+            FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
         assertTrue(predicate.test(new Recipe(new Name("Grilled Cheese"))));
 
         // Only one matching keyword
         predicate = new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("Steamed", "Baked"),
-            FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+            FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
         assertTrue(predicate.test(new Recipe(new Name("Baked Rice"))));
 
         // Mixed-case keywords
         predicate = new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("pork", "hAlaL"),
-            FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+            FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
         assertTrue(predicate.test(new Recipe(new Name("Halal Bak Kut Teh"))));
     }
 
@@ -77,18 +77,19 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         PropertyNameContainsKeywordsPredicate<Name> predicate = new PropertyNameContainsKeywordsPredicate<Name>(
-            Collections.emptyList(), FindUtil.getNameFromRecipe, FindUtil.getNameString);
+            Collections.emptyList(), FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
         assertFalse(predicate.test(new Recipe(new Name("Grilled Cheese"))));
 
         // Non-matching keyword
-        predicate = new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("Steak"), FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+        predicate = new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("Steak"),
+            FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
         assertFalse(predicate.test(new Recipe(new Name("Grilled Cheese"))));
 
         // Keywords match fields, but does not match name
         predicate = new PropertyNameContainsKeywordsPredicate<Name>(
-            Arrays.asList("Butter", "Onions", "Halibut", "Mediterranean"), FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+            Arrays.asList("Butter", "Onions", "Halibut", "Mediterranean"), FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
         Recipe r = new Recipe(new Name("Pan-roasted fish"));
         r.setPortion(RecipePortion.of("1 serving"));
         r.setDuration(RecipeDuration.of("2 h"));

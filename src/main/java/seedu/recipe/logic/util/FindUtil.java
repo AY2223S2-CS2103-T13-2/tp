@@ -10,6 +10,6 @@ import seedu.recipe.model.recipe.Recipe;
  */
 public class FindUtil {
     // Find-by-name utils
-    public static final Function<Recipe, Name> getNameFromRecipe = Recipe::getName;
-    public static final Function<Name, String> getNameString = name -> name.recipeName;
+    public static final Function<Recipe, Name> GET_NAME_FROM_RECIPE = Recipe::getName;
+    public static final Function<Name, String> GET_NAME_STRING = name -> name.recipeName;
 }

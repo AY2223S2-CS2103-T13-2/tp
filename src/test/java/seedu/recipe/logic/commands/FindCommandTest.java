@@ -29,12 +29,12 @@ public class FindCommandTest {
     public void equals() {
         PropertyNameContainsKeywordsPredicate<Name> firstPredicate =
             new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("first"),
-                FindUtil.getNameFromRecipe,
-                FindUtil.getNameString);
+                FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING);
         PropertyNameContainsKeywordsPredicate<Name> secondPredicate =
             new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("second"),
-                FindUtil.getNameFromRecipe,
-                FindUtil.getNameString);
+                FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -81,7 +81,7 @@ public class FindCommandTest {
      */
     private PropertyNameContainsKeywordsPredicate<Name> preparePredicate(String userInput) {
         return new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(userInput.split("\\s+")),
-            FindUtil.getNameFromRecipe,
-            FindUtil.getNameString);
+            FindUtil.GET_NAME_FROM_RECIPE,
+            FindUtil.GET_NAME_STRING);
     }
 }
