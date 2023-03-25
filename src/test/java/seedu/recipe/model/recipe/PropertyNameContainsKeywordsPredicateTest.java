@@ -14,18 +14,22 @@ import org.junit.jupiter.api.Test;
 import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.model.tag.Tag;
 
-// TODO: this file may not be named properly
-public class NameContainsKeywordsPredicateTest {
+public class PropertyNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
+        // testing equals for Name
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        List<String> thirdPredicateKeywordList = Arrays.asList("first", "third");
 
         PropertyNameContainsKeywordsPredicate<Name> firstPredicate = new
             PropertyNameContainsKeywordsPredicate<Name>(
             firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
         PropertyNameContainsKeywordsPredicate<Name> secondPredicate = new
+            PropertyNameContainsKeywordsPredicate<Name>(
+            secondPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
+        PropertyNameContainsKeywordsPredicate<Name> thirdPredicate = new
             PropertyNameContainsKeywordsPredicate<Name>(
             secondPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
 
@@ -37,6 +41,9 @@ public class NameContainsKeywordsPredicateTest {
             new PropertyNameContainsKeywordsPredicate<Name>(
                 firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
         assertEquals(firstPredicate, firstPredicateCopy);
+
+        // different but equal values -> returns true
+        assertEquals(secondPredicate, thirdPredicate);
 
         // different types -> returns false
         assertNotEquals(1, firstPredicate);
