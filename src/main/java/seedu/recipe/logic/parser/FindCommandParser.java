@@ -37,8 +37,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         switch (nameKeywords[0].toLowerCase()) {
         case "tag":
-            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(nameKeywords, Recipe::getTags, (
-                tag) -> tag.tagName);
+            predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(nameKeywords,
+                FindUtil.GET_TAGS_FROM_RECIPE, FindUtil.GET_TAG_STRING);
             break;
         case "name":
             nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
