@@ -7,6 +7,10 @@ import static seedu.recipe.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.recipe.testutil.Assert.assertThrows;
 import static seedu.recipe.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.recipe.logic.commands.AddCommand;
@@ -14,11 +18,14 @@ import seedu.recipe.logic.commands.ClearCommand;
 import seedu.recipe.logic.commands.DeleteCommand;
 import seedu.recipe.logic.commands.EditCommand;
 import seedu.recipe.logic.commands.ExitCommand;
+import seedu.recipe.logic.commands.FindCommand;
 import seedu.recipe.logic.commands.HelpCommand;
 import seedu.recipe.logic.commands.ListCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.logic.util.RecipeDescriptor;
 import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
@@ -68,16 +75,16 @@ public class RecipeBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
-//    @Test
-//    public void parseCommand_find() throws Exception {
-//        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-//        FindCommand command = (FindCommand) parser.parseCommand(
-//            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-//        assertEquals(new FindCommand(
-//                new PropertyNameContainsKeywordsPredicate<Name>(keywords, FindUtil.GET_NAME_FROM_RECIPE,
-//                    FindUtil.GET_NAME_STRING)),
-//            command);
-//    }
+    @Test
+    public void parseCommand_find() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindCommand command = (FindCommand) parser.parseCommand(
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(
+                new PropertyNameContainsKeywordsPredicate<Name>(keywords, FindUtil.GET_NAME_FROM_RECIPE,
+                    FindUtil.GET_NAME_STRING)),
+            command);
+    }
 
     @Test
     public void parseCommand_help() throws Exception {

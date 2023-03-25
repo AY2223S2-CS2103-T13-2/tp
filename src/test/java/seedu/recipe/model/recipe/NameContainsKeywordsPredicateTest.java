@@ -1,10 +1,13 @@
 package seedu.recipe.model.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,36 +17,36 @@ import seedu.recipe.model.tag.Tag;
 // TODO: this file may not be named properly
 public class NameContainsKeywordsPredicateTest {
 
-    //    @Test
-    //    public void equals() {
-    //        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-    //        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
-    //
-    //        PropertyNameContainsKeywordsPredicate<Name> firstPredicate = new
-    //            PropertyNameContainsKeywordsPredicate<Name>(
-    //            firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
-    //        PropertyNameContainsKeywordsPredicate<Name> secondPredicate = new
-    //            PropertyNameContainsKeywordsPredicate<Name>(
-    //            secondPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
-    //
-    //        // same object -> returns true
-    //        assertEquals(firstPredicate, firstPredicate);
-    //
-    //        // same values -> returns true
-    //        PropertyNameContainsKeywordsPredicate<Name> firstPredicateCopy =
-    //            new PropertyNameContainsKeywordsPredicate<Name>(
-    //                firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
-    //        assertEquals(firstPredicate, firstPredicateCopy);
-    //
-    //        // different types -> returns false
-    //        assertNotEquals(1, firstPredicate);
-    //
-    //        // null -> returns false
-    //        assertNotEquals(null, firstPredicate);
-    //
-    //        // different recipe -> returns false
-    //        assertNotEquals(firstPredicate, secondPredicate);
-    //    }
+    @Test
+    public void equals() {
+        List<String> firstPredicateKeywordList = Collections.singletonList("first");
+        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+
+        PropertyNameContainsKeywordsPredicate<Name> firstPredicate = new
+            PropertyNameContainsKeywordsPredicate<Name>(
+            firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
+        PropertyNameContainsKeywordsPredicate<Name> secondPredicate = new
+            PropertyNameContainsKeywordsPredicate<Name>(
+            secondPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
+
+        // same object -> returns true
+        assertEquals(firstPredicate, firstPredicate);
+
+        // same values -> returns true
+        PropertyNameContainsKeywordsPredicate<Name> firstPredicateCopy =
+            new PropertyNameContainsKeywordsPredicate<Name>(
+                firstPredicateKeywordList, FindUtil.GET_NAME_FROM_RECIPE, FindUtil.GET_NAME_STRING);
+        assertEquals(firstPredicate, firstPredicateCopy);
+
+        // different types -> returns false
+        assertNotEquals(1, firstPredicate);
+
+        // null -> returns false
+        assertNotEquals(null, firstPredicate);
+
+        // different recipe -> returns false
+        assertNotEquals(firstPredicate, secondPredicate);
+    }
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
