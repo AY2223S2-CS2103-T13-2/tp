@@ -20,7 +20,6 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
      */
     private final Function<Recipe, T> propertyGetter;
     private final Function<T, String> nameGetter;
-    private final Function<Recipe, String> getter;
 
 
     /**
@@ -35,7 +34,7 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
         this.keywords = keywords;
         this.propertyGetter = propertyGetter;
         this.nameGetter = nameGetter;
-        this.getter = propertyGetter.andThen(nameGetter);
+
     }
 
     /**
@@ -50,8 +49,15 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
         this(Arrays.asList(keywords), propertyGetter, nameGetter);
     }
 
+    /**
+     * Tests if the target property of the given Recipe matches any of the keywords.
+     *
+     * @param recipe the input Recipe
+     * @return Whether any of the keywords match the target property
+     */
     @Override
     public boolean test(Recipe recipe) {
+        Function<Recipe, String> getter = propertyGetter.andThen(nameGetter);
         return keywords.stream()
             .anyMatch(
                 keyword -> StringUtil.containsWordIgnoreCase(getter.apply(recipe), keyword));

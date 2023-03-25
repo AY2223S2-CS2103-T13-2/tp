@@ -22,7 +22,6 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
      */
     private final Function<Recipe, Collection<T>> propertyGetter;
     private final Function<T, String> nameGetter;
-    private final Function<Recipe, Collection<String>> getter;
 
     /**
      * Constructs an instance of PropertyCollectionContainsKeywordsPredicate.
@@ -37,7 +36,6 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
         this.keywords = keywords;
         this.propertyGetter = propertyGetter;
         this.nameGetter = nameGetter;
-        this.getter = (recipe) -> propertyGetter.apply(recipe).stream().map(nameGetter).collect(Collectors.toList());
     }
 
     /**
@@ -53,8 +51,18 @@ public class PropertyCollectionContainsKeywordsPredicate<T> implements Predicate
         this(Arrays.asList(keywords), propertyGetter, nameGetter);
     }
 
+    /**
+     * Tests if any property in the property collection of the given Recipe matches any of the keywords.
+     *
+     * @param recipe the input Recipe
+     * @return Whether any of the keywords match any property in the collection
+     */
     @Override
     public boolean test(Recipe recipe) {
+        // given a recipe, gets the name string of each property in the collection
+        Function<Recipe, Collection<String>> getter = targetRecipe -> propertyGetter.apply(targetRecipe).stream().map(
+            nameGetter).collect(Collectors.toList());
+
         // check if any of the keywords match any property in the collection
         return keywords.stream()
             .anyMatch(
