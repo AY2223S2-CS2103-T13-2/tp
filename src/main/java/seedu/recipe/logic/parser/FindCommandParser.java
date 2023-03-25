@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import seedu.recipe.logic.commands.FindCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyCollectionContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
@@ -43,8 +44,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             nameKeywords = Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length);
             // fallthrough
         default: // if no property is specified, assume we are finding by Name
-            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, Recipe::getName, (
-                name) -> name.recipeName);
+            predicate = new PropertyNameContainsKeywordsPredicate<Name>(nameKeywords, FindUtil.getNameFromRecipe,
+                FindUtil.getNameString);
         }
 
         return new FindCommand(predicate);

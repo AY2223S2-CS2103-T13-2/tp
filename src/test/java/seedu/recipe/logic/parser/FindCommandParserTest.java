@@ -21,8 +21,8 @@ public class FindCommandParserTest {
     //        // no leading and trailing whitespaces
     //        FindCommand expectedFindCommand =
     //            new FindCommand(new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList("Alice", "Bob"),
-    //                Recipe::getName,
-    //                name -> name.recipeName));
+    //                FindUtil.getNameFromRecipe,
+    //                FindUtil.getNameString));
     //        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
     //
     //        // multiple whitespaces between keywords

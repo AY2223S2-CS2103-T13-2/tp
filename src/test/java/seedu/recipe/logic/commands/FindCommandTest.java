@@ -11,12 +11,12 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.model.Model;
 import seedu.recipe.model.ModelManager;
 import seedu.recipe.model.UserPrefs;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
-import seedu.recipe.model.recipe.Recipe;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -28,11 +28,13 @@ public class FindCommandTest {
     @Test
     public void equals() {
         PropertyNameContainsKeywordsPredicate<Name> firstPredicate =
-            new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("first"), Recipe::getName,
-                name -> name.recipeName);
+            new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("first"),
+                FindUtil.getNameFromRecipe,
+                FindUtil.getNameString);
         PropertyNameContainsKeywordsPredicate<Name> secondPredicate =
-            new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("second"), Recipe::getName,
-                name -> name.recipeName);
+            new PropertyNameContainsKeywordsPredicate<Name>(Collections.singletonList("second"),
+                FindUtil.getNameFromRecipe,
+                FindUtil.getNameString);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -78,7 +80,8 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code PropertyNameContainsKeywordsPredicate<Name>}.
      */
     private PropertyNameContainsKeywordsPredicate<Name> preparePredicate(String userInput) {
-        return new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(userInput.split("\\s+")), Recipe::getName,
-            name -> name.recipeName);
+        return new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(userInput.split("\\s+")),
+            FindUtil.getNameFromRecipe,
+            FindUtil.getNameString);
     }
 }

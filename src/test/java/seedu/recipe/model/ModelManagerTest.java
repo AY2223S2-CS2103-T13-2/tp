@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.recipe.commons.core.GuiSettings;
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.Recipe;
@@ -117,8 +118,8 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         String[] keywords = CACIO_E_PEPE.getName().recipeName.split("\\s+");
         modelManager.updateFilteredRecipeList(
-            new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(keywords), Recipe::getName,
-                name -> name.recipeName));
+            new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(keywords), FindUtil.getNameFromRecipe,
+                FindUtil.getNameString));
         assertNotEquals(modelManager, new ModelManager(recipeBook, userPrefs));
 
         // resets modelManager to initial state for upcoming tests

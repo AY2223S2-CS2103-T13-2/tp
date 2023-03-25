@@ -18,6 +18,8 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
     /**
      * This method gets the name string of property T from Recipe.
      */
+    private final Function<Recipe, T> propertyGetter;
+    private final Function<T, String> nameGetter;
     private final Function<Recipe, String> getter;
 
 
@@ -31,6 +33,8 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
     public PropertyNameContainsKeywordsPredicate(List<String> keywords, Function<Recipe, T> propertyGetter,
                                                  Function<T, String> nameGetter) {
         this.keywords = keywords;
+        this.propertyGetter = propertyGetter;
+        this.nameGetter = nameGetter;
         this.getter = propertyGetter.andThen(nameGetter);
     }
 
@@ -58,7 +62,8 @@ public class PropertyNameContainsKeywordsPredicate<T> implements Predicate<Recip
         return other == this // short circuit if same object
             || (other instanceof PropertyNameContainsKeywordsPredicate<?> // instanceof handles nulls
             && keywords.equals(((PropertyNameContainsKeywordsPredicate<?>) other).keywords)
-            && getter.equals(((PropertyNameContainsKeywordsPredicate<?>) other).getter)); // state check
+            && propertyGetter.equals(((PropertyNameContainsKeywordsPredicate<?>) other).propertyGetter)
+            && nameGetter.equals(((PropertyNameContainsKeywordsPredicate<?>) other).nameGetter)); // state check
     }
 
 }
