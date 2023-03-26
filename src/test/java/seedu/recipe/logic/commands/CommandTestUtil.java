@@ -16,10 +16,12 @@ import java.util.List;
 
 import seedu.recipe.commons.core.index.Index;
 import seedu.recipe.logic.commands.exceptions.CommandException;
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.logic.util.RecipeDescriptor;
 import seedu.recipe.model.Model;
 import seedu.recipe.model.RecipeBook;
-import seedu.recipe.model.recipe.NameContainsKeywordsPredicate;
+import seedu.recipe.model.recipe.Name;
+import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.testutil.EditRecipeDescriptorBuilder;
 
@@ -71,13 +73,13 @@ public class CommandTestUtil {
 
     static {
         DESC_CHICKEN = new EditRecipeDescriptorBuilder().withName(VALID_NAME_CHICKEN)
-                .withPortion(VALID_PORTION_CHICKEN).withDuration(VALID_DURATION_CHICKEN)
-                .withTags(VALID_TAG_CHINESE).withIngredients(VALID_INGREDIENT_CHICKEN)
-                .withSteps(VALID_STEP_CHICKEN).build();
+            .withPortion(VALID_PORTION_CHICKEN).withDuration(VALID_DURATION_CHICKEN)
+            .withTags(VALID_TAG_CHINESE).withIngredients(VALID_INGREDIENT_CHICKEN)
+            .withSteps(VALID_STEP_CHICKEN).build();
         DESC_FISH = new EditRecipeDescriptorBuilder().withName(VALID_NAME_FISH)
-                .withPortion(VALID_PORTION_FISH).withDuration(VALID_DURATION_FISH)
-                .withTags(VALID_TAG_ITALIAN).withIngredients(VALID_INGREDIENT_FISH)
-                .withSteps(VALID_STEP_FISH).build();
+            .withPortion(VALID_PORTION_FISH).withDuration(VALID_DURATION_FISH)
+            .withTags(VALID_TAG_ITALIAN).withIngredients(VALID_INGREDIENT_FISH)
+            .withSteps(VALID_STEP_FISH).build();
     }
 
     /**
@@ -132,7 +134,9 @@ public class CommandTestUtil {
 
         Recipe recipe = model.getFilteredRecipeList().get(targetIndex.getZeroBased());
         final String[] splitName = recipe.getName().recipeName.split("\\s+");
-        model.updateFilteredRecipeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredRecipeList(
+            new PropertyNameContainsKeywordsPredicate<Name>(Arrays.asList(splitName[0]), FindUtil.GET_NAME_FROM_RECIPE,
+                FindUtil.GET_NAME_STRING));
 
         assertEquals(1, model.getFilteredRecipeList().size());
     }

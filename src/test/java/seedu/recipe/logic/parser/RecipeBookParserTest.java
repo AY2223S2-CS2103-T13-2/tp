@@ -22,9 +22,10 @@ import seedu.recipe.logic.commands.FindCommand;
 import seedu.recipe.logic.commands.HelpCommand;
 import seedu.recipe.logic.commands.ListCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.logic.util.RecipeDescriptor;
 import seedu.recipe.model.recipe.Name;
-import seedu.recipe.model.recipe.NameContainsKeywordsPredicate;
+import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
@@ -51,7 +52,7 @@ public class RecipeBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+            DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
     }
 
@@ -62,9 +63,9 @@ public class RecipeBookParserTest {
         recipe.setDuration(RecipeDuration.of("15 min"));
         RecipeDescriptor descriptor = new EditRecipeDescriptorBuilder(recipe).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                                                                        + INDEX_FIRST_PERSON.getOneBased() + " "
-                                                                        + RecipeUtil.getEditRecipeDescriptorDetails(
-                descriptor));
+            + INDEX_FIRST_PERSON.getOneBased() + " "
+            + RecipeUtil.getEditRecipeDescriptorDetails(
+            descriptor));
         // assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor).toString(), command.toString());
     }
 
@@ -78,8 +79,11 @@ public class RecipeBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+            FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(
+                new PropertyNameContainsKeywordsPredicate<Name>(keywords, FindUtil.GET_NAME_FROM_RECIPE,
+                    FindUtil.GET_NAME_STRING)),
+            command);
     }
 
     @Test
@@ -97,7 +101,7 @@ public class RecipeBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test
