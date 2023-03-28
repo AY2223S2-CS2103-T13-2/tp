@@ -16,10 +16,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.recipe.logic.parser.exceptions.ParseException;
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
 import seedu.recipe.model.tag.Tag;
 
 public class ParserUtilTest {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+    <Label text="Name:" />
+    <TextField fx:id="nameField" />
+    <Label text="Duration:" />
+    <TextField fx:id="durationField" />
+    <Label text="Portion:" />
+    <TextField fx:id="portionField" />
+    <Label text="Ingredients:" />
+    <VBox fx:id="ingredientsBox" spacing="5" />
+    <Label text="Steps:" />
+    <VBox fx:id="stepsBox" spacing="5" />
+    <Label text="Tags:" />
+    <TextField fx:id="tagsField" />
+    <FlowPane fx:id="tags" />
+    <Button fx:id="saveButton" text="Save" />
+    <Button fx:id="cancelButton" text="Cancel" />
+</VBox>

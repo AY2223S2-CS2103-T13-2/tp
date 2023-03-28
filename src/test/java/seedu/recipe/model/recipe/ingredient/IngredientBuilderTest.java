@@ -1,4 +1,4 @@
-package seedu.recipe.model.recipe;
+package seedu.recipe.model.recipe.ingredient;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,7 +21,7 @@ public class IngredientBuilderTest {
 
     @Test
     public void null_name() {
-        assertThrows(NullPointerException.class, () -> new IngredientBuilder(null));
+        assertThrows(IllegalArgumentException.class, () -> new IngredientBuilder(null));
     }
 
     @Test

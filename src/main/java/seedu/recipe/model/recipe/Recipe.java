@@ -1,13 +1,15 @@
 package seedu.recipe.model.recipe;
 
 import static seedu.recipe.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.recipe.model.util.IngredientUtil.ingredientTableToString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -15,23 +17,22 @@ import java.util.Set;
 import seedu.recipe.model.recipe.exceptions.RecipeDurationNotPresentException;
 import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
 import seedu.recipe.model.recipe.ingredient.Ingredient;
-import seedu.recipe.model.recipe.ingredient.IngredientQuantity;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
  * Represents a Recipe in the recipe book.
  * Guarantees: details are present and not null, field values are validated.
  */
-
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class Recipe {
 
     // Identity field
     private final Name name;
     private final Set<Tag> tags = new HashSet<>();
-    private final List<IngredientBuilder> ingredients = new ArrayList<>();
     private final List<Step> steps = new ArrayList<>();
-    private final Hashtable<Ingredient, IngredientQuantity> ingredientTable = new Hashtable<>();
+    private final HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
 
     // Data fields
     private Optional<RecipePortion> portion = Optional.empty();
@@ -49,12 +50,24 @@ public class Recipe {
         return name;
     }
 
-    public List<IngredientBuilder> getIngredients() {
-        return ingredients;
+    public HashMap<Ingredient, IngredientInformation> getIngredients() {
+        return ingredientTable;
+    }
+
+    public Set<Ingredient> getIngredientList() {
+        return ingredientTable.keySet();
     }
 
     public void setIngredients(IngredientBuilder... ingredients) {
-        this.ingredients.addAll(List.of(ingredients));
+        for (IngredientBuilder ingredientBuilder: ingredients) {
+            ingredientTable.putAll(
+                ingredientBuilder.build()
+            );
+        }
+    }
+
+    public void setIngredients(Map<? extends Ingredient, ? extends IngredientInformation> ingredientMap) {
+        this.ingredientTable.putAll(ingredientMap);
     }
 
     public RecipePortion getPortion() {
@@ -107,7 +120,6 @@ public class Recipe {
         this.steps.addAll(List.of(steps));
     }
 
-
     /**
      * Returns true if both recipes have the same name.
      * This defines a weaker notion of equality between two recipes.
@@ -147,40 +159,36 @@ public class Recipe {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, portion, duration, tags, ingredients, steps);
+        return Objects.hash(name, portion, duration, tags, ingredientTable, steps);
     }
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName());
+        final StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getName());
 
-        portion.ifPresent(p -> {
-            builder.append(";\nPortion: ").append(p);
-        });
+        portion.ifPresent(p -> stringBuilder.append(";\nPortion: ").append(p));
 
-        duration.ifPresent(d -> {
-            builder.append(";\nDuration: ").append(d);
-        });
+        duration.ifPresent(d -> stringBuilder.append(";\nDuration: ").append(d));
 
         if (!tags.isEmpty()) {
-            builder.append(";\nTags: ");
+            stringBuilder.append(";\nTags: ");
             ArrayList<Tag> tags = new ArrayList<>(this.tags);
             tags.sort(Comparator.comparing(t -> t.tagName));
-            tags.forEach(builder::append);
+            tags.forEach(stringBuilder::append);
         }
 
-        if (!ingredients.isEmpty()) {
-            builder.append(";\nIngredients: ");
-            ingredients.forEach(i -> builder.append(i).append(",\n"));
+        if (!ingredientTable.isEmpty()) {
+            stringBuilder.append(";\nIngredients:\n");
+            stringBuilder.append(ingredientTableToString(ingredientTable));
         }
 
         if (!steps.isEmpty()) {
-            builder.append(";\nSteps: ");
+            stringBuilder.append(";\nSteps: ");
             for (int i = 0; i < steps.size(); i++) {
-                builder.append(String.format("%s. %s,\n", i + 1, steps.get(i)));
+                stringBuilder.append(String.format("%s. %s,\n", i + 1, steps.get(i)));
             }
         }
-        return builder.toString();
+        return stringBuilder.toString();
     }
 }

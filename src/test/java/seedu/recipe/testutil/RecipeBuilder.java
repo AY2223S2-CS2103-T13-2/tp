@@ -1,16 +1,19 @@
 package seedu.recipe.testutil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -21,7 +24,7 @@ public class RecipeBuilder {
     private RecipeDuration duration;
     private RecipePortion portion;
     private Set<Tag> tags = new HashSet<>();
-    private List<IngredientBuilder> ingredients = new ArrayList<>();
+    private HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
     private List<Step> steps = new ArrayList<>();
 
     /**
@@ -33,7 +36,20 @@ public class RecipeBuilder {
         this.portion = portion;
         this.duration = duration;
         this.tags.addAll(tags);
-        this.ingredients.addAll(ingredients);
+        ingredients.forEach(ingredientBuilder -> ingredientTable.putAll(ingredientBuilder.build()));
+        this.steps.addAll(steps);
+    }
+
+    /**
+     * Creates a {@code RecipeBuilder} with the default details.
+     */
+    public RecipeBuilder(Name name, RecipePortion portion, RecipeDuration duration,
+                         Set<Tag> tags, HashMap<Ingredient, IngredientInformation> ingredients, List<Step> steps) {
+        this.name = name;
+        this.portion = portion;
+        this.duration = duration;
+        this.tags.addAll(tags);
+        this.ingredientTable = ingredients;
         this.steps.addAll(steps);
     }
 
@@ -45,7 +61,7 @@ public class RecipeBuilder {
         duration = recipeToCopy.getDuration();
         portion = recipeToCopy.getPortion();
         tags = new HashSet<>(recipeToCopy.getTags());
-        ingredients = recipeToCopy.getIngredients();
+        ingredientTable = recipeToCopy.getIngredients();
         steps = recipeToCopy.getSteps();
     }
 
@@ -59,7 +75,7 @@ public class RecipeBuilder {
         out.setDuration(duration);
         out.setPortion(portion);
         out.setTags(tags.toArray(Tag[]::new));
-        out.setIngredients(ingredients.toArray(IngredientBuilder[]::new));
+        out.setIngredients(ingredientTable);
         out.setSteps(steps.toArray(Step[]::new));
         return out;
     }

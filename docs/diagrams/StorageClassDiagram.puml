@@ -18,9 +18,12 @@ package "RecipeBook Storage" #F4F6F6{
 Class "<<interface>>\nRecipeBookStorage" as RecipeBookStorage
 Class JsonRecipeBookStorage
 Class JsonSerializableRecipeBook
+Package "JSON Adapters" {
 Class JsonAdaptedRecipe
-Class JsonAdaptedTag
 }
+}
+
+
 
 }
 
@@ -37,7 +40,6 @@ Storage -right-|> RecipeBookStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonRecipeBookStorage .up.|> RecipeBookStorage
 JsonRecipeBookStorage ..> JsonSerializableRecipeBook
-JsonSerializableRecipeBook --> "*" JsonAdaptedRecipe
-JsonAdaptedRecipe --> "*" JsonAdaptedTag
+JsonSerializableRecipeBook -> "*" JsonAdaptedRecipe
 
 @enduml

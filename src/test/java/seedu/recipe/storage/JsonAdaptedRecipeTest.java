@@ -12,6 +12,7 @@ import static seedu.recipe.testutil.TypicalRecipes.CACIO_PORTION;
 import static seedu.recipe.testutil.TypicalRecipes.CACIO_STEPS;
 import static seedu.recipe.testutil.TypicalRecipes.CACIO_TAGS;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,12 +20,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.recipe.commons.exceptions.IllegalValueException;
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 import seedu.recipe.storage.jsonadapters.JsonAdaptedIngredient;
 import seedu.recipe.storage.jsonadapters.JsonAdaptedName;
@@ -45,7 +48,23 @@ public class JsonAdaptedRecipeTest {
             -1, new JsonAdaptedTimeUnit("minutes")
     );
     private static final String INVALID_TAG = "#lit";
-    private static final String INVALID_INGREDIENT = "-1oz. juice";
+    private static final JsonAdaptedIngredient INVALID_INGREDIENT =
+            new JsonAdaptedIngredient("", "", "1g", "", List.of(), List.of());
+
+    private static final String INVALID_STEP = "";
+
+    private static List<JsonAdaptedIngredient> getIngredientList() {
+        HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
+        CACIO_INGREDIENTS.stream()
+                .map(IngredientBuilder::build)
+                .forEach(ingredientTable::putAll);
+
+        return ingredientTable
+                .entrySet()
+                .stream()
+                .map(entry -> new JsonAdaptedIngredient(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
 
     @Test
     public void toModelType_validRecipeDetails_returnsRecipe() throws Exception {
@@ -62,7 +81,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
@@ -76,7 +95,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
@@ -90,7 +109,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(INVALID_PORTION),
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = RecipePortion.MESSAGE_CONSTRAINTS;
@@ -104,7 +123,7 @@ public class JsonAdaptedRecipeTest {
                 null,
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RecipePortion.class.getSimpleName());
@@ -118,7 +137,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 Optional.of(INVALID_DURATION),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = RecipeDuration.MESSAGE_CONSTRAINTS;
@@ -132,7 +151,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 null,
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList())
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, RecipeDuration.class.getSimpleName());
@@ -148,7 +167,7 @@ public class JsonAdaptedRecipeTest {
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 invalidTags,
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList()));
         String expectedMessage = String.format(Tag.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);
@@ -156,9 +175,8 @@ public class JsonAdaptedRecipeTest {
 
     @Test
     public void toModelType_invalidIngredients_throwsIllegalValueException() {
-        List<JsonAdaptedIngredient> invalidIngredients =
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList());
-        invalidIngredients.add(new JsonAdaptedIngredient(INVALID_INGREDIENT));
+        List<JsonAdaptedIngredient> invalidIngredients = getIngredientList();
+        invalidIngredients.add(INVALID_INGREDIENT);
         JsonAdaptedRecipe recipe = new JsonAdaptedRecipe(
                 new JsonAdaptedName(CACIO_NAME),
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
@@ -166,21 +184,21 @@ public class JsonAdaptedRecipeTest {
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
                 invalidIngredients,
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList()));
-        String expectedMessage = String.format(IngredientBuilder.MESSAGE_CONSTRAINTS);
-        assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);
+        String expectedMessage = String.format(Ingredient.MESSAGE_CONSTRAINTS);
+        assertThrows(IllegalArgumentException.class, expectedMessage, recipe::toModelType);
     }
 
     @Test
     public void toModelType_invalidSteps_throwsIllegalValueException() {
         List<JsonAdaptedStep> invalidSteps =
                 CACIO_STEPS.stream().map(JsonAdaptedStep::new).collect(Collectors.toList());
-        invalidSteps.add(new JsonAdaptedStep(INVALID_INGREDIENT));
+        invalidSteps.add(new JsonAdaptedStep(INVALID_STEP));
         JsonAdaptedRecipe recipe = new JsonAdaptedRecipe(
                 new JsonAdaptedName(CACIO_NAME),
                 Optional.of(CACIO_PORTION).map(JsonAdaptedRecipePortion::new),
                 Optional.of(CACIO_DURATION).map(JsonAdaptedRecipeDuration::new),
                 CACIO_TAGS.stream().map(JsonAdaptedTag::new).collect(Collectors.toList()),
-                CACIO_INGREDIENTS.stream().map(JsonAdaptedIngredient::new).collect(Collectors.toList()),
+                getIngredientList(),
                 invalidSteps);
         String expectedMessage = String.format(Step.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, recipe::toModelType);

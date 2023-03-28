@@ -1,17 +1,20 @@
 package seedu.recipe.testutil;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.recipe.logic.util.RecipeDescriptor;
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -80,10 +83,12 @@ public class EditRecipeDescriptorBuilder {
      * Sets the {@code Ingredients} of the {@code EditRecipeDescriptor} that we are building.
      */
     public EditRecipeDescriptorBuilder withIngredients(String... ingredients) {
-        List<IngredientBuilder> ingredientList = Stream.of(ingredients)
+        HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
+        Stream.of(ingredients)
                 .map(IngredientBuilder::new)
-                .collect(Collectors.toList());
-        descriptor.setIngredients(ingredientList);
+                .map(IngredientBuilder::build)
+                .forEach(ingredientTable::putAll);
+        descriptor.setIngredients(ingredientTable);
         return this;
     }
 

@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+Package "JSON Adapters" {
+Class JsonAdaptedRecipe
+Class JsonAdaptedName
+Class JsonAdaptedRecipePortion
+Class JsonAdaptedPortionUnit
+Class JsonAdaptedRecipeDuration
+Class JsonAdaptedTimeUnit
+Class JsonAdaptedTag
+Class JsonAdaptedIngredient
+Class JsonAdaptedSubstitutionIngredient
+Class JsonAdaptedStep
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside --> JsonAdaptedRecipe
+
+JsonAdaptedRecipe *--> "1" JsonAdaptedName
+JsonAdaptedRecipe *--> "0..1" JsonAdaptedRecipePortion
+JsonAdaptedRecipePortion *--> "1" JsonAdaptedPortionUnit
+JsonAdaptedRecipe *--> "0..1" JsonAdaptedRecipeDuration
+JsonAdaptedRecipeDuration *--> "1" JsonAdaptedTimeUnit
+JsonAdaptedRecipe *--> "*" JsonAdaptedTag
+JsonAdaptedRecipe *--> "*" JsonAdaptedIngredient
+JsonAdaptedIngredient *--> "*" JsonAdaptedSubstitutionIngredient
+JsonAdaptedRecipe *--> "*" JsonAdaptedStep
+
+@enduml

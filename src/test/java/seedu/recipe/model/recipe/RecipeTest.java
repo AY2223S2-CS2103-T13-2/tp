@@ -19,6 +19,7 @@ import static seedu.recipe.testutil.TypicalRecipes.GRILLED_CHEESE;
 import static seedu.recipe.testutil.TypicalRecipes.MASALA_DOSA;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +29,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.recipe.model.recipe.exceptions.RecipeDurationNotPresentException;
 import seedu.recipe.model.recipe.exceptions.RecipePortionNotPresentException;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 import seedu.recipe.testutil.RecipeBuilder;
 
@@ -154,7 +158,12 @@ public class RecipeTest {
     //IngredientBuilder logic
     @Test
     public void getIngredients() {
-        assertEquals(CACIO_INGREDIENTS, CACIO_E_PEPE.getIngredients());
+        HashMap<Ingredient, IngredientInformation> cacioIngredients = new HashMap<>();
+        CACIO_INGREDIENTS.stream()
+            .map(IngredientBuilder::build)
+            .forEach(cacioIngredients::putAll);
+
+        assertEquals(cacioIngredients, CACIO_E_PEPE.getIngredients());
     }
 
     @Test
@@ -167,7 +176,12 @@ public class RecipeTest {
         Recipe test = new RecipeBuilder(CACIO_E_PEPE).build();
         test.setIngredients(ingredientsToAdd);
         newIngredientList.addAll(List.of(ingredientsToAdd));
-        assertEquals(newIngredientList, test.getIngredients());
+
+        HashMap<Ingredient, IngredientInformation> newIngredientTable = new HashMap<>();
+        newIngredientList.forEach(ingredientBuilder -> newIngredientTable.putAll(ingredientBuilder.build()));
+        HashMap<Ingredient, IngredientInformation> testTable = test.getIngredients();
+
+        assertEquals(newIngredientTable, testTable);
     }
 
     //IngredientBuilder logic
@@ -248,7 +262,12 @@ public class RecipeTest {
 
     @Test
     public void testHashCode() {
-        int hash = Objects.hash(CACIO_NAME, CACIO_PORTION, CACIO_DURATION, CACIO_TAGS, CACIO_INGREDIENTS, CACIO_STEPS);
+        HashMap<Ingredient, IngredientInformation> cacioIngredientTable = new HashMap<>();
+        CACIO_INGREDIENTS.stream()
+                .map(IngredientBuilder::build)
+                .forEach(cacioIngredientTable::putAll);
+        int hash = Objects.hash(
+                CACIO_NAME, CACIO_PORTION, CACIO_DURATION, CACIO_TAGS, cacioIngredientTable, CACIO_STEPS);
         assertEquals(hash, CACIO_E_PEPE.hashCode());
     }
 

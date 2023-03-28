@@ -5,17 +5,20 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 RecipeBook *-right-> "1" UniqueRecipeList
-RecipeBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueRecipeList
-UniqueTagList -[hidden]down- UniqueRecipeList
+RecipeBook *-left-> "1" UniqueTagList
+RecipeBook *-right-> "1" UniqueIngredientList
 
-UniqueTagList -right-> "*" Tag
-UniqueRecipeList -right-> Recipe
+UniqueTagList -down-> "*" Tag
+UniqueIngredientList -down-> "*" Ingredient
+UniqueRecipeList -down-> "*" Recipe
 
 Recipe -up-> "*" Tag
+Recipe -up-> "*" Ingredient
 
+Recipe *--> RecipePortion
+Recipe *--> RecipeDuration
 Recipe *--> Name
-Recipe *--> Phone
-Recipe *--> Email
-Recipe *--> Address
+Recipe *--> Step
+Recipe *--> "*" IngredientQuantifier
+
 @enduml

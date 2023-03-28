@@ -14,8 +14,8 @@ public class RecipeQuantityInvalidArgumentException extends RuntimeException {
     public RecipeQuantityInvalidArgumentException(String s) {
         super(
             String.format(
-                "An invalid quantity expression %s was passed for this ingredient. "
-                + "Please follow this format: \n%s", s, IngredientQuantity.MESSAGE_CONSTRAINTS
+                "An invalid quantity expression %s was passed for this ingredient. %s",
+                s, IngredientQuantity.MESSAGE_CONSTRAINTS
             )
         );
     }

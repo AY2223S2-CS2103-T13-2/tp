@@ -8,6 +8,7 @@ import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -16,9 +17,11 @@ import seedu.recipe.logic.commands.AddCommand;
 import seedu.recipe.logic.parser.exceptions.ParseException;
 import seedu.recipe.logic.parser.functional.TryUtil;
 import seedu.recipe.logic.util.RecipeDescriptor;
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -74,7 +77,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // 4. Parse Ingredients
         List<IngredientBuilder> ingredients = ParserUtil.parseIngredients(argMultimap.getAllValues(PREFIX_INGREDIENT));
-        recipeDescriptor.setIngredients(ingredients);
+        HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
+        ingredients.forEach(ingredientBuilder -> ingredientTable.putAll(ingredientBuilder.build()));
+        recipeDescriptor.setIngredients(ingredientTable);
 
         // 5. Parse Steps
         List<Step> steps = ParserUtil.parseSteps(argMultimap.getAllValues(PREFIX_STEP));

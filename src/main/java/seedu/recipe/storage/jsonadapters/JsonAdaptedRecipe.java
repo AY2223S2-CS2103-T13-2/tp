@@ -1,6 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,18 +11,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import seedu.recipe.commons.exceptions.IllegalValueException;
-import seedu.recipe.model.recipe.IngredientBuilder;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Recipe}.
  */
 @JsonPropertyOrder({"name", "portion", "duration", "tags", "ingredients", "steps"})
+@SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class JsonAdaptedRecipe {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Recipe's %s field is missing!";
 
@@ -52,7 +55,7 @@ public class JsonAdaptedRecipe {
             @JsonProperty("portion") Optional<JsonAdaptedRecipePortion> portion,
             @JsonProperty("duration") Optional<JsonAdaptedRecipeDuration> duration,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("ingredient") List<JsonAdaptedIngredient> ingredients,
+            @JsonProperty("ingredients") List<JsonAdaptedIngredient> ingredients,
             @JsonProperty("steps") List<JsonAdaptedStep> steps) {
         this.name = name;
         this.portion = portion;
@@ -83,10 +86,10 @@ public class JsonAdaptedRecipe {
                 source.getTags().stream()
                         .map(JsonAdaptedTag::new)
                         .collect(Collectors.toList()));
-        ingredients.addAll(
-                source.getIngredients().stream()
-                        .map(JsonAdaptedIngredient::new)
-                        .collect(Collectors.toList()));
+        //Set ingredients
+        source.getIngredients().forEach((ingredient, information) ->
+                ingredients.add(new JsonAdaptedIngredient(ingredient, information)));
+
         steps.addAll(
                 source.getSteps().stream()
                         .map(JsonAdaptedStep::new)
@@ -130,11 +133,11 @@ public class JsonAdaptedRecipe {
         }
         res.setTags(tagList.toArray(Tag[]::new));
 
-        List<IngredientBuilder> ingredientsList = new ArrayList<>();
+        HashMap<Ingredient, IngredientInformation> ingredientTable = new HashMap<>();
         for (JsonAdaptedIngredient i : ingredients) {
-            ingredientsList.add(i.toModelType());
+            ingredientTable.putAll(i.toModelType());
         }
-        res.setIngredients(ingredientsList.toArray(IngredientBuilder[]::new));
+        res.setIngredients(ingredientTable);
 
         List<Step> stepList = new ArrayList<>();
         for (JsonAdaptedStep s : steps) {

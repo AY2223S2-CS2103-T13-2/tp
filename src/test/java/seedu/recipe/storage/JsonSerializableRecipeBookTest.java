@@ -39,7 +39,7 @@ public class JsonSerializableRecipeBookTest {
      * Tests if an invalid data file with improperly formatted arguments causes the appropriate control flow
      * and raises an IllegalArgumentException, from attempting to instantiate with invalid arguments.
      *
-     * @throws Exception
+     * @throws Exception The exception arising from illegal values
      */
     @Test
     public void toModelType_invalidRecipeFile_throwsIllegalValueException() throws Exception {

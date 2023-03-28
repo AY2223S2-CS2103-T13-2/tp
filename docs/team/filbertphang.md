@@ -5,7 +5,8 @@ title: Filbert Phang's Project Portfolio Page
 
 ### Project: RIZZipe
 
-RIZZipe is a desktop recipe book application used for busy cooks who want to track their recipes. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+RIZZipe is a desktop recipe book application used for busy cooks who want to track their recipes. The user interacts
+with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -15,16 +16,17 @@ Given below are my contributions to the project.
     * Highlights: This enhancement affects...
     * Credits: *{if any}*
 
-* **New Feature**: Added...
+[//]: # (* **New Feature**: Added...)
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2223s2.github.io/tp-dashboard/?search=filbertphang&breakdown=true)
+* **Code
+  contributed**: [RepoSense link](https://nus-cs2103-ay2223s2.github.io/tp-dashboard/?search=filbertphang&breakdown=true)
 
 * **Project management**:
-    * Managed releases `v1.xx` - `v1.xx` (# releases) on GitHub
+    * Moved user stories to GitHub
 
 * **Enhancements to existing features**:
-    * Updated... (Pull requests [\#29](), [\#39](), [\#40]())
-    * Wrote additional tests... (Pull requests [\#](), [\#]())
+    * Refactored logic and parser for Edit, Delete, Find, Help commands (Pull requests [\#74](), [\#75]())
+    * Refactored JSON serialization/deserialization of recipe data (Pull request [\#86]())
 
 * **Documentation**:
     * User Guide:
@@ -32,15 +34,13 @@ Given below are my contributions to the project.
         * Did cosmetic tweaks to existing documentation of features `xx`, `xx`: [\#]()
     * Developer Guide:
         * Added user profile
+    * Code Quality and Code Style:
+        * Cleaned up code quality and style for release `v1.2` (Pull request [\#80]())
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#3]()
-    * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-    * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-    * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
+    * PRs reviewed (with non-trivial review comments): [\#75](), [\#77](), [\#87](), [\#94]()
+
+[//]: # (    * Reported bugs and suggestions for other teams in the class &#40;examples: [1]&#40;&#41;, [2]&#40;&#41;, [3]&#40;&#41;&#41;)
 
 * **Tools**:
-    * Integrated a third party library (BangBros-JS) to the project ([\#42]())
-    * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+    * Integrated a new dependency (jackson-datatype-jdk8) to the project ([\#86]())

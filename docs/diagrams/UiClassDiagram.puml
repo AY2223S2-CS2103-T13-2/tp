@@ -13,9 +13,14 @@ Class HelpWindow
 Class ResultDisplay
 Class RecipeListPanel
 Class RecipeCard
+Class RecipePopup
+Class RecipeForm
 Class StatusBarFooter
 Class CommandBox
+Class DeleteRecipeEvent
 }
+
+Class "<<interface>>\nCommandExecutor" as CommandExecutor
 
 package Model <<Rectangle>> {
 Class HiddenModel #FFFFFF
@@ -35,21 +40,33 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" RecipeListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow ..> DeleteRecipeEvent
 
-RecipeListPanel -down-> "*" RecipeCard
+RecipeListPanel *-down-> "*" RecipeCard
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-RecipeListPanel --|> UiPart
+RecipeListPanel -left--|> UiPart
 RecipeCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+RecipeForm --|> UiPart
+RecipePopup --|> UiPart
 
 RecipeCard ..> Model
+
+RecipeCard ..> RecipePopup
+RecipeCard ..>  RecipeForm
+RecipeCard ..>  DeleteRecipeEvent
+
 UiManager -right-> Logic
 MainWindow -left-> Logic
+
+CommandExecutor ..> Logic
+MainWindow ..> CommandExecutor
+
 
 RecipeListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox

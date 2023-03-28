@@ -25,11 +25,14 @@ public class IngredientParser {
     public static final Prefix REMARK_PREFIX = new Prefix("-r");
 
     /**
-     * Parses an IngredientBuilder instance for its arguments.
+     * Parses a command string for its arguments.
      *
-     * @param args The raw IngredientBuilder instance.
+     * @param args The raw ingredient command string.
+     * @return A key-value pair map, that maps prefixes to their tokens within the command
+     *         string.
      */
     public static HashMap<Prefix, List<String>> parse(String args) {
+        assert args != null;
         List<PrefixPosition> positions = findAllPositions(args,
                 AMOUNT_PREFIX, COMMON_NAME_PREFIX,
                 ESTIMATE_PREFIX, NAME_PREFIX, REMARK_PREFIX, SUBSTITUTION_PREFIX);
@@ -44,7 +47,7 @@ public class IngredientParser {
 
     private static List<PrefixPosition> findPosition(String args, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
-        int startPos = args.indexOf(prefix.getPrefix());
+        int startPos = args.indexOf(prefix.getPrefix() + " ");
         while (startPos != -1) {
             PrefixPosition position = new PrefixPosition(prefix, startPos);
             positions.add(position);

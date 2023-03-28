@@ -38,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_CHINESE = "Chinese";
     public static final String VALID_TAG_ITALIAN = "Italian";
     public static final String VALID_INGREDIENT_CHICKEN = "-a 1 -n chicken breast";
-    public static final String VALID_INGREDIENT_FISH = "-a 200g -n fish";
+    public static final String VALID_INGREDIENT_FISH = "-a 200 g -n fish";
     public static final String VALID_STEP_CHICKEN = "In a bowl, marinate the chicken in oyster sauce";
     public static final String VALID_STEP_FISH = "On a chopping board, remove the skin of the fish";
 
