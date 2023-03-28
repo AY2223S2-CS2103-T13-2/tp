@@ -21,6 +21,7 @@ import seedu.recipe.model.UserPrefs;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyCollectionContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -99,6 +100,17 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(BLUEBERRY_PANCAKES, CACIO_E_PEPE), model.getFilteredRecipeList());
     }
 
+    @Test
+    public void execute_ingredientPropertyMultipleKeywords_multipleRecipesFound() {
+        String expectedMessage = String.format(MESSAGE_RECIPES_LISTED_OVERVIEW, 3);
+        PropertyCollectionContainsKeywordsPredicate<Ingredient> predicate =
+            prepareIngredientPredicate("Egg Pepper");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredRecipeList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BLUEBERRY_PANCAKES, CACIO_E_PEPE, FISH_AND_CHIPS), model.getFilteredRecipeList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code PropertyNameContainsKeywordsPredicate<Name>}.
      */
@@ -108,9 +120,21 @@ public class FindCommandTest {
             FindUtil.GET_NAME_STRING);
     }
 
+    /**
+     * Parses {@code userInput} into a {@code PropertyCollectionContainsKeywordsPredicate<Tag>}.
+     */
     private PropertyCollectionContainsKeywordsPredicate<Tag> prepareTagPredicate(String userInput) {
         return new PropertyCollectionContainsKeywordsPredicate<Tag>(Arrays.asList(userInput.split("\\s+")),
             FindUtil.GET_TAGS_FROM_RECIPE,
             FindUtil.GET_TAG_STRING);
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code PropertyCollectionContainsKeywordsPredicate<Ingredient>}.
+     */
+    private PropertyCollectionContainsKeywordsPredicate<Ingredient> prepareIngredientPredicate(String userInput) {
+        return new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList(userInput.split("\\s+")),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
     }
 }

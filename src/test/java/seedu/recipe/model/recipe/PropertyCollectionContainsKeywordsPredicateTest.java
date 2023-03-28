@@ -16,6 +16,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.recipe.logic.util.FindUtil;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.tag.Tag;
 
 public class PropertyCollectionContainsKeywordsPredicateTest {
@@ -101,11 +102,61 @@ public class PropertyCollectionContainsKeywordsPredicateTest {
             FindUtil.GET_TAG_STRING);
         assertFalse(predicate.test(GRILLED_CHEESE));
 
-        // Keywords match fields, but does not match name
+        // Keywords match fields, but does not match tags
         predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(
             Arrays.asList("Pan-fried", "camembert", "sandwich", "balsamic", "butter"),
             FindUtil.GET_TAGS_FROM_RECIPE,
             FindUtil.GET_TAG_STRING);
+        assertFalse(predicate.test(GRILLED_CHEESE));
+    }
+
+    @Test
+    public void test_ingredientsContainKeywords_returnsTrue() {
+        // Only one keyword, one matching
+        PropertyCollectionContainsKeywordsPredicate<Ingredient> predicate =
+            new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Collections.singletonList("pecorino"),
+                FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+                FindUtil.GET_INGREDIENT_STRING);
+        assertTrue(predicate.test(CACIO_E_PEPE));
+
+        // Multiple keywords, multiple matching
+        predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList("pecorino", "pepper"),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
+        assertTrue(predicate.test(CACIO_E_PEPE));
+
+        // Multiple keywords, only one matching
+        predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList("pepper", "sesame"),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
+        assertTrue(predicate.test(CACIO_E_PEPE));
+
+        // Mixed-case keywords, matching
+        predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList("gRaNa", "pEcOriNO"),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
+        assertTrue(predicate.test(CACIO_E_PEPE));
+    }
+
+    @Test
+    public void test_ingredientsDoNotContainKeywords_returnsFalse() {
+        // Zero keywords
+        PropertyCollectionContainsKeywordsPredicate<Ingredient> predicate =
+            new PropertyCollectionContainsKeywordsPredicate<Ingredient>(
+                Collections.emptyList(), FindUtil.GET_INGREDIENTS_FROM_RECIPE, FindUtil.GET_INGREDIENT_STRING);
+        assertFalse(predicate.test(GRILLED_CHEESE));
+
+        // Non-matching keyword
+        predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList("Steak"),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
+        assertFalse(predicate.test(GRILLED_CHEESE));
+
+        // Keywords match fields, but does not match ingredients
+        predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(
+            Arrays.asList("sandwich", "english", "comfort"),
+            FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+            FindUtil.GET_INGREDIENT_STRING);
         assertFalse(predicate.test(GRILLED_CHEESE));
     }
 }

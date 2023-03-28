@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.recipe.logic.util.FindUtil;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
 import seedu.recipe.model.tag.Tag;
 
 public class PropertyNameContainsKeywordsPredicateTest {

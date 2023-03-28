@@ -14,6 +14,7 @@ import seedu.recipe.logic.util.FindUtil;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyCollectionContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.tag.Tag;
 
 public class FindCommandParserTest {
@@ -33,6 +34,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_tagsPropertyEmptyArg_throwsParseException() {
         assertParseFailure(parser, "tag     ", MESSAGE_EMPTY_KEYWORDS_FIND);
+    }
+
+    @Test
+    public void parse_ingredientsPropertyEmptyArg_throwsParseException() {
+        assertParseFailure(parser, "ingredient     ", MESSAGE_EMPTY_KEYWORDS_FIND);
     }
 
     @Test
@@ -72,5 +78,19 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "tag \n Indian \n \t Italian  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_ingredientsPropertyValidArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+            new FindCommand(
+                new PropertyCollectionContainsKeywordsPredicate<Ingredient>(Arrays.asList("pecorino", "pepper"),
+                    FindUtil.GET_INGREDIENTS_FROM_RECIPE,
+                    FindUtil.GET_INGREDIENT_STRING));
+        assertParseSuccess(parser, "ingredient pecorino pepper", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "ingredient \n pecorino \n \t pepper  \t", expectedFindCommand);
     }
 }
