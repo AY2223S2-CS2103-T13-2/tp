@@ -13,6 +13,7 @@ import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.PropertyCollectionContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.PropertyNameContainsKeywordsPredicate;
 import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -39,6 +40,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Recipe> predicate;
 
         switch (command.toLowerCase()) {
+        case "ingredient":
+            validateFindKeywords(findKeywords);
+            predicate = new PropertyCollectionContainsKeywordsPredicate<Ingredient>(findKeywords,
+                FindUtil.GET_INGREDIENTS_FROM_RECIPE, FindUtil.GET_INGREDIENT_STRING);
+            break;
         case "tag":
             validateFindKeywords(findKeywords);
             predicate = new PropertyCollectionContainsKeywordsPredicate<Tag>(findKeywords,

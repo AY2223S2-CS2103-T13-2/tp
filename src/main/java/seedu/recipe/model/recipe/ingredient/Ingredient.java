@@ -9,8 +9,8 @@ import java.util.Objects;
  */
 public class Ingredient implements Comparable<Ingredient> {
     public static final String MESSAGE_CONSTRAINTS = "An ingredient should be made up of one or more groups of "
-            + "whitespace separated alphabetic characters. These characters may also be separated by "
-            + "singular hyphens, such as 'self-raising flour'.";
+        + "whitespace separated alphabetic characters. These characters may also be separated by "
+        + "singular hyphens, such as 'self-raising flour'.";
     private static final String WORD_GROUP = "[A-Za-z]+(\\-[A-Za-z]+)?";
     public static final String VALIDATION_REGEX = String.format("^%s(\\s+%s)*$", WORD_GROUP, WORD_GROUP);
 
@@ -25,6 +25,7 @@ public class Ingredient implements Comparable<Ingredient> {
     /**
      * Given a String ingredient name, parses it for validity and returns a new
      * Ingredient instance if it is valid.
+     *
      * @param s The Ingredient name to construct from.
      * @return The generated Ingredient instance.
      */
@@ -35,18 +36,9 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     /**
-     * Set the common name of this Ingredient.
-     * @param s The common name to be set.
-     */
-    public void setCommonName(String s) {
-        assert s != null;
-        checkArgument(isValidIngredientName(s), MESSAGE_CONSTRAINTS);
-        this.commonName = s;
-    }
-
-    /**
      * Given a String ingredient name, parses it for validity and returns a
      * boolean value indicating if it is valid.
+     *
      * @param s The ingredient name to test.
      * @return True if the ingredient name is valid, False otherwise.
      */
@@ -86,5 +78,21 @@ public class Ingredient implements Comparable<Ingredient> {
 
     public String getCommonName() {
         return this.commonName;
+    }
+
+    /**
+     * Set the common name of this Ingredient.
+     *
+     * @param s The common name to be set.
+     */
+    public void setCommonName(String s) {
+        assert s != null;
+        checkArgument(isValidIngredientName(s), MESSAGE_CONSTRAINTS);
+        this.commonName = s;
+    }
+
+    public String getNames() {
+        String s = String.format("%s %s", this.name, this.commonName);
+        return s;
     }
 }

@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -18,4 +19,9 @@ public class FindUtil {
     // Find-by-tag utils
     public static final Function<Recipe, Collection<Tag>> GET_TAGS_FROM_RECIPE = Recipe::getTags;
     public static final Function<Tag, String> GET_TAG_STRING = tag -> tag.tagName;
+
+    // Find-by-ingredient utils
+    public static final Function<Recipe, Collection<Ingredient>> GET_INGREDIENTS_FROM_RECIPE =
+        Recipe::getIngredientList;
+    public static final Function<Ingredient, String> GET_INGREDIENT_STRING = ingredient -> ingredient.getNames();
 }
