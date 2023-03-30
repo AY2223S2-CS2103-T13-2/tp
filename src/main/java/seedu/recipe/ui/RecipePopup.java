@@ -29,8 +29,11 @@ public class RecipePopup extends UiPart<Region> {
 
     public final Recipe recipe;
 
+    //Root Layout Component
     @FXML
     private HBox cardPane;
+
+    //Child Data fields
     @FXML
     private Label name;
     @FXML
