@@ -23,5 +23,5 @@ public class FindUtil {
     // Find-by-ingredient utils
     public static final Function<Recipe, Collection<Ingredient>> GET_INGREDIENTS_FROM_RECIPE =
         Recipe::getIngredientList;
-    public static final Function<Ingredient, String> GET_INGREDIENT_STRING = ingredient -> ingredient.getNames();
+    public static final Function<Ingredient, String> GET_INGREDIENT_STRING = Ingredient::getNames;
 }

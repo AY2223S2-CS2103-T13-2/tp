@@ -73,10 +73,6 @@ public class RecipeTest {
         GRILLED_CHEESE.getDuration(), GRILLED_CHEESE.getTags(),
         GRILLED_CHEESE.getIngredients(), GRILLED_CHEESE.getSteps()).build();
 
-    private static final Recipe CACIO_TRAILING_SPACE = new RecipeBuilder(
-        new Name("Cacio e Pepe "), CACIO_E_PEPE.getPortion(),
-        CACIO_E_PEPE.getDuration(), CACIO_E_PEPE.getTags(),
-        CACIO_E_PEPE.getIngredients(), CACIO_E_PEPE.getSteps()).build();
 
     //Deep copying
     private static final Recipe CACIO_DEEP_COPY = new RecipeBuilder(
@@ -219,9 +215,6 @@ public class RecipeTest {
 
         // name differs in case, all other attributes same -> returns false
         assertFalse(GRILLED_CHEESE.isSameRecipe(GRILLED_CHEESE_DIFF_CASE));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        assertFalse(CACIO_E_PEPE.isSameRecipe(CACIO_TRAILING_SPACE));
     }
 
     @Test
@@ -264,10 +257,10 @@ public class RecipeTest {
     public void testHashCode() {
         HashMap<Ingredient, IngredientInformation> cacioIngredientTable = new HashMap<>();
         CACIO_INGREDIENTS.stream()
-                .map(IngredientBuilder::build)
-                .forEach(cacioIngredientTable::putAll);
+            .map(IngredientBuilder::build)
+            .forEach(cacioIngredientTable::putAll);
         int hash = Objects.hash(
-                CACIO_NAME, CACIO_PORTION, CACIO_DURATION, CACIO_TAGS, cacioIngredientTable, CACIO_STEPS);
+            CACIO_NAME, CACIO_PORTION, CACIO_DURATION, CACIO_TAGS, cacioIngredientTable, CACIO_STEPS);
         assertEquals(hash, CACIO_E_PEPE.hashCode());
     }
 

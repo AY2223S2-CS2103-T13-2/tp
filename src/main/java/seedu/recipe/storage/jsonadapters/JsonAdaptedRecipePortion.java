@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,7 +17,6 @@ import seedu.recipe.model.recipe.RecipePortion;
  */
 @JsonInclude(Include.NON_NULL)
 public class JsonAdaptedRecipePortion {
-
     private final int lowerRange;
 
     private final int upperRange;
@@ -29,6 +30,7 @@ public class JsonAdaptedRecipePortion {
     public JsonAdaptedRecipePortion(@JsonProperty("lowerRange") int lowerRange,
                                     @JsonProperty("upperRange") int upperRange,
                                     @JsonProperty("portionUnit") JsonAdaptedPortionUnit portionUnit) {
+        requireNonNull(portionUnit);
         this.lowerRange = lowerRange;
         this.upperRange = upperRange;
         this.portionUnit = portionUnit;
@@ -38,6 +40,7 @@ public class JsonAdaptedRecipePortion {
      * Converts a given {@code Name} into this class for Jackson use.
      */
     public JsonAdaptedRecipePortion(RecipePortion source) {
+        requireNonNull(source);
         this.lowerRange = source.getLowerRange();
         this.upperRange = source.getUpperRange();
         this.portionUnit = new JsonAdaptedPortionUnit(source.getPortionUnit());

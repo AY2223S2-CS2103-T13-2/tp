@@ -101,7 +101,11 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && recipeDescriptor.equals(e.recipeDescriptor);
+            && recipeDescriptor.equals(e.recipeDescriptor);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s|%s", index.getOneBased(), recipeDescriptor.toRecipe());
+    }
 }

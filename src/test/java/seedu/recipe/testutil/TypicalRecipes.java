@@ -7,6 +7,8 @@ import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.Recipe;
@@ -251,5 +253,21 @@ public class TypicalRecipes {
                 GRILLED_CHEESE,
                 MASALA_DOSA
         );
+    }
+
+    public static ObservableList<Recipe> getTypicalRecipesObservableList() {
+        ObservableList<Recipe> list = FXCollections.observableArrayList();
+        list.add(BLUEBERRY_PANCAKES);
+        list.add(CACIO_E_PEPE);
+        list.add(FISH_AND_CHIPS);
+        list.add(GRILLED_CHEESE);
+        list.add(MASALA_DOSA);
+        return list;
+    }
+
+    public static int getCacioHashCode() {
+        ObservableList<Recipe> list = FXCollections.observableArrayList();
+        list.add(CACIO_E_PEPE);
+        return list.hashCode();
     }
 }

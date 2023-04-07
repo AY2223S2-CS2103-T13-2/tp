@@ -28,6 +28,7 @@ import seedu.recipe.testutil.EditRecipeDescriptorBuilder;
 /**
  * Contains helper methods for testing commands.
  */
+//@@author alson001
 public class CommandTestUtil {
     public static final String VALID_NAME_CHICKEN = "Grilled Chicken";
     public static final String VALID_NAME_FISH = "Grilled Fish";
@@ -56,14 +57,10 @@ public class CommandTestUtil {
     public static final String STEP_DESC_FISH = " " + PREFIX_STEP + VALID_STEP_FISH;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Chicken&"; // '&' not allowed in names
-    public static final String INVALID_PORTION_DESC = " " + PREFIX_PORTION + "1 person"; // missing upper limit
-
-    public static final String INVALID_DURATION_DESC = " " + PREFIX_DURATION + "10"; // missing units
+    public static final String INVALID_PORTION_DESC = " " + PREFIX_PORTION + "-1 person"; // negative portion
+    public static final String INVALID_DURATION_DESC = " " + PREFIX_DURATION + "45"; // missing unit
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "Chinese*"; // '*' not allowed in tags
-
-    // number not allowed for ingredient
-    public static final String INVALID_INGREDIENT_DESC = " " + PREFIX_INGREDIENT + "2";
-    public static final String INVALID_STEP_DESC = " " + PREFIX_STEP + ""; // empty string not allowed for step
+    public static final String INVALID_STEP_DESC = " " + PREFIX_STEP + "***"; // special characters not allowed for step
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

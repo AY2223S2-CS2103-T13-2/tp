@@ -7,11 +7,11 @@ import seedu.recipe.model.recipe.exceptions.RecipeQuantityInvalidArgumentExcepti
  */
 public class IngredientQuantity {
     public static final String MESSAGE_CONSTRAINTS =
-            "The quantity field for a Recipe Ingredient should consist of this format: "
+        "The quantity field for a Recipe Ingredient should consist of this format: "
             + "`{amount} {unit}`, where the amount can either be a non-zero decimal, i.e. `A/a` or `One/one`, "
-            + "and the unit should comprise of alphabetic characters, with minimal use of "
+            + "\nand the unit should comprise of alphabetic characters, with minimal use of "
             + "trailing periods ('.') and hyphens."
-            + "i.e. `1 gram`, `1.5 L`, `A pinch of`, `One oz.`";
+            + "\ni.e. `1 gram`, `1.5 L`, `A pinch of`, `One oz.`";
 
     //"A", "a", "One", "one"
     private static final String ALPHA_AMOUNT_REGEX = "[aA]|[Oo]ne";
@@ -21,7 +21,7 @@ public class IngredientQuantity {
 
     //The above two, or a non-zero digit/decimal/fraction
     private static final String AMOUNT_REGEX = String.format(
-            "([1-9][0-9]*|[0-9]+[\\./][0-9]*[1-9]|%s|%s)", ALPHA_AMOUNT_REGEX, RANGE_REGEX);
+        "([1-9][0-9]*|[0-9]+[\\./][0-9]*[1-9]|%s|%s)", ALPHA_AMOUNT_REGEX, RANGE_REGEX);
 
     //The above patterns, followed by at least one group of whitespace separated alphabet groups
     private static final String VALIDATION_REGEX = String.format("^%s(\\s+[A-Za-z]+\\.?)*", AMOUNT_REGEX);
@@ -31,6 +31,7 @@ public class IngredientQuantity {
     /**
      * Instantiates an IngredientQuantity instance around
      * a String representing a valid Ingredient Quantity amount.
+     *
      * @param amount The String amount to be stored.
      */
     private IngredientQuantity(String amount) {
@@ -39,6 +40,7 @@ public class IngredientQuantity {
 
     /**
      * Tests and validates sample String patterns to check if they form valid Recipe Ingredient Quantities.
+     *
      * @param candidate The sample pattern String to test.
      * @return True if it is valid, False otherwise.
      */
@@ -67,6 +69,7 @@ public class IngredientQuantity {
      * Validates the String parameter candidate passed in as an argument,
      * and generates and returns a IngredientQuantity instance, if
      * it is valid.
+     *
      * @param candidate The string parameter to be checked.
      * @return The quantity instance.
      */

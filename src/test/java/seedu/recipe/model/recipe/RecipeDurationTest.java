@@ -1,96 +1,64 @@
 package seedu.recipe.model.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthException;
-import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
 import seedu.recipe.model.recipe.unit.TimeUnit;
 
 public class RecipeDurationTest {
-    private static final String VALID_SIMPLE = "1 hour";
-    private static final String VALID_PLURAL = "2 hours";
-    private static final String DECIMAL_PLURAL_END = "1.5 hours";
-    private static final String DECIMAL_LT_ONE = "0.005 hours";
-    private static final String VALID_DECIMAL = "10.000 hours";
-    private static final String SECONDS = "30 seconds";
-    private static final String MINUTES = "25 minutes";
-    private static final String DAY = "1 day";
+    private static final String VALID_INTEGER = "1 hour";
+    private static final String VALID_DECIMAL = "0.00012 years";
+    private static final String VALID_FRACTION = "13/213 days";
 
-    private static final String SINGLE_PLURAL_END = "1 hours";
-    private static final String INVALID_UNIT = "1 run";
-    private static final String INVALID_FRACTION = "1/2 hour";
-    private static final String NO_NUMBER = "hour";
-    private static final String ZERO_DECIMAL = "0.000 hours";
-    private static final String NO_WHITESPACE = "1hour";
-    private static final String LONG_DECIMAL = "1.0000 hours";
-    private static final String LONG_DECIMAL_2 = "2.0000 hours";
-    private static final String LARGE_NUM_2 = "2000 hours";
-    private static final String LARGE_NUM = "1000 hours";
-    private static final String NON_ONE_NON_PLURAL = "10 hour";
+    private static final String VALID_MULTIPLE_WHITESPACE_BETWEEN = "38.7        units";
+    private static final String VALID_MULTIPLE_WORDS_UNIT = "321/22 Word onE twO three";
 
-    //Future support is intended for this, but the recipe duration should be a fixed estimate.
-    private static final String RANGE_UNIT = "2 - 3 hours";
+    private static final String INVALID_NO_TIME = "years";
+    private static final String INVALID_NO_UNIT = "908.2098";
+    private static final String INVALID_DECIMAL_WHITESPACE = "0 . 1233 units";
+    private static final String INVALID_FRACTION_WHITESPACE = "1321 /   123     sample tesTing";
+
+    private static final String INVALID_INTEGER_NO_WHITESPACE = "1hour";
+    private static final String INVALID_DECIMAL_NO_WHITESPACE = "0.00012years";
+    private static final String INVALID_FRACTION_NO_WHITESPACE = "312/32891798timeunits";
+
+    private static final String INVALID_WHITESPACE_IN_UNIT = "321 example\ntime units";
+    private static final String INVALID_CHARACTERS_IN_UNIT = "213.10000 Cycles of_the Earth's Rotation";
 
     @Test
-    public void test_null_constructor() {
-        assertThrows(NullPointerException.class, () -> new RecipeDuration(0, null));
+    public void of_validInputs_recipeDurationCreated() {
+        assertEquals(RecipeDuration.of(VALID_INTEGER), new RecipeDuration(1, new TimeUnit("hour")));
+        assertEquals(RecipeDuration.of(VALID_DECIMAL), new RecipeDuration(0.00012, new TimeUnit("years")));
+        assertEquals(RecipeDuration.of(VALID_FRACTION), new RecipeDuration(((double) 13) / 213, new TimeUnit("days")));
+
+        assertEquals(RecipeDuration.of(VALID_MULTIPLE_WHITESPACE_BETWEEN),
+            new RecipeDuration(38.7, new TimeUnit("units")));
+        assertEquals(RecipeDuration.of(VALID_MULTIPLE_WORDS_UNIT),
+            new RecipeDuration(((double) 321) / 22, new TimeUnit("Word onE twO three")));
     }
 
     @Test
-    public void test_regex() {
-        assertFalse(RecipeDuration.isValidRecipeDuration(INVALID_UNIT));
-        assertFalse(RecipeDuration.isValidRecipeDuration(SINGLE_PLURAL_END));
-        assertFalse(RecipeDuration.isValidRecipeDuration(RANGE_UNIT));
-        assertFalse(RecipeDuration.isValidRecipeDuration(INVALID_FRACTION));
-        assertFalse(RecipeDuration.isValidRecipeDuration(NO_NUMBER));
-        assertFalse(RecipeDuration.isValidRecipeDuration(ZERO_DECIMAL));
-        assertFalse(RecipeDuration.isValidRecipeDuration(NO_WHITESPACE));
-        assertFalse(RecipeDuration.isValidRecipeDuration(LONG_DECIMAL));
-        assertFalse(RecipeDuration.isValidRecipeDuration(LONG_DECIMAL_2));
-        assertFalse(RecipeDuration.isValidRecipeDuration(LARGE_NUM));
-        assertFalse(RecipeDuration.isValidRecipeDuration(LARGE_NUM_2));
-        assertFalse(RecipeDuration.isValidRecipeDuration(NON_ONE_NON_PLURAL));
+    public void of_invalidInputs_exceptionThrown() {
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_NO_TIME));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_NO_UNIT));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_DECIMAL_WHITESPACE));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_FRACTION_WHITESPACE));
 
-        assertTrue(RecipeDuration.isValidRecipeDuration(VALID_DECIMAL));
-        assertTrue(RecipeDuration.isValidRecipeDuration(VALID_SIMPLE));
-        assertTrue(RecipeDuration.isValidRecipeDuration(VALID_PLURAL));
-        assertTrue(RecipeDuration.isValidRecipeDuration(DECIMAL_PLURAL_END));
-        assertTrue(RecipeDuration.isValidRecipeDuration(DECIMAL_LT_ONE));
-        assertTrue(RecipeDuration.isValidRecipeDuration(DAY));
-        assertTrue(RecipeDuration.isValidRecipeDuration(MINUTES));
-        assertTrue(RecipeDuration.isValidRecipeDuration(SECONDS));
-    }
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_INTEGER_NO_WHITESPACE));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_DECIMAL_NO_WHITESPACE));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_FRACTION_NO_WHITESPACE));
 
-    @Test
-    public void testWrongArgumentsConstructor() {
-        assertThrows(IllegalArgumentException.class, () -> new RecipeDuration(0.00, new TimeUnit("hour")));
-        assertThrows(IllegalArgumentException.class, () -> new RecipeDuration(-1.00, new TimeUnit("hour")));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_WHITESPACE_IN_UNIT));
+        assertThrows(IllegalArgumentException.class, () -> RecipeDuration.of(INVALID_CHARACTERS_IN_UNIT));
     }
 
     @Test
     public void test_toString() {
         assertEquals("1.0 hour", new RecipeDuration(1, new TimeUnit("hour")).toString());
-    }
-
-    @Test
-    public void testFactory() {
-        //Too few arguments
-        assertThrows(RecipeDurationInvalidArgumentLengthException.class, () -> RecipeDuration.of(NO_WHITESPACE));
-        //Too many arguments
-        assertThrows(
-            RecipeDurationInvalidArgumentLengthException.class, (
-            ) -> RecipeDuration.of("13 days in the winter"));
-        //Invalid duration
-        assertThrows(RecipeDurationInvalidDurationException.class, () -> RecipeDuration.of(INVALID_FRACTION));
-        assertEquals(RecipeDuration.of(VALID_PLURAL).toString(),
-                     new RecipeDuration(2, new TimeUnit("hours")).toString());
     }
 
     @Test

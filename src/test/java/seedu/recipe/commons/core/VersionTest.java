@@ -1,6 +1,7 @@
 package seedu.recipe.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
@@ -121,11 +122,14 @@ public class VersionTest {
 
         one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);
-        assertTrue(one.equals(another));
+        assertEquals(one, another);
 
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
-        assertTrue(one.equals(another));
+        assertEquals(one, another);
+
+        assertNotEquals(one, null); //null
+        assertNotEquals(one, ""); //type
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

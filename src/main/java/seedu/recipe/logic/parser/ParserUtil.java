@@ -1,21 +1,32 @@
 package seedu.recipe.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.recipe.commons.core.index.Index;
 import seedu.recipe.commons.util.StringUtil;
 import seedu.recipe.logic.parser.exceptions.ParseException;
+import seedu.recipe.logic.util.RecipeDescriptor;
 import seedu.recipe.model.recipe.Name;
 import seedu.recipe.model.recipe.RecipeDuration;
 import seedu.recipe.model.recipe.RecipePortion;
 import seedu.recipe.model.recipe.Step;
+import seedu.recipe.model.recipe.ingredient.Ingredient;
 import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.model.recipe.ingredient.IngredientInformation;
 import seedu.recipe.model.tag.Tag;
 
 /**
@@ -63,10 +74,12 @@ public class ParserUtil {
     public static RecipeDuration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);
         String trimmedDuration = duration.trim();
-        if (!RecipeDuration.isValidRecipeDuration(trimmedDuration)) {
-            throw new ParseException(RecipeDuration.MESSAGE_CONSTRAINTS);
+
+        try {
+            return RecipeDuration.of(trimmedDuration);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-        return RecipeDuration.of(trimmedDuration);
     }
 
     /**
@@ -78,10 +91,12 @@ public class ParserUtil {
     public static RecipePortion parsePortion(String portion) throws ParseException {
         requireNonNull(portion);
         String trimmedPortion = portion.trim();
-        if (!RecipePortion.isValidRecipePortion(trimmedPortion)) {
-            throw new ParseException(RecipePortion.MESSAGE_CONSTRAINTS);
+
+        try {
+            return RecipePortion.of(trimmedPortion);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-        return RecipePortion.of(trimmedPortion);
     }
 
     /**
@@ -90,13 +105,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static IngredientBuilder parseIngredient(String ingredient) throws ParseException {
+    public static HashMap<Ingredient, IngredientInformation> parseIngredient(String ingredient) throws ParseException {
         requireNonNull(ingredient);
         String trimmedIngredient = ingredient.trim();
         try {
-            return new IngredientBuilder(trimmedIngredient);
+            IngredientBuilder ingredientBuilder = new IngredientBuilder(trimmedIngredient);
+            return ingredientBuilder.build();
         } catch (IllegalArgumentException e) {
-            throw new ParseException(IngredientBuilder.MESSAGE_CONSTRAINTS);
+            throw new ParseException(e.getMessage());
         }
     }
 
@@ -106,13 +122,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static List<IngredientBuilder> parseIngredients(Collection<String> ingredients) throws ParseException {
+    public static HashMap<Ingredient, IngredientInformation> parseIngredients(
+        Collection<String> ingredients) throws ParseException {
         requireNonNull(ingredients);
-        List<IngredientBuilder> ingredientList = new ArrayList<>();
+        HashMap<Ingredient, IngredientInformation> ingredientMap = new HashMap<>();
         for (String ingredientName : ingredients) {
-            ingredientList.add(parseIngredient(ingredientName));
+            ingredientMap.putAll(parseIngredient(ingredientName));
         }
-        return ingredientList;
+        return ingredientMap;
     }
 
     /**
@@ -136,8 +153,12 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+
+        // ensure tags are non-empty
+        if (tags.size() != 1 || !tags.contains("")) {
+            for (String tagName : tags) {
+                tagSet.add(parseTag(tagName));
+            }
         }
         return tagSet;
     }
@@ -168,9 +189,73 @@ public class ParserUtil {
     public static List<Step> parseSteps(Collection<String> steps) throws ParseException {
         requireNonNull(steps);
         List<Step> stepList = new ArrayList<>();
-        for (String stepDescription : steps) {
-            stepList.add(parseStep(stepDescription));
+
+        // ensure steps are non-empty
+        if (steps.size() != 1 || !steps.contains("")) {
+            for (String stepDescription : steps) {
+                stepList.add(parseStep(stepDescription));
+            }
         }
         return stepList;
     }
+
+    /**
+     * Creates a RecipeDescriptor from a multimap of recipe arguments.
+     *
+     * @param argMultimap Multimap of recipe arguments.
+     * @return RecipeDescriptor created from given argument multimap.
+     * @throws ParseException Thrown when any argument is unable to be properly parsed.
+     */
+    public static RecipeDescriptor parseToRecipeDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        RecipeDescriptor recipeDescriptor = new RecipeDescriptor();
+
+        Optional<String> nameString = argMultimap.getValue(PREFIX_NAME);
+        if (nameString.isPresent()) {
+            Name name = parseName(nameString.get());
+            recipeDescriptor.setName(name);
+        }
+
+        Optional<String> durationString = argMultimap.getValue(PREFIX_DURATION);
+        if (durationString.isPresent()) {
+            RecipeDuration duration = null;
+            // handle the case where empty duration string is provided
+            // interpret this as: user wants to clear the duration field
+            if (!durationString.get().trim().isEmpty()) {
+                duration = parseDuration(durationString.get());
+            }
+            recipeDescriptor.setDuration(duration);
+            recipeDescriptor.setDurationChanged(true);
+        }
+
+        Optional<String> portionString = argMultimap.getValue(PREFIX_PORTION);
+        if (portionString.isPresent()) {
+            RecipePortion portion = null;
+            // handle the case where empty portion string is provided
+            // interpret this as: user wants to clear the portion field
+            if (!portionString.get().trim().isEmpty()) {
+                portion = parsePortion(portionString.get());
+            }
+            recipeDescriptor.setPortion(portion);
+            recipeDescriptor.setPortionChanged(true);
+        }
+
+        if (argMultimap.containsKey(PREFIX_TAG)) {
+            Set<Tag> tags = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            recipeDescriptor.setTags(tags);
+        }
+
+        if (argMultimap.containsKey(PREFIX_INGREDIENT)) {
+            HashMap<Ingredient, IngredientInformation> ingredientTable = ParserUtil.parseIngredients(
+                argMultimap.getAllValues(PREFIX_INGREDIENT));
+            recipeDescriptor.setIngredients(ingredientTable);
+        }
+
+        if (argMultimap.containsKey(PREFIX_STEP)) {
+            List<Step> steps = ParserUtil.parseSteps(argMultimap.getAllValues(PREFIX_STEP));
+            recipeDescriptor.setSteps(steps);
+        }
+
+        return recipeDescriptor;
+    }
+
 }

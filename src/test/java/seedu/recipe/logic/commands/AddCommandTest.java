@@ -1,22 +1,29 @@
 package seedu.recipe.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.recipe.logic.commands.CommandTestUtil.DESC_CHICKEN;
+import static seedu.recipe.logic.commands.CommandTestUtil.DESC_FISH;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.recipe.commons.core.GuiSettings;
+import seedu.recipe.logic.commands.exceptions.CommandException;
 import seedu.recipe.model.Model;
 import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.ReadOnlyUserPrefs;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.recipe.Recipe;
 
+//@@author alson001
 public class AddCommandTest {
 
     @Test
@@ -27,46 +34,43 @@ public class AddCommandTest {
     @Test
     public void execute_recipeAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingRecipeAdded modelStub = new ModelStubAcceptingRecipeAdded();
-        //  Recipe validRecipe = new RecipeBuilder().build();
-        //  CommandResult commandResult = new AddCommand(validRecipe).execute(modelStub);
-        //
-        //  assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validRecipe), commandResult.getFeedbackToUser());
-        //  assertEquals(Arrays.asList(validRecipe), modelStub.recipesAdded);
+        Recipe validRecipe = DESC_CHICKEN.toRecipe();
+        CommandResult commandResult = new AddCommand(DESC_CHICKEN).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validRecipe.getName()),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validRecipe), modelStub.recipesAdded);
     }
 
     @Test
     public void execute_duplicateRecipe_throwsCommandException() {
-        // Recipe validRecipe = new RecipeBuilder().build();
-        // AddCommand addCommand = new AddCommand(validRecipe);
-        // ModelStub modelStub = new ModelStubWithRecipe(validRecipe);
-        // assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
-        // () -> addCommand.execute(modelStub));
+        AddCommand addCommand = new AddCommand(DESC_FISH);
+        ModelStub modelStub = new ModelStubWithRecipe(DESC_FISH.toRecipe());
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_RECIPE, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        // Recipe alice = new RecipeBuilder().withName("Alice").build();
-        // Recipe bob = new RecipeBuilder().withName("Bob").build();
-        // AddCommand addAliceCommand = new AddCommand(alice);
-        // AddCommand addBobCommand = new AddCommand(bob);
+        AddCommand addChickenCommand = new AddCommand(DESC_CHICKEN);
+        AddCommand addFishCommand = new AddCommand(DESC_FISH);
 
         // same object -> returns true
-        // assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addChickenCommand, addChickenCommand);
         // same values -> returns true
-        // AddCommand addAliceCommandCopy = new AddCommand(alice);
-        // assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addChickenCommandCopy = new AddCommand(DESC_CHICKEN);
+        assertEquals(addChickenCommand, addChickenCommandCopy);
         // different types -> returns false
-        // assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addChickenCommand);
         // null -> returns false
-        // assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addChickenCommand);
         // different recipe -> returns false
-        // assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addChickenCommand, addFishCommand);
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that causes failures with all its methods.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -141,7 +145,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single recipe.
      */
-    private class ModelStubWithRecipe extends ModelStub {
+    private static class ModelStubWithRecipe extends ModelStub {
         private final Recipe recipe;
 
         ModelStubWithRecipe(Recipe recipe) {
@@ -159,7 +163,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the recipe being added.
      */
-    private class ModelStubAcceptingRecipeAdded extends ModelStub {
+    private static class ModelStubAcceptingRecipeAdded extends ModelStub {
         final ArrayList<Recipe> recipesAdded = new ArrayList<>();
 
         @Override

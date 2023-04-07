@@ -1,4 +1,4 @@
-package seedu.recipe.storage;
+package seedu.recipe.storage.filemanagers;
 
 import static seedu.recipe.logic.commands.ImportCommand.EMPTY_COMMAND;
 import static seedu.recipe.logic.commands.ImportCommand.INVALID_VALUES;
@@ -6,10 +6,7 @@ import static seedu.recipe.logic.commands.ImportCommand.NOT_JSON_FILE;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -19,17 +16,24 @@ import javafx.stage.Stage;
 import seedu.recipe.commons.core.LogsCenter;
 import seedu.recipe.commons.exceptions.DataConversionException;
 import seedu.recipe.commons.exceptions.IllegalValueException;
+import seedu.recipe.logic.parser.CliSyntax;
 import seedu.recipe.model.ReadOnlyRecipeBook;
 import seedu.recipe.model.recipe.Recipe;
-import seedu.recipe.model.recipe.Step;
-import seedu.recipe.model.recipe.ingredient.Ingredient;
-import seedu.recipe.model.recipe.ingredient.IngredientInformation;
-import seedu.recipe.model.tag.Tag;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
+import seedu.recipe.storage.JsonRecipeBookStorage;
 
+//@@author alson001
 /**
  * API to import a RecipeBook from other directories
  */
 public class ImportManager {
+    //Model Prefixes
+    private static final String NAME_PREFIX = CliSyntax.PREFIX_NAME.getPrefix();
+    private static final String DURATION_PREFIX = CliSyntax.PREFIX_DURATION.getPrefix();
+    private static final String PORTION_PREFIX = CliSyntax.PREFIX_PORTION.getPrefix();
+    private static final String TAG_PREFIX = CliSyntax.PREFIX_TAG.getPrefix();
+    private static final String INGREDIENT_PREFIX = CliSyntax.PREFIX_INGREDIENT.getPrefix();
+    private static final String STEP_PREFIX = CliSyntax.PREFIX_STEP.getPrefix();
 
     private final Stage owner;
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -124,68 +128,36 @@ public class ImportManager {
      *
      * @param recipe The Recipe object to convert to a command string.
      * @return A string representation of the Recipe object in the format of a command string to add the recipe to the
-     *     RecipeBook.
+ *             RecipeBook.
      */
     public String getCommandText(Recipe recipe) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(" n/");
+        stringBuilder.append(" ").append(NAME_PREFIX);
         stringBuilder.append(recipe.getName().toString());
 
         if (recipe.getDurationNullable() != null) {
-            stringBuilder.append(" d/");
+            stringBuilder.append(" ").append(DURATION_PREFIX);
             stringBuilder.append(recipe.getDuration().toString());
         }
 
         if (recipe.getPortionNullable() != null) {
-            stringBuilder.append(" p/");
+            stringBuilder.append(" ").append(PORTION_PREFIX);
             stringBuilder.append(recipe.getPortion().toString());
         }
 
-        if (!recipe.getTags().isEmpty()) {
-            Set<Tag> tags = recipe.getTags();
-            for (Tag tag : tags) {
-                stringBuilder.append(" t/");
-                stringBuilder.append(tag.getTagName());
-            }
-        }
+        //Tags
+        recipe.getTags().forEach(tag ->
+            stringBuilder.append(" ").append(TAG_PREFIX).append(tag.getTagName()));
 
-        if (!recipe.getIngredients().isEmpty()) {
-            HashMap<Ingredient, IngredientInformation> ingredientTable = recipe.getIngredients();
-            ingredientTable.forEach((ingredient, ingredientInfomation) -> {
-                stringBuilder.append(" i/");
-                stringBuilder.append(" -n " + ingredient.getName());
-                if (!ingredient.getCommonName().isEmpty()) {
-                    stringBuilder.append(" -cn " + ingredient.getCommonName());
-                }
-                if (ingredientInfomation.getQuantity().isPresent()) {
-                    stringBuilder.append(" -a " + ingredientInfomation.getQuantity().get().toString());
-                }
-                if (ingredientInfomation.getEstimatedQuantity().isPresent()) {
-                    stringBuilder.append(" -e " + ingredientInfomation.getEstimatedQuantity().get().toString());
-                }
-                if (!ingredientInfomation.getRemarks().isEmpty()) {
-                    List<String> remarks = ingredientInfomation.getRemarks();
-                    for (String remark : remarks) {
-                        stringBuilder.append(" -r " + remark);
-                    }
-                }
-                if (!ingredientInfomation.getSubstitutions().isEmpty()) {
-                    List<Ingredient> substitutions = ingredientInfomation.getSubstitutions();
-                    for (Ingredient substitution : substitutions) {
-                        stringBuilder.append(" -s " + substitution.getName());
-                    }
-                }
-            });
-        }
+        //Ingredients
+        recipe.getIngredients().forEach((ingredient, information) ->
+                stringBuilder.append(" ").append(INGREDIENT_PREFIX)
+                        .append(new IngredientBuilder(ingredient, information)));
+        //Steps
+        recipe.getSteps().forEach(step ->
+                stringBuilder.append(" ").append(STEP_PREFIX).append(step));
 
-        if (!recipe.getSteps().isEmpty()) {
-            List<Step> steps = recipe.getSteps();
-            for (Step step : steps) {
-                stringBuilder.append(" s/");
-                stringBuilder.append(step.toString());
-            }
-        }
         return stringBuilder.toString();
     }
 }

@@ -26,7 +26,6 @@ import seedu.recipe.model.recipe.ingredient.IngredientInformation;
  * Ingredient name matching is case-insensitive.
  */
 public class SubCommand extends Command {
-
     public static final String COMMAND_WORD = "sub";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches across RecipeBook for substitutions for the "
@@ -57,16 +56,11 @@ public class SubCommand extends Command {
             subList.addAll(rInfo.getSubstitutions());
         }
 
-        // query all recipes in the current recipe book
-        for (Recipe r : recipeObservableList) {
-            HashMap<Ingredient, IngredientInformation> tokens = r.getIngredients();
-            // if recipe contains queried ingredient
-            if (tokens.containsKey(queryIngredient)) {
-                //inquire for subs
-                IngredientInformation rInfo = tokens.get(queryIngredient);
-                subList.addAll(rInfo.getSubstitutions());
-            }
-        }
+        recipeObservableList.stream()
+            .map(Recipe::getIngredients)
+            .filter(tokens -> tokens.containsKey(queryIngredient))
+            .map(tokens -> tokens.get(queryIngredient))
+            .forEach(ingredientInfo -> subList.addAll(ingredientInfo.getSubstitutions()));
 
         if (subList.isEmpty()) {
             return new CommandResult((MESSAGE_NO_STORED_SUBS));
@@ -75,7 +69,7 @@ public class SubCommand extends Command {
         String formattedSubList = subList.toString().substring(1, subList.toString().length() - 1);
 
         return new CommandResult(String.format(MESSAGE_DISPLAY_STORED_SUBS, queryIngredient,
-                formattedSubList));
+            formattedSubList));
     }
 
 

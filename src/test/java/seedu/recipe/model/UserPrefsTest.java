@@ -4,7 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.recipe.testutil.Assert.assertThrows;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Objects;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.recipe.commons.core.GuiSettings;
 
 public class UserPrefsTest {
 
@@ -27,5 +33,14 @@ public class UserPrefsTest {
         assertEquals(userPrefs, userPrefs);
         //Different type
         assertNotEquals(userPrefs, "Hello");
+    }
+
+    @Test
+    public void hashcode() {
+        UserPrefs userPref = new UserPrefs();
+        GuiSettings guiSettings = new GuiSettings();
+        Path filePath = Paths.get("data", "recipebook.json");
+        int expected = Objects.hash(guiSettings, filePath);
+        assertEquals(expected, userPref.hashCode());
     }
 }

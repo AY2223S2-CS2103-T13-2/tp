@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,7 +15,6 @@ import seedu.recipe.model.recipe.Name;
  */
 @JsonInclude(Include.NON_NULL)
 public class JsonAdaptedName {
-
     private final String name;
 
     /**
@@ -21,6 +22,7 @@ public class JsonAdaptedName {
      */
     @JsonCreator
     public JsonAdaptedName(String name) {
+        requireNonNull(name);
         this.name = name;
     }
 
@@ -28,6 +30,7 @@ public class JsonAdaptedName {
      * Converts a given {@code Name} into this class for Jackson use.
      */
     public JsonAdaptedName(Name source) {
+        requireNonNull(source);
         name = source.toString();
     }
 

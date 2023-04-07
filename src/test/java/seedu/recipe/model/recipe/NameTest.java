@@ -38,10 +38,10 @@ public class NameTest {
         assertFalse(Name.isValidName(WHITESPACE));
         assertFalse(Name.isValidName(NON_VALID_CHAR_SOLO));
         assertFalse(Name.isValidName(NON_VALID_CHAR));
-        assertFalse(Name.isValidName(NUMBER_ONLY));
-        assertFalse(Name.isValidName(HYPHEN_ONLY));
 
         // valid name
+        assertTrue(Name.isValidName(NUMBER_ONLY));
+        assertTrue(Name.isValidName(HYPHEN_ONLY));
         assertTrue(Name.isValidName(ONE_TOKEN_ALPHA));
         assertTrue(Name.isValidName(MULTI_TOKEN_ALPHA));
         assertTrue(Name.isValidName(SINGLE_NUMBER_LEADING));

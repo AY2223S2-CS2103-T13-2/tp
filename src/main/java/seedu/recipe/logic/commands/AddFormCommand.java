@@ -55,7 +55,7 @@ public class AddFormCommand extends Command {
             model.addRecipe(recipeToAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, recipeToAdd.getName()));
         } catch (ParseException e) {
-            throw new CommandException(MESSAGE_PARSE_RECIPE);
+            throw new CommandException(e.getMessage());
         }
     }
 }

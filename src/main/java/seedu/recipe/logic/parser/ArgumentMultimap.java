@@ -14,7 +14,6 @@ import java.util.Optional;
  * can be inserted multiple times for the same prefix.
  */
 public class ArgumentMultimap {
-
     /**
      * Prefixes mapped to their respective arguments
      **/
@@ -51,6 +50,16 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.get(prefix));
+    }
+
+    /**
+     * Checks if the given {@code prefix} exists in this ArgumentMultimap.
+     *
+     * @param prefix Prefix to check.
+     * @return Whether the given prefix exists.
+     */
+    public boolean containsKey(Prefix prefix) {
+        return argMultimap.containsKey(prefix);
     }
 
     /**

@@ -1,20 +1,21 @@
 package seedu.recipe.testutil;
 
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_INGREDIENT;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_PORTION;
+import static seedu.recipe.logic.parser.CliSyntax.PREFIX_STEP;
 import static seedu.recipe.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
 
 import seedu.recipe.logic.commands.AddCommand;
 import seedu.recipe.logic.util.RecipeDescriptor;
 import seedu.recipe.model.recipe.Recipe;
-import seedu.recipe.model.tag.Tag;
+import seedu.recipe.model.recipe.ingredient.IngredientBuilder;
 
 /**
  * A utility class for Recipe.
  */
 public class RecipeUtil {
-
     /**
      * Returns an add command string for adding the {@code recipe}.
      */
@@ -27,11 +28,27 @@ public class RecipeUtil {
      */
     public static String getRecipeDetails(Recipe recipe) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + recipe.getName().recipeName + " ");
-        // sb.append(PREFIX_PHONE + recipe.getIngredient().value + " ");
-        // sb.append(PREFIX_EMAIL + recipe.getEmail().value + " ");
-        // sb.append(PREFIX_ADDRESS + recipe.getAddress().value + " ");
-        recipe.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        sb.append(PREFIX_NAME).append(recipe.getName().recipeName).append(" ");
+
+        if (recipe.getDurationNullable() != null) {
+            sb.append(PREFIX_DURATION).append(recipe.getDuration()).append(" ");
+        }
+
+        if (recipe.getPortionNullable() != null) {
+            sb.append(PREFIX_PORTION).append(recipe.getPortion()).append(" ");
+        }
+
+        recipe.getTags()
+            .forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+
+        recipe.getIngredients().forEach(((ingredient, information) ->
+            sb.append(PREFIX_INGREDIENT)
+                .append(new IngredientBuilder(ingredient, information))
+                .append(" "))
+        );
+
+        recipe.getSteps().forEach(step -> sb.append(PREFIX_STEP).append(step).append(" "));
+
         return sb.toString();
     }
 
@@ -41,17 +58,21 @@ public class RecipeUtil {
     public static String getEditRecipeDescriptorDetails(RecipeDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.recipeName).append(" "));
-        // descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
-        // descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        // descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
+        descriptor.getDuration().ifPresent(duration -> sb.append(PREFIX_DURATION).append(duration).append(" "));
+        descriptor.getPortion().ifPresent(portion -> sb.append(PREFIX_PORTION).append(portion).append(" "));
+        descriptor.getTags().ifPresent(tags ->
+            tags.forEach(tag -> sb.append(PREFIX_TAG).append(tag).append(" "))
+        );
+        descriptor.getIngredients().ifPresent(ingredientMap ->
+            ingredientMap.forEach((ingredient, information) ->
+                sb.append(PREFIX_INGREDIENT)
+                    .append(new IngredientBuilder(ingredient, information))
+                    .append(" ")
+            )
+        );
+        descriptor.getSteps().ifPresent(steps ->
+            steps.forEach(step -> sb.append(PREFIX_STEP).append(step).append(" "))
+        );
         return sb.toString();
     }
 }

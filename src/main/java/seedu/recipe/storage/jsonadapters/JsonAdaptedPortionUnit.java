@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,7 +15,6 @@ import seedu.recipe.model.recipe.unit.PortionUnit;
  */
 @JsonInclude(Include.NON_NULL)
 public class JsonAdaptedPortionUnit {
-
     private final String unit;
 
     /**
@@ -21,6 +22,7 @@ public class JsonAdaptedPortionUnit {
      */
     @JsonCreator
     public JsonAdaptedPortionUnit(String unit) {
+        requireNonNull(unit);
         this.unit = unit;
     }
 
@@ -28,6 +30,7 @@ public class JsonAdaptedPortionUnit {
      * Converts a given {@code PortionUnit} into this class for Jackson use.
      */
     public JsonAdaptedPortionUnit(PortionUnit source) {
+        requireNonNull(source);
         unit = source.getUnit();
     }
 

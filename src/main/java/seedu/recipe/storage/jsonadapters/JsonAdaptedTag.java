@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,7 +15,6 @@ import seedu.recipe.model.tag.Tag;
  */
 @JsonInclude(Include.NON_NULL)
 public class JsonAdaptedTag {
-
     private final String tagName;
 
     /**
@@ -21,6 +22,7 @@ public class JsonAdaptedTag {
      */
     @JsonCreator
     public JsonAdaptedTag(String tagName) {
+        requireNonNull(tagName);
         this.tagName = tagName;
     }
 
@@ -28,6 +30,7 @@ public class JsonAdaptedTag {
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedTag(Tag source) {
+        requireNonNull(source);
         tagName = source.tagName;
     }
 

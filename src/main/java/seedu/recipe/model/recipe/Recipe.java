@@ -54,20 +54,19 @@ public class Recipe {
         return ingredientTable;
     }
 
-    public Set<Ingredient> getIngredientList() {
-        return ingredientTable.keySet();
-    }
-
     public void setIngredients(IngredientBuilder... ingredients) {
-        for (IngredientBuilder ingredientBuilder: ingredients) {
+        for (IngredientBuilder ingredientBuilder : ingredients) {
             ingredientTable.putAll(
-                ingredientBuilder.build()
-            );
+                ingredientBuilder.build());
         }
     }
 
     public void setIngredients(Map<? extends Ingredient, ? extends IngredientInformation> ingredientMap) {
         this.ingredientTable.putAll(ingredientMap);
+    }
+
+    public Set<Ingredient> getIngredientList() {
+        return ingredientTable.keySet();
     }
 
     public RecipePortion getPortion() {
@@ -130,7 +129,7 @@ public class Recipe {
         }
 
         return otherRecipe != null
-                && otherRecipe.getName().equals(getName());
+            && otherRecipe.getName().equals(getName());
     }
 
     /**
@@ -149,11 +148,11 @@ public class Recipe {
 
         Recipe otherRecipe = (Recipe) other;
         return otherRecipe.getName().equals(getName())
-                && otherRecipe.getPortion().equals(getPortion())
-                && otherRecipe.getDuration().equals(getDuration())
-                && otherRecipe.getTags().equals(getTags())
-                && otherRecipe.getIngredients().equals(getIngredients())
-                && otherRecipe.getSteps().equals(getSteps());
+            && otherRecipe.portion.equals(portion)
+            && otherRecipe.duration.equals(duration)
+            && otherRecipe.getTags().equals(getTags())
+            && otherRecipe.getIngredients().equals(getIngredients())
+            && otherRecipe.getSteps().equals(getSteps());
     }
 
     @Override

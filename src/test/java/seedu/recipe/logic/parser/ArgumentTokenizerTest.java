@@ -2,13 +2,11 @@ package seedu.recipe.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
-
     private final Prefix unknownPrefix = new Prefix("--u");
     private final Prefix pSlash = new Prefix("p/");
     private final Prefix dashT = new Prefix("-t");
@@ -135,16 +133,4 @@ public class ArgumentTokenizerTest {
         assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
     }
-
-    @Test
-    public void equalsMethod() {
-        Prefix aaa = new Prefix("aaa");
-
-        assertEquals(aaa, aaa);
-        assertEquals(aaa, new Prefix("aaa"));
-
-        assertNotEquals(aaa, "aaa");
-        assertNotEquals(aaa, new Prefix("aab"));
-    }
-
 }

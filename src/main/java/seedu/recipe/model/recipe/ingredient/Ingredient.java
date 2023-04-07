@@ -8,8 +8,9 @@ import java.util.Objects;
  * Represents an ingredient that is used in a {@code Recipe}.
  */
 public class Ingredient implements Comparable<Ingredient> {
-    public static final String MESSAGE_CONSTRAINTS = "An ingredient should be made up of one or more groups of "
-        + "whitespace separated alphabetic characters. These characters may also be separated by "
+    public static final String MESSAGE_CONSTRAINTS = "Invalid ingredient name: %s\n"
+        + "An ingredient should be made up of one or more groups of "
+        + "whitespace separated alphabetic characters. \nThese characters may also be separated by "
         + "singular hyphens, such as 'self-raising flour'.";
     private static final String WORD_GROUP = "[A-Za-z]+(\\-[A-Za-z]+)?";
     public static final String VALIDATION_REGEX = String.format("^%s(\\s+%s)*$", WORD_GROUP, WORD_GROUP);
@@ -31,7 +32,8 @@ public class Ingredient implements Comparable<Ingredient> {
      */
     public static Ingredient of(String s) {
         assert s != null;
-        checkArgument(isValidIngredientName(s), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidIngredientName(s),
+            String.format(MESSAGE_CONSTRAINTS, s));
         return new Ingredient(s);
     }
 
@@ -88,7 +90,7 @@ public class Ingredient implements Comparable<Ingredient> {
      */
     public void setCommonName(String s) {
         assert s != null;
-        checkArgument(isValidIngredientName(s), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidIngredientName(s), String.format(MESSAGE_CONSTRAINTS, s));
         this.commonName = s;
     }
 

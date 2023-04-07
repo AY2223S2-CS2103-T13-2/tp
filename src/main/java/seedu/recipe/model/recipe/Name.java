@@ -9,14 +9,12 @@ import static seedu.recipe.commons.util.AppUtil.checkArgument;
  */
 public class Name {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+        "Names should only contain alphanumeric characters, spaces, and the following special characters: \' \" -\n"
+            + "Names cannot be blank.";
 
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX =
-            "^(([1-9][0-9]?(\\-)?\\s*)?[A-Za-z]+)(\\-[A-Za-z]+)?(\\s+[A-Za-z0-9\\-]*)*$";
+    // syntax: any combination of alphanumeric characters and
+    // the following special characters: " ' -
+    public static final String VALIDATION_REGEX = "[A-Za-z0-9\\-'\"](?: *[A-Za-z0-9\\-'\"]+)*";
 
     public final String recipeName;
 
@@ -47,8 +45,8 @@ public class Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && recipeName.equals(((Name) other).recipeName)); // state check
+            || (other instanceof Name // instanceof handles nulls
+            && recipeName.equals(((Name) other).recipeName)); // state check
     }
 
     @Override

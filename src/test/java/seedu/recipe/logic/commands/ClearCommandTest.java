@@ -10,6 +10,7 @@ import seedu.recipe.model.ModelManager;
 import seedu.recipe.model.RecipeBook;
 import seedu.recipe.model.UserPrefs;
 
+//@@author alson001
 public class ClearCommandTest {
 
     @Test

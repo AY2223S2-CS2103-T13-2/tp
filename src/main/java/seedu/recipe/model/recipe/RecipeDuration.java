@@ -1,8 +1,8 @@
 package seedu.recipe.model.recipe;
 
-import static seedu.recipe.commons.util.AppUtil.checkArgument;
-
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidArgumentLengthException;
 import seedu.recipe.model.recipe.exceptions.RecipeDurationInvalidDurationException;
@@ -13,10 +13,11 @@ import seedu.recipe.model.recipe.unit.TimeUnit;
  */
 public class RecipeDuration {
     public static final String MESSAGE_CONSTRAINTS =
-            "A Recipe Duration should consist of a numeric/decimal section and an alphanumeric time unit";
-    private static final String VALIDATION_REGEX =
-            "^(([2-9]\\d{0,2}|1\\d{1,2})(\\.\\d{1,3})?|[01]\\.\\d{0,2}[1-9])\\s+((hour|minute|second|day)s|min|h)$|"
-                    + "^(1|1.0)\\s+(hour|minute|day|second|min|h)$";
+        "A Recipe's duration should consist of an integer/fraction/decimal section and an alphabetic time unit "
+        + "(spaces allowed)";
+
+    // format: {number} {unit} OR {number}{. or /}{number} {unit}
+    private static final Pattern VALIDATION_REGEX = Pattern.compile("((\\d+)(?:([.\\/])(\\d+))?)\\s+([A-Za-z ]+)");
 
     private final double time;
     private final TimeUnit timeUnit;
@@ -28,38 +29,46 @@ public class RecipeDuration {
      * @param timeUnit The time unit instance
      */
     public RecipeDuration(double time, TimeUnit timeUnit) {
-        checkArgument(isValidRecipeDuration(String.format("%s %s", time, timeUnit.toString())), MESSAGE_CONSTRAINTS);
+        if (time < 0) {
+            throw new RecipeDurationInvalidDurationException(String.valueOf(time));
+        }
         this.time = time;
         this.timeUnit = timeUnit;
     }
 
     /**
-     * Returns whether a given String is a valid RecipeDuration.
-     *
-     * @param test the string to test.
-     * @return true if the String is a valid RecipeDuration in accordance to the regex, false otherwise.
-     */
-    public static boolean isValidRecipeDuration(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
-
-    /**
      * Generates an instance of a RecipeDuration Object, provided the parameter string is formatted correctly.
      *
-     * @param duration The parameter string to input the time and unit into this factory.
+     * @param candidate The parameter string to input the time and unit into this factory.
      * @return The generated RecipeDuration instance, if the parameter is valid.
      */
-    public static RecipeDuration of(String duration) {
-        String[] tokens = duration.split("\\s+");
-        if (tokens.length != 2) {
+    public static RecipeDuration of(String candidate) {
+        Matcher matcher = VALIDATION_REGEX.matcher(candidate);
+
+        if (!matcher.matches()) {
             throw new RecipeDurationInvalidArgumentLengthException();
         }
-        if (!isValidRecipeDuration(duration)) {
-            throw new RecipeDurationInvalidDurationException(duration);
+
+        // 5 capture groups in the regex, so if the candidate string matches,
+        // there should be 5 groups captured!
+        assert matcher.groupCount() == 5;
+
+        // parse time amount
+        double time;
+        if (matcher.group(3) != null && matcher.group(3).equals("/")) {
+            // parse fractions
+            double group1 = Double.parseDouble((matcher.group(2)));
+            double group2 = Double.parseDouble((matcher.group(4)));
+            time = group1 / group2;
+        } else {
+            // parse integers or decimals
+            time = Double.parseDouble(matcher.group(1));
         }
-        //No format exception will occur, thanks to regex
-        double timeAmount = Double.parseDouble(tokens[0]);
-        return new RecipeDuration(timeAmount, new TimeUnit(tokens[1]));
+
+        // parse time unit
+        String unitString = matcher.group(5);
+
+        return new RecipeDuration(time, new TimeUnit(unitString));
     }
 
     @Override
@@ -83,8 +92,8 @@ public class RecipeDuration {
     @Override
     public boolean equals(Object o) {
         return o == this
-                || o instanceof RecipeDuration
-                && ((RecipeDuration) o).time == this.time
-                && ((RecipeDuration) o).timeUnit.equals(this.timeUnit);
+            || o instanceof RecipeDuration
+            && ((RecipeDuration) o).time == this.time
+            && ((RecipeDuration) o).timeUnit.equals(this.timeUnit);
     }
 }

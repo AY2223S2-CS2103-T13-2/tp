@@ -11,13 +11,15 @@ import org.junit.jupiter.api.Test;
 public class IngredientBuilderTest {
     private static final String VALID_INTEGER = "-a 1 -n watermelon";
     private static final String VALID_DECIMAL = "-a 13.5 g -n molasses extract";
-    private static final String VALID_INTEGER_CONCAT_UNIT = "-a 300g -n rice -r washed";
-    private static final String VALID_DECIMAL_CONCAT_UNIT = "-a 10.35oz. -n powder -s flour";
+    private static final String VALID_INTEGER_CONCAT_UNIT = "-a 300 g -n rice -r washed -s noodle";
+    private static final String VALID_DECIMAL_CONCAT_UNIT = "-a 10.35 oz. -n powder -s flour";
     private static final String VALID_ALPHA = "-n butter";
     private static final String TRAILING_WHITESPACE = "watermelon juice ";
     private static final String WHITESPACE = "  ";
     private static final String LEADING_WHITESPACE = " juice of 1 carrot ";
     private static final String SLASH_UNIT = "-a 1/3 cup -n milk";
+    private static final String COMMAND_STRING_SAMPLE = "-a 300 g -e 1 scoop -n polished rice "
+            + "-cn rice -r washed -s noodle ";
 
     @Test
     public void null_name() {
@@ -32,7 +34,16 @@ public class IngredientBuilderTest {
     }
 
     @Test
-    public void test_toString() {
+    public void overloadedConstructor() {
+        Ingredient polishedRice = Ingredient.of("polished rice");
+        polishedRice.setCommonName("rice");
+        assertEquals(COMMAND_STRING_SAMPLE, new IngredientBuilder(polishedRice,
+            new IngredientInformation(IngredientQuantity.of("300 g"), "1 scoop", new String[]{"washed"},
+                new Ingredient[]{Ingredient.of("noodle")})).toString());
+    }
+
+    @Test
+    public void toString_validIngredientBuilder() {
         assertEquals(VALID_INTEGER_CONCAT_UNIT, new IngredientBuilder(VALID_INTEGER_CONCAT_UNIT).toString());
     }
 

@@ -1,4 +1,6 @@
-package seedu.recipe.storage;
+package seedu.recipe.storage.filemanagers;
+
+import static seedu.recipe.commons.util.AppUtil.checkArgument;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,24 +11,34 @@ import java.nio.file.Path;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import seedu.recipe.logic.Logic;
+import seedu.recipe.logic.commands.exceptions.CommandException;
+import seedu.recipe.model.ReadOnlyRecipeBook;
+import seedu.recipe.storage.JsonRecipeBookStorage;
 
+//@@author alson001
 /**
  * API to export current RecipeBook
  */
 public class ExportManager {
+    public static final String NULL_LOGIC = "Please provide a non-null Logic instance";
+    public static final String NO_SELECTION = "Export operation cancelled.";
 
     private final Path recipeBookFilePath;
     private final Stage owner;
+    private final Logic logic;
 
     /**
      * Creates an instance of the ExportManager that is responsible for exporting the RecipeBook to a JSON file.
      *
      * @param owner the owner stage of MainWindow
-     * @param recipeBookFilePath the file path to the RecipeBook to be exported.
+     * @param logic The Logic that helps to derive the current Recipe Book path for the export operation.
      */
-    public ExportManager(Stage owner, Path recipeBookFilePath) {
+    public ExportManager(Stage owner, Logic logic) {
+        checkArgument(logic != null, NULL_LOGIC);
         this.owner = owner;
-        this.recipeBookFilePath = recipeBookFilePath;
+        this.logic = logic;
+        this.recipeBookFilePath = logic.getRecipeBookFilePath();
     }
 
     /**
@@ -35,11 +47,13 @@ public class ExportManager {
      *
      * @throws IOException if there is an error while writing to the file.
      */
-    public void execute() throws IOException {
+    public void execute() throws IOException, CommandException {
         FileChooser fileChooser = createFile();
         File selectedFile = fileChooser.showSaveDialog(this.owner);
         if (selectedFile != null) {
             writeToFile(selectedFile);
+        } else {
+            throw new CommandException(NO_SELECTION);
         }
     }
 
@@ -57,12 +71,17 @@ public class ExportManager {
     }
 
     /**
-     * Writes the contents of the RecipeBook JSON file to the selected file.
+     * Writes the contents of the RecipeBook JSON file to the selected file. If the RecipeBook file path does not exist,
+     * a different method is used to write the file by using the Logic instance
      *
      * @param selectedFile the selected file to write to.
      * @throws IOException if there is an error while writing to the file.
      */
-    private void writeToFile(File selectedFile) throws IOException {
+    protected void writeToFile(File selectedFile) throws IOException {
+        if (!recipeBookFilePath.toFile().exists()) {
+            writeToFileUsingLogic(selectedFile);
+            return;
+        }
         FileReader fr = new FileReader(recipeBookFilePath.toFile());
         FileWriter fw = new FileWriter(selectedFile);
         try (BufferedReader reader = new BufferedReader(fr)) {
@@ -75,4 +94,18 @@ public class ExportManager {
         fr.close();
         fw.close();
     }
+
+    /**
+     * Writes the contents of the RecipeBook using the Logic instance of RecipeBook. The contents of the RecipeBook are
+     * retrieved using the Logic instance and saved to the selected file as a JSON file.
+     *
+     * @param selectedFile the selected file to write to.
+     * @throws IOException if there is an error while writing to the file.
+     */
+    public void writeToFileUsingLogic(File selectedFile) throws IOException {
+        ReadOnlyRecipeBook recipeBook = logic.getRecipeBook();
+        JsonRecipeBookStorage jsonRecipeBookStorage = new JsonRecipeBookStorage(selectedFile.toPath());
+        jsonRecipeBookStorage.saveRecipeBook(recipeBook);
+    }
+
 }

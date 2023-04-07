@@ -1,11 +1,15 @@
 package seedu.recipe.model.recipe.unit;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recipe.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the unit of measurement for different data stored by a Recipe in RecipeBook.
  */
 public abstract class Unit {
+    public static final String MESSAGE_CONSTRAINTS = "A Unit should be made up of one or more groups of whitespace "
+        + "separated alphabetic characters. '%s' does not fit this format.";
+    private static final String VALIDATION_REGEX = "^[a-zA-Z]+(\\s+[a-zA-Z]+)*$";
     public final String unit;
 
     /**
@@ -15,6 +19,7 @@ public abstract class Unit {
      */
     public Unit(String unit) {
         requireNonNull(unit);
+        checkArgument(unit.matches(VALIDATION_REGEX), String.format(MESSAGE_CONSTRAINTS, unit));
         this.unit = unit;
     }
 

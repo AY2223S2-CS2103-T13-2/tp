@@ -27,7 +27,12 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs and generates an instance of this Command with the specified Index.
+     * @param targetIndex The index of the recipe to be deleted.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 

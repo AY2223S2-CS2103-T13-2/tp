@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,7 @@ public class JsonAdaptedRecipe {
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("ingredients") List<JsonAdaptedIngredient> ingredients,
             @JsonProperty("steps") List<JsonAdaptedStep> steps) {
+        requireNonNull(name);
         this.name = name;
         this.portion = portion;
         this.duration = duration;
@@ -78,6 +81,7 @@ public class JsonAdaptedRecipe {
      * Converts a given {@code Recipe} into this class for Jackson use.
      */
     public JsonAdaptedRecipe(Recipe source) {
+        requireNonNull(source);
         name = new JsonAdaptedName(source.getName());
         portion = Optional.ofNullable(source.getPortionNullable()).map(JsonAdaptedRecipePortion::new);
         duration = Optional.ofNullable(source.getDurationNullable()).map(JsonAdaptedRecipeDuration::new);

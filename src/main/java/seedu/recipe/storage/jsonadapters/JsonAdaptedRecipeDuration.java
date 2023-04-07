@@ -1,5 +1,7 @@
 package seedu.recipe.storage.jsonadapters;
 
+import static java.util.Objects.requireNonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,8 +17,6 @@ import seedu.recipe.model.recipe.RecipeDuration;
  */
 @JsonInclude(Include.NON_NULL)
 public class JsonAdaptedRecipeDuration {
-
-
     private final double time;
 
     private final JsonAdaptedTimeUnit timeUnit;
@@ -27,6 +27,7 @@ public class JsonAdaptedRecipeDuration {
     @JsonCreator
     public JsonAdaptedRecipeDuration(@JsonProperty("time") double time,
                                      @JsonProperty("timeUnit") JsonAdaptedTimeUnit timeUnit) {
+        requireNonNull(timeUnit);
         this.time = time;
         this.timeUnit = timeUnit;
     }
@@ -35,6 +36,7 @@ public class JsonAdaptedRecipeDuration {
      * Converts a given {@code Name} into this class for Jackson use.
      */
     public JsonAdaptedRecipeDuration(RecipeDuration source) {
+        requireNonNull(source);
         this.time = source.getTime();
         this.timeUnit = new JsonAdaptedTimeUnit(source.getTimeUnit());
     }

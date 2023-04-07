@@ -20,11 +20,10 @@ import seedu.recipe.model.recipe.Recipe;
 import seedu.recipe.testutil.TypicalRecipes;
 
 public class JsonSerializableRecipeBookTest {
-
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableRecipeBookTest");
-    private static final Path TYPICAL_RECIPE_FILE = TEST_DATA_FOLDER.resolve("typicalRecipeRecipeBook.json");
-    private static final Path INVALID_RECIPE_FILE = TEST_DATA_FOLDER.resolve("invalidRecipeRecipeBook.json");
-    private static final Path DUPLICATE_RECIPE_FILE = TEST_DATA_FOLDER.resolve("duplicateRecipeRecipeBook.json");
+    public static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableRecipeBookTest");
+    public static final Path TYPICAL_RECIPE_FILE = TEST_DATA_FOLDER.resolve("typicalRecipeRecipeBook.json");
+    public static final Path INVALID_RECIPE_FILE = TEST_DATA_FOLDER.resolve("invalidRecipeRecipeBook.json");
+    public static final Path DUPLICATE_RECIPE_FILE = TEST_DATA_FOLDER.resolve("duplicateRecipeRecipeBook.json");
 
     @Test
     public void toModelType_typicalRecipesFile_success() throws Exception {

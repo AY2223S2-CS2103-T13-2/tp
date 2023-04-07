@@ -106,11 +106,8 @@ public class ModelManagerTest {
         // same object -> returns true
         assertEquals(modelManager, modelManager);
 
-        // null -> returns false
-        assertNotEquals(null, modelManager);
-
-        // different types -> returns false
-        assertNotEquals(5, modelManager);
+        // null (not an instance) -> returns false
+        assertFalse(modelManager.equals(null));
 
         // different recipeBook -> returns false
         assertNotEquals(modelManager, new ModelManager(differentRecipeBook, userPrefs));

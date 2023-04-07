@@ -8,6 +8,31 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void constructor_withAllFields_shouldReturnSetFieldsCorrectly() {
+        String feedbackToUser = AddCommand.MESSAGE_SUCCESS;
+        boolean showHelp = true;
+        boolean exit = true;
+
+        CommandResult result = new CommandResult(feedbackToUser, showHelp, exit);
+
+        assertEquals(feedbackToUser, result.getFeedbackToUser());
+        assertTrue(result.isShowHelp());
+        assertTrue(result.isExit());
+    }
+
+    @Test
+    public void constructor_withFeedbackToUserOnly_shouldSetDefaultValuesForOtherFields() {
+        String feedbackToUser = AddCommand.MESSAGE_SUCCESS;
+
+        CommandResult result = new CommandResult(feedbackToUser);
+
+        assertEquals(feedbackToUser, result.getFeedbackToUser());
+        assertFalse(result.isShowHelp());
+        assertFalse(result.isExit());
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");

@@ -18,10 +18,10 @@ import seedu.recipe.model.ReadOnlyRecipeBook;
  * A class to access RecipeBook data stored as a json file on the hard disk.
  */
 public class JsonRecipeBookStorage implements RecipeBookStorage {
-
     private static final Logger logger = LogsCenter.getLogger(JsonRecipeBookStorage.class);
 
     private final Path filePath;
+
     public JsonRecipeBookStorage(Path filePath) {
         this.filePath = filePath;
     }

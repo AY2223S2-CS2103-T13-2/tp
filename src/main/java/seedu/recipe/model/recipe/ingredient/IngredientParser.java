@@ -88,9 +88,10 @@ public class IngredientParser {
         return out;
     }
 
-    private static class PrefixPosition {
+    static class PrefixPosition {
         private final Prefix prefix;
         private final int startPos;
+
         PrefixPosition(Prefix prefix, int startPos) {
             this.prefix = prefix;
             this.startPos = startPos;

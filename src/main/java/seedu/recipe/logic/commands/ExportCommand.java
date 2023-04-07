@@ -1,12 +1,14 @@
 package seedu.recipe.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 
 import javafx.stage.Stage;
 import seedu.recipe.logic.Logic;
 import seedu.recipe.logic.commands.exceptions.CommandException;
 import seedu.recipe.model.Model;
-import seedu.recipe.storage.ExportManager;
+import seedu.recipe.storage.filemanagers.ExportManager;
 
 /**
  * Represents the command used to export RecipeBook JSON file from this RecipeBook app to a specified file location.
@@ -25,7 +27,8 @@ public class ExportCommand extends Command {
      * @param logic The Logic that helps to derive the current Recipe Book path for Export Manager to use.
      */
     public ExportCommand(Stage stage, Logic logic) {
-        exportManager = new ExportManager(stage, logic.getRecipeBookFilePath());
+        requireNonNull(logic);
+        exportManager = new ExportManager(stage, logic);
     }
 
     /**
